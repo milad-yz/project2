@@ -139,12 +139,7 @@ public class Drawer  {
                 frame.remove(SingInPanel);
                 Enter();
             } else {
-                JLabel error = new JLabel("invalid username or password");
-                error.setBounds(150, 300, 200, 30);
-                error.setForeground(Color.red);
-                SingInPanel.add(error);
-                frame.repaint();
-                frame.revalidate();
+                JOptionPane.showMessageDialog(frame, "Sorry .... wrong username or password .... please try again", "Error", JOptionPane.INFORMATION_MESSAGE);
             }
         });
     }
@@ -194,12 +189,7 @@ public class Drawer  {
             String PW = passwordtext.getText();
             try {
                 if (FileWorks.twoEqualsUserName("Players.txt", UN)) {
-                    JLabel error = new JLabel("we have the same username please try another username");
-                    error.setBounds(150, 300, 200, 30);
-                    error.setForeground(Color.red);
-                    SingUpPanel.add(error);
-                    frame.repaint();
-                    frame.revalidate();
+                    JOptionPane.showMessageDialog(frame, "we have the same username please try another username", "Error", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     ArrayList<Hero> heros = Hero.heroSetter();
                     ArrayList<Card> currentCards = Card.currentCardsSetter();
@@ -324,8 +314,10 @@ public class Drawer  {
 
     private void play() throws IOException {
         Battle b1;
-        if (p.currentDeck == null)
+        if (p.currentDeck == null) {
+            JOptionPane.showMessageDialog(frame, "You have no current deck please first choose your main deck next come and play", "null deck", JOptionPane.INFORMATION_MESSAGE);
             collection();
+        }
         else {
             for (int i = 0; i < p.currentDeck.deckCards.size(); i++) {
                 p.currentDeck.deckCards.get(i).useage++;
@@ -703,7 +695,6 @@ public class Drawer  {
     }
 
     private void status() throws IOException {
-        login.body(p.getUserName(),"status","went to status");
         JPanel statusPanel = new JPanel();
         statusPanel.setLayout(null);
         statusPanel.setBounds(0, 0, 1200, 800);
