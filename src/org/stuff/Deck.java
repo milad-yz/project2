@@ -36,9 +36,6 @@ public class Deck {
         return deck;
     }
 
-    public void update() {
-
-    }
 
     public float getAverageMana() {
         int counter=0;

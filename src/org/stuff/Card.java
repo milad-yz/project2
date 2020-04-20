@@ -21,7 +21,6 @@ public class Card {
     public String icon;
     public int rarity;
     public int useage = 0;
-    public int number = 1;
 
     public Card(String name, int cost, int mana, int damage, int health, String feature, String description, String specialFor, String icon, int rarity) {
         this.name = name;
@@ -88,9 +87,4 @@ public class Card {
         return cards;
     }
 
-    public void firstInBattle() {
-    }
-
-    public void duringBattle() {
-    }
 }
