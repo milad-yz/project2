@@ -4,7 +4,6 @@ import org.fileWorks.login;
 import org.player.Player;
 import org.stuff.Card;
 import org.stuff.Deck;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -87,9 +86,9 @@ public class Collection {
         cardsPanel.setLayout(null);
         cardsPanel.setBounds(0, 0, 1200, 800);
         //
-        JLabel cardslabel = new JLabel("this is all cards");
-        cardslabel.setBounds(500, 0, 400, 30);
-        cardsPanel.add(cardslabel);
+        JLabel cardsLabel = new JLabel("this is all cards");
+        cardsLabel.setBounds(500, 0, 400, 30);
+        cardsPanel.add(cardsLabel);
         //
         JButton backButton = new JButton("back");
         backButton.setBounds(500, 630, 100, 30);
@@ -255,7 +254,7 @@ public class Collection {
         searchButton.addActionListener(e -> {
             frame.remove(cardsPanel);
             try {
-                cards(Hero, mana, 1, textFinder(searchtext.getText()));
+                cards(Hero, mana, 1, textFinder(searchtext.getText(),p.allcards));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -266,18 +265,18 @@ public class Collection {
         frame.repaint();
         frame.revalidate();
     }
-    private Card textFinder(String name) {
+    private Card textFinder(String name,ArrayList<Card>cards) {
         double couter = 0, max = 0;
-        for (int i = 0; i < p.allcards.size(); i++) {
-            couter = similarity(name, p.allcards.get(i).name);
+        for (int i = 0; i < cards.size(); i++) {
+            couter = similarity(name, cards.get(i).name);
             if (couter > max)
                 max = couter;
         }
-        for (int i = 0; i < p.allcards.size(); i++) {
-            if (similarity(p.allcards.get(i).name, name) == max)
-                return p.allcards.get(i);
+        for (int i = 0; i < cards.size(); i++) {
+            if (similarity(cards.get(i).name, name) == max)
+                return cards.get(i);
         }
-        return p.allcards.get(0);
+        return cards.get(0);
     }
     private double similarity(String s1, String s2) {
         String longer = s1, shorter = s2;
@@ -364,7 +363,7 @@ public class Collection {
                 frame.remove(deckPanel);
                 try {
                     login.body(p.getUserName(), "deck show", "went to deck show room for" + p.playerDeck.get(finalI).name);
-                    deckShow(p.playerDeck.get(finalI));
+                    deckShow(p.playerDeck.get(finalI),null,20,"");
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -415,16 +414,17 @@ public class Collection {
         frame.revalidate();
     }
 
-    private void deckShow(Deck deck) throws IOException {
+    private void deckShow(Deck deck,Card searchCard,int filterCards,String Hero) throws IOException {
+        System.out.println(filterCards);
         ArrayList<Card> tempCardArray = purifyCards(deck.deckCards);
         //
         JPanel deckShowPanel = new JPanel();
         deckShowPanel.setLayout(null);
         deckShowPanel.setBounds(0, 0, 1200, 800);
         //
-        JLabel decklShowLabel = new JLabel(deck.name + ":" + " and its hero is" + deck.deckHero.name);
-        decklShowLabel.setBounds(400, 0, 500, 30);
-        deckShowPanel.add(decklShowLabel);
+        JLabel deckShowLabel = new JLabel(deck.name + ":" + " and its hero is" + deck.deckHero.name);
+        deckShowLabel.setBounds(400, 0, 500, 30);
+        deckShowPanel.add(deckShowLabel);
         //
         JButton backButton = new JButton("back");
         backButton.setBounds(500, 630, 100, 30);
@@ -439,21 +439,8 @@ public class Collection {
             }
         });
         //
-        JButton addButton = new JButton("add card");
-        addButton.setBounds(600, 630, 100, 30);
-        deckShowPanel.add(addButton);
-        addButton.addActionListener(e -> {
-            frame.remove(deckShowPanel);
-            try {
-                login.body(p.getUserName(), "add card room", "went to add card room");
-                add(deck);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
-        //
         JButton removeButton = new JButton("remove this deck");
-        removeButton.setBounds(700, 630, 100, 30);
+        removeButton.setBounds(700, 630, 200, 30);
         deckShowPanel.add(removeButton);
         removeButton.addActionListener(e -> {
             frame.remove(deckShowPanel);
@@ -477,34 +464,165 @@ public class Collection {
         temp.setBounds(20, 40, 900, 2000);
         //
         for (int i = 0; i < tempCardArray.size(); i++) {
-            BufferedImage myPicture = ImageIO.read(new File(tempCardArray.get(i).icon));
-            JButton cardButton = new JButton();
-            cardButton.setIcon(new ImageIcon(myPicture));
-            cardButton.setBounds((i % 4) * 150, (i / 4) * 200, 150, 200);
-            cardButton.setText(numberInArray(tempCardArray.get(i), deck.deckCards) + "x");
-            temp.add(cardButton);
-            int finalI = i;
-            cardButton.addActionListener(e -> {
-                frame.remove(deckShowPanel);
-                try {
-                    login.body(p.getUserName(), "card show", "went to card show for" + tempCardArray.get(finalI).name);
-                    cardShow(tempCardArray.get(finalI), 1, deck);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            });
+            if((searchCard==null||searchCard.name.equals(tempCardArray.get(i).name))&&(tempCardArray.get(i).mana==filterCards||filterCards==20)&&(Hero.equals("")||Hero.equals(tempCardArray.get(i).specialFor))) {
+                BufferedImage myPicture = ImageIO.read(new File(tempCardArray.get(i).icon));
+                JButton cardButton = new JButton();
+                cardButton.setIcon(new ImageIcon(myPicture));
+                cardButton.setBounds((i % 4) * 150, (i / 4) * 200, 150, 200);
+                cardButton.setText(numberInArray(tempCardArray.get(i), deck.deckCards) + "x");
+                temp.add(cardButton);
+                int finalI = i;
+                cardButton.addActionListener(e -> {
+                    frame.remove(deckShowPanel);
+                    try {
+                        login.body(p.getUserName(), "card show", "went to card show for" + tempCardArray.get(finalI).name);
+                        cardShow(tempCardArray.get(finalI), 1, deck);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                });
+            }
         }
         JScrollPane scrollableTextArea = new JScrollPane(temp);
         scrollableTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollableTextArea.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scrollableTextArea.setBounds(50, 150, 800, 200);
+        scrollableTextArea.setBounds(150, 120, 800, 180);
         deckShowPanel.add(scrollableTextArea);
+        //
+        JLabel removeCardLabel = new JLabel("card to remove");
+        removeCardLabel.setBounds(10, 120, 150, 30);
+        deckShowPanel.add(removeCardLabel);
+        //
+        JPanel temp2 = new JPanel(new GridBagLayout());
+        temp2.setBounds(20, 40, 900, 2000);
+        //
+        for (int i = 0; i < p.currentcards.size(); i++) {
+            boolean flag = true;
+            for (int j = 0; j < deck.deckCards.size(); j++) {
+                if (deck.deckCards.get(j).name.equals(p.currentcards.get(i).name)&&numberInArray(deck.deckCards.get(j),deck.deckCards)>=2) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag && (p.currentcards.get(i).specialFor.equals("All") || deck.deckHero.name.equals(p.currentcards.get(i).specialFor))) {
+                if((searchCard==null||searchCard.name.equals(p.currentcards.get(i).name))&&(filterCards==20||p.currentcards.get(i).mana==filterCards)&&(Hero.equals("")||Hero.equals(p.currentcards.get(i).specialFor))) {
+                    BufferedImage myPicture = ImageIO.read(new File(p.currentcards.get(i).icon));
+                    JButton cardButton = new JButton((2 - numberInArray(p.currentcards.get(i), deck.deckCards)) + "x");
+                    cardButton.setIcon(new ImageIcon(myPicture));
+                    cardButton.setBounds((i % 4) * 150, (i / 4) * 200, 150, 200);
+                    temp2.add(cardButton);
+                    int finalI = i;
+                    cardButton.addActionListener(e -> {
+                        frame.remove(deckShowPanel);
+                        try {
+                            login.body(p.getUserName(), "card show", "went to card show room for:" + p.currentcards.get(finalI).name);
+                            cardShow(p.currentcards.get(finalI), 2, deck);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    });
+                }
+            }
+        }
+        //
+        JScrollPane scrollableTextArea2 = new JScrollPane(temp2);
+        scrollableTextArea2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollableTextArea2.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollableTextArea2.setBounds(150, 310, 800, 180);
+        deckShowPanel.add(scrollableTextArea2);
+        //
+        JLabel addCardLabel = new JLabel("card to add");
+        addCardLabel.setBounds(10, 310, 150, 30);
+        deckShowPanel.add(addCardLabel);
         //
         JLabel HeroLabel = new JLabel();
         BufferedImage HeroPicture = ImageIO.read(new File(deck.deckHero.icon));
         HeroLabel.setIcon(new ImageIcon(HeroPicture));
         HeroLabel.setBounds(20,0 , 75, 110);
         deckShowPanel.add(HeroLabel);
+        //
+        JTextField searchText = new JTextField();
+        searchText.setBounds(50, 600, 100, 30);
+        deckShowPanel.add(searchText);
+        //
+        JButton searchButton = new JButton("search");
+        searchButton.setBounds(150, 600, 100, 30);
+        searchButton.addActionListener(e -> {
+            frame.remove(deckShowPanel);
+            ArrayList<Card>tempCards=new ArrayList<>();
+            try {
+                deckShow(deck,textFinder(searchText.getText(),p.allcards),20,"");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+        deckShowPanel.add(searchButton);
+        //
+        JPanel temp3 = new JPanel(new GridBagLayout());
+        for (int i = 0; i < 11; i++) {
+            JButton manaButton = new JButton(String.valueOf(i));
+            manaButton.setBounds(0, 0, 10, 20);
+            int finalI = i;
+            manaButton.addActionListener(e -> {
+                frame.remove(deckShowPanel);
+                try {
+                    deckShow(deck,null,finalI,"");
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
+            temp3.add(manaButton);
+        }
+        JButton manaButton = new JButton("All");
+        manaButton.setBounds(0, 0, 10, 20);
+        manaButton.addActionListener(e -> {
+            frame.remove(deckShowPanel);
+            try {
+                deckShow(deck,null,20,"");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+        temp3.add(manaButton);
+        JScrollPane scrollableMana = new JScrollPane(temp3);
+        scrollableMana.setBounds(50, 500, 800, 50);
+        deckShowPanel.add(scrollableMana);
+        //
+        JButton HeroButton=new JButton(deck.deckHero.name);
+        HeroButton.setBounds(1000,50,100,30);
+        deckShowPanel.add(HeroButton);
+        HeroButton.addActionListener(e->{
+            frame.remove(deckShowPanel);
+            try {
+                deckShow(deck,null,20,deck.deckHero.name);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+        //
+        JButton NaturalButton=new JButton("Natural");
+        NaturalButton.setBounds(1000,100,100,30);
+        deckShowPanel.add(NaturalButton);
+        NaturalButton.addActionListener(e->{
+            frame.remove(deckShowPanel);
+            try {
+                deckShow(deck,null,20,"All");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+        //
+        JButton AllButton=new JButton("All");
+        AllButton.setBounds(1000,150,100,30);
+        deckShowPanel.add(AllButton);
+        AllButton.addActionListener(e->{
+            frame.remove(deckShowPanel);
+            try {
+                deckShow(deck,null,20,"");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
         //
         frame.add(deckShowPanel);
         frame.repaint();
@@ -536,69 +654,6 @@ public class Collection {
                 counter++;
         }
         return counter;
-    }
-
-    private void add(Deck deck) throws IOException {
-        JPanel addPanel = new JPanel();
-        addPanel.setLayout(null);
-        addPanel.setBounds(0, 0, 1200, 800);
-        //
-        JLabel addlabel = new JLabel("add for " + deck.name);
-        addlabel.setBounds(500, 0, 400, 30);
-        addPanel.add(addlabel);
-        //
-        JButton backButton = new JButton("back");
-        backButton.setBounds(500, 630, 100, 30);
-        addPanel.add(backButton);
-        backButton.addActionListener(e -> {
-            frame.remove(addPanel);
-            try {
-                login.body(p.getUserName(), "back", "went to deck show room");
-                deckShow(deck);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
-        //
-        JPanel temp = new JPanel(new GridBagLayout());
-        temp.setBounds(20, 40, 900, 2000);
-        //
-        for (int i = 0; i < p.currentcards.size(); i++) {
-            boolean flag = true;
-            for (int j = 0; j < deck.deckCards.size(); j++) {
-                if (deck.deckCards.get(j).name.equals(p.currentcards.get(i).name)&&numberInArray(deck.deckCards.get(j),deck.deckCards)>=2) {
-                    flag = false;
-                    break;
-                }
-            }
-            if (flag && (p.currentcards.get(i).specialFor.equals("All") || deck.deckHero.name.equals(p.currentcards.get(i).specialFor))) {
-                BufferedImage myPicture = ImageIO.read(new File(p.currentcards.get(i).icon));
-                JButton cardButton = new JButton((2-numberInArray(p.currentcards.get(i),deck.deckCards))+"x");
-                cardButton.setIcon(new ImageIcon(myPicture));
-                cardButton.setBounds((i % 4) * 150, (i / 4) * 200, 150, 200);
-                temp.add(cardButton);
-                int finalI = i;
-                cardButton.addActionListener(e -> {
-                    frame.remove(addPanel);
-                    try {
-                        login.body(p.getUserName(), "card show", "went to card show room for:" + p.currentcards.get(finalI).name);
-                        cardShow(p.currentcards.get(finalI), 2, deck);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                });
-            }
-        }
-        //
-        JScrollPane scrollableTextArea = new JScrollPane(temp);
-        scrollableTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scrollableTextArea.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scrollableTextArea.setBounds(50, 50, 800, 300);
-        addPanel.add(scrollableTextArea);
-        //
-        frame.add(addPanel);
-        frame.repaint();
-        frame.revalidate();
     }
 
     private void signNewDeck() throws IOException {
@@ -665,7 +720,7 @@ public class Collection {
                 ex.printStackTrace();
             }
             try {
-                deckShow(p.playerDeck.get(p.playerDeck.size() - 1));
+                deckShow(p.playerDeck.get(p.playerDeck.size() - 1),null,20,"");
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -693,14 +748,14 @@ public class Collection {
             if (n == 1) {
                 try {
                     login.body(p.getUserName(), "back button", "went to deck show");
-                    deckShow(deck);
+                    deckShow(deck,null,20,"");
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
             } else if (n == 2) {
                 try {
                     login.body(p.getUserName(), "back button", "went to add room");
-                    add(deck);
+                    deckShow(deck,null,20,"");
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -745,7 +800,7 @@ public class Collection {
                     ex.printStackTrace();
                 }
                 try {
-                    deckShow(deck);
+                    deckShow(deck,null,20,"");
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -768,7 +823,7 @@ public class Collection {
                     ex.printStackTrace();
                 }
                 try {
-                    add(deck);
+                    deckShow(deck,null,20,"");
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }

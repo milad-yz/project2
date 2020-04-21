@@ -11,9 +11,7 @@ import org.stuff.Hero;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
-import java.awt.image.ColorConvertOp;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -193,7 +191,7 @@ public class Drawer {
                     ArrayList<Hero> heros = Hero.heroSetter();
                     ArrayList<Card> currentCards = Card.currentCardsSetter();
                     ArrayList<Card> allCard = Card.allCardsSetter();
-                    ArrayList<Deck> playerdeck = Deck.Decksetter(heros, currentCards);
+                    ArrayList<Deck> playerdeck = Deck.DeckSetter(heros, currentCards);
                     p = new Player(UN, PW, currentCards, allCard, heros, playerdeck, playerdeck.get(0));
                     FileWorks.filewrite("Players.txt", p);
                     login.createLog(UN, PW);

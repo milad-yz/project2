@@ -19,11 +19,11 @@ public class Deck {
         deckCards=new ArrayList<>();
         this.deckHero=hero;
     }
-    public static ArrayList<Deck> Decksetter(ArrayList<Hero> heros, ArrayList<Card> cards) {
+    public static ArrayList<Deck> DeckSetter(ArrayList<Hero> heros, ArrayList<Card> cards) {
         ArrayList<Deck> deck = new ArrayList<>();
         for (int i = 0; i < heros.size(); i++) {
             ArrayList<Card> currentCards = new ArrayList<>();
-            for (int j = 0; j < cards.size()&& j<15; j++) {
+            for (int j = 0; j < cards.size()&&(j<30); j++) {
                 if (cards.get(j).specialFor.equals("All")) {
                     currentCards.add(cards.get(j));
                 }
