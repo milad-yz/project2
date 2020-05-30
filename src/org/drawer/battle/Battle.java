@@ -1,5 +1,6 @@
-package org.drawer;
+package org.drawer.battle;
 
+import org.drawer.Drawer;
 import org.fileWorks.login;
 import org.player.Player;
 import org.stuff.Card;
@@ -214,8 +215,7 @@ public class Battle {
         endGameButton.setBounds(950, 20, 150, 30);
         endGameButton.addActionListener(e -> {
             frame.setVisible(false);
-            Drawer d1 = new Drawer(p);
-            d1.Enter();
+            Drawer.getInstance().Enter();
         });
         mapPanel.add(endGameButton);
         //

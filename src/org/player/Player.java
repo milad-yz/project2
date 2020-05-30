@@ -29,44 +29,6 @@ public class Player {
         this.currentDeck = currentDeck;
     }
 
-    public void getCurrentCards() {
-        System.out.println("heres are your currentCards:");
-        for (int i = 0; i < currentcards.size(); i++) {
-            System.out.println(currentcards.get(i).name);
-        }
-    }
-
-    public void getAllCards() {
-        System.out.println("heres are your total Cards:");
-        for (int i = 0; i < allcards.size(); i++) {
-            System.out.println(allcards.get(i).name);
-        }
-    }
-
-    public void getheros() {
-        for (int i = 0; i < heros.size(); i++) {
-            System.out.println(heros.get(i).name);
-        }
-    }
-
-    public void store() {
-        for (int i = 0; i < allcards.size(); i++) {
-            boolean flag = true;
-            for (int j = 0; j < currentcards.size(); j++) {
-                if (allcards.get(i).name.equals(currentcards.get(j).name))
-                    flag = false;
-            }
-            if (flag)
-                System.out.println(new Gson().toJson(allcards.get(i)));
-        }
-    }
-
-    public void buyUpdate(Card card) {
-        for (int i = 0; i < playerDeck.size(); i++) {
-            if (card.name.equals("All") || card.specialFor.equals(playerDeck.get(i).deckHero.name))
-                playerDeck.get(i).deckCards.add(card);
-        }
-    }
 
     public void sellUpdate(Card card) {
         for (int i = 0; i < playerDeck.size(); i++) {
@@ -126,4 +88,5 @@ public class Player {
         inputFile.delete();
         boolean successful = tempFile.renameTo(inputFile);
     }
+
 }

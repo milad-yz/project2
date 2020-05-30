@@ -1,0 +1,46 @@
+USER:milad
+CREATED_AT:2020/05/30 20:05:37(timestamp)
+PASSWORD:1234
+
+Collection 2020/05/30 20:05:41 went to Collection
+signIn 2020/05/30 20:06:18 ap2020
+Collection 2020/05/30 20:06:25 went to Collection
+signIn 2020/05/30 20:11:11 ap2020
+Collection 2020/05/30 20:11:12 went to Collection
+deck 2020/05/30 20:11:14 went to deck room
+back buuton 2020/05/30 20:11:15 went to collection
+back buton 2020/05/30 20:11:16 went to menu
+Status 2020/05/30 20:11:18 went to status
+back buton 2020/05/30 20:11:20 went to menu
+play 2020/05/30 20:11:22 wants to play
+play 2020/05/30 20:11:23 just want to play
+signIn 2020/05/30 20:12:12 ap2020
+play 2020/05/30 20:12:13 wants to play
+play 2020/05/30 20:12:14 just want to play
+signIn 2020/05/30 20:13:42 ap2020
+play 2020/05/30 20:13:45 wants to play
+play 2020/05/30 20:13:45 just want to play
+signIn 2020/05/30 20:42:55 ap2020
+Collection 2020/05/30 20:42:58 went to Collection
+card 2020/05/30 20:42:59 went to card room
+sell 2020/05/30 20:43:16 want to sellemad
+signIn 2020/05/30 20:44:27 ap2020
+Collection 2020/05/30 20:44:29 went to Collection
+card 2020/05/30 20:44:30 went to card room
+sell 2020/05/30 20:44:32 want to sellemad
+signIn 2020/05/30 20:45:37 ap2020
+Collection 2020/05/30 20:45:39 went to Collection
+card 2020/05/30 20:45:42 went to card room
+sell 2020/05/30 20:45:44 want to sellemad
+back button 2020/05/30 20:45:46 went to card room
+sell 2020/05/30 20:45:48 want to sellFriendly Smith
+back button 2020/05/30 20:45:49 went to card room
+back buton 2020/05/30 20:45:51 went to collection
+deck 2020/05/30 20:45:52 went to deck room
+deck show 2020/05/30 20:45:55 went to deck show room forWARLOCK
+card show 2020/05/30 20:45:57 went to card show forRavaginGhoul
+back button 2020/05/30 20:45:59 went to deck show
+card show 2020/05/30 20:46:00 went to card show room for:Wolfrider
+back button 2020/05/30 20:46:02 went to add room
+back button 2020/05/30 20:46:06 went to deck room
+back buuton 2020/05/30 20:46:07 went to collection

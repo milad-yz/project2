@@ -1,6 +1,7 @@
 package org.launchcode;
 
 import org.drawer.Drawer;
+import org.drawer.sign.FirstQuestion;
 import org.stuff.Card;
 import org.stuff.Hero;
 
@@ -148,8 +149,7 @@ public class Main {
             fileWriter.write(data + "\r\n");
             fileWriter.close();
         }*/
-        Drawer d1=new Drawer();
-        d1.firstQuestion();
+        FirstQuestion.getInstance();
     }
 
 }

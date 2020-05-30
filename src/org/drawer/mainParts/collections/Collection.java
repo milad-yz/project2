@@ -1,5 +1,6 @@
-package org.drawer;
+package org.drawer.mainParts.collections;
 
+import org.drawer.Drawer;
 import org.fileWorks.login;
 import org.player.Player;
 import org.stuff.Card;
@@ -16,13 +17,10 @@ import java.util.ArrayList;
 
 public class Collection {
     Player p;
-    JFrame frame = new JFrame("collection");
+    JFrame frame ;
 
-    public Collection(Player p) {
-        frame.setVisible(true);
-        frame.setSize(1200, 800);
-        frame.setLayout(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public Collection(JFrame frame, Player p) {
+        this.frame=frame;
         this.p = p;
     }
 
@@ -42,9 +40,7 @@ public class Collection {
                 ex.printStackTrace();
             }
             frame.remove(collectionPanel);
-            frame.setVisible(false);
-            Drawer d1 = new Drawer(p);
-            d1.Enter();
+            Drawer.getInstance().Enter();
         });
         JLabel EnterRoom = new JLabel("Collection:");
         EnterRoom.setBounds(500, 0, 100, 30);
@@ -80,7 +76,6 @@ public class Collection {
         frame.repaint();
         frame.revalidate();
     }
-
     public void cards(String Hero, int mana, int filterCards, Card searchCard) throws IOException {
         JPanel cardsPanel = new JPanel();
         cardsPanel.setLayout(null);
@@ -128,10 +123,8 @@ public class Collection {
                     frame.remove(cardsPanel);
                     try {
                         login.body(p.getUserName(), "buy", "want to buy" + p.allcards.get(finalI).name);
-                        frame.setVisible(false);
-                        Drawer d1 = new Drawer(p);
                         p.update(p);
-                        d1.buyCardShow(p.allcards.get(finalI), "", 2);
+                        Drawer.getInstance().buyCardShow(p.allcards.get(finalI), "", 2);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -147,10 +140,8 @@ public class Collection {
                     frame.remove(cardsPanel);
                     try {
                         login.body(p.getUserName(), "sell", "want to sell" + p.allcards.get(finalI).name);
-                        frame.setVisible(false);
-                        Drawer d1 = new Drawer(p);
                         p.update(p);
-                        d1.sellCardShow(p.allcards.get(finalI), "", 2);
+                        Drawer.getInstance().sellCardShow(p.allcards.get(finalI), "", 2);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -265,6 +256,7 @@ public class Collection {
         frame.repaint();
         frame.revalidate();
     }
+
     private Card textFinder(String name,ArrayList<Card>cards) {
         double couter = 0, max = 0;
         for (int i = 0; i < cards.size(); i++) {
@@ -317,7 +309,7 @@ public class Collection {
         return costs[s2.length()];
     }
 
-    private void deck(String massage) throws IOException {
+    private void deck(String massage) {
         JPanel deckPanel = new JPanel();
         deckPanel.setLayout(null);
         deckPanel.setBounds(0, 0, 1200, 800);
@@ -415,7 +407,6 @@ public class Collection {
     }
 
     private void deckShow(Deck deck,Card searchCard,int filterCards,String Hero) throws IOException {
-        System.out.println(filterCards);
         ArrayList<Card> tempCardArray = purifyCards(deck.deckCards);
         //
         JPanel deckShowPanel = new JPanel();
@@ -453,11 +444,7 @@ public class Collection {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            try {
-                deck("");
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            deck("");
         });
         //
         JPanel temp = new JPanel(new GridBagLayout());
@@ -656,7 +643,7 @@ public class Collection {
         return counter;
     }
 
-    private void signNewDeck() throws IOException {
+    private void signNewDeck() {
         JPanel SignNewDeckPanel = new JPanel();
         SignNewDeckPanel.setLayout(null);
         SignNewDeckPanel.setBounds(0, 0, 1200, 800);
