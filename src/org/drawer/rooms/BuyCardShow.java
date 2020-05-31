@@ -16,14 +16,12 @@ import java.io.IOException;
 public class BuyCardShow {
     private JFrame frame;
     private Player p;
-    private String massage;
     private int n;
     private Card card;
 
-    public BuyCardShow(JFrame frame, Player p, String massage, int n, Card card) {
+    public BuyCardShow(JFrame frame, Player p, int n, Card card) {
         this.frame = frame;
         this.p = p;
-        this.massage = massage;
         this.n = n;
         this.card = card;
         try {
@@ -38,14 +36,9 @@ public class BuyCardShow {
         buyCardShowPanel.setLayout(null);
         buyCardShowPanel.setBounds(0, 0, 1200, 800);
         //
-        JLabel buylabel = new JLabel("your diamond is = " + p.diamonds);
-        buylabel.setBounds(500, 0, 400, 30);
-        buyCardShowPanel.add(buylabel);
-        //
-        JLabel massagelabel = new JLabel(massage);
-        massagelabel.setBounds(500, 600, 400, 30);
-        massagelabel.setForeground(Color.red);
-        buyCardShowPanel.add(massagelabel);
+        JLabel buyLabel = new JLabel("your diamond is = " + p.diamonds);
+        buyLabel.setBounds(500, 0, 400, 30);
+        buyCardShowPanel.add(buyLabel);
         //
         JLabel information1 = new JLabel("mana: " + card.mana + " damage: " + card.damage + " health: " + card.health);
         information1.setBounds(500, 200, 500, 100);
@@ -104,13 +97,19 @@ public class BuyCardShow {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-                massage="you have bought this card successfully";
-                frame.repaint();
-                frame.revalidate();
+                JOptionPane.showMessageDialog(frame, "you have bought this card successfully", "buy", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                massage="sorry you dont have enough diamonds";
-                frame.repaint();
-                frame.revalidate();
+                JOptionPane.showMessageDialog(frame, "sorry you dont have enough diamonds", "buy", JOptionPane.INFORMATION_MESSAGE);
+            }
+            if (n == 1) {
+                Drawer.getInstance().buy("");
+            } else if (n == 2) {
+                try {
+                    Collection c1 = new Collection(frame,p);
+                    c1.cards("", 20, 1, null);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
             try {
                 p.update(p);

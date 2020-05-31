@@ -91,23 +91,28 @@ public class SellCardShow {
         picLabel.setBounds(20, 20, 150, 200);
         sellCardShowPanel.add(picLabel);
         //
-        JButton buyButton = new JButton("sell: " + card.name + " for:" + card.cost / 2);
-        buyButton.setBounds(650, 630, 200, 30);
-        sellCardShowPanel.add(buyButton);
-        buyButton.addActionListener(e -> {
+        JButton sellButton = new JButton("sell: " + card.name + " for:" + card.cost / 2);
+        sellButton.setBounds(650, 630, 200, 30);
+        sellCardShowPanel.add(sellButton);
+        sellButton.addActionListener(e -> {
             frame.remove(sellCardShowPanel);
-            try {
-                login.body(p.getUserName(), card.name, "have sold this card");
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
             p.diamonds += card.cost / 2;
+            forceSell(card);
             p.currentcards.remove(card);
             p.sellUpdate(card);
-            massage="you have sold this card successfully";
-            frame.repaint();
-            frame.revalidate();
+            JOptionPane.showMessageDialog(frame, "you have sold it successfully", "sell", JOptionPane.INFORMATION_MESSAGE);
+            if (n == 1) {
+                Drawer.getInstance().sell("");
+            } else if (n == 2) {
+                try {
+                    Collection c1 = new Collection(frame,p);
+                    c1.cards("", 20, 1, null);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
             try {
+                login.body(p.getUserName(), card.name, "have sold this card");
                 p.update(p);
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -117,5 +122,15 @@ public class SellCardShow {
         frame.add(sellCardShowPanel);
         frame.repaint();
         frame.revalidate();
+    }
+
+    private void forceSell(Card card) {
+        for (int i = 0; i < p.currentcards.size(); i++) {
+            if(card.name.equals(p.currentcards.get(i).name)){
+                System.out.println(p.currentcards.get(i).name);
+                p.currentcards.remove(i);
+                break;
+            }
+        }
     }
 }

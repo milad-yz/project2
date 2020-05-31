@@ -50,7 +50,6 @@ public class Drawer {
     }
 
     public void play() throws IOException {
-        Battle b1;
         if (p.currentDeck == null) {
             JOptionPane.showMessageDialog(frame, "You have no current deck please first choose your main deck next come and play", "null deck", JOptionPane.INFORMATION_MESSAGE);
             collection();
@@ -59,9 +58,7 @@ public class Drawer {
                 p.currentDeck.deckCards.get(i).useage++;
             }
             p.update(p);
-            frame.setVisible(false);
-            b1 = new Battle(p);
-            b1.passiveInfo();
+            new Battle(frame,p);
         }
 
     }
@@ -74,8 +71,8 @@ public class Drawer {
         new Buy(frame, p, massage);
     }
 
-    public void buyCardShow(Card card, String massage, int n) {
-        new BuyCardShow(frame, p, massage, n, card);
+    public void buyCardShow(Card card, int n) {
+        new BuyCardShow(frame, p, n, card);
     }
 
     public void sellCardShow(Card card, String massage, int n) {

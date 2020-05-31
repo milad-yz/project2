@@ -75,7 +75,7 @@ public class Buy {
                     frame.remove(buyPanel);
                     try {
                         login.body(p.getUserName(), "card show", "want to buy" + p.allcards.get(finalI).name);
-                        Drawer.getInstance().buyCardShow(p.allcards.get(finalI), "", 1);
+                        Drawer.getInstance().buyCardShow(p.allcards.get(finalI), 1);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
