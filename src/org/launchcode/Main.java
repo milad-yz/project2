@@ -1,20 +1,13 @@
 package org.launchcode;
 
-import org.drawer.Drawer;
 import org.drawer.sign.FirstQuestion;
-import org.stuff.Card;
-import org.stuff.Hero;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         /*
         ArrayList<Card> cards = new ArrayList<>();
         ArrayList<Hero> Heros = new ArrayList<>();
-
         {
             Card polymorph = new Card("Polymorph", 4, 4, "convert-sheep", "convert an enemy minion to sheep", "MAGE", "images\\polymorph.png", 2);
             Card milad = new Card("milad", 3, 3, "hero-hp+5", "give your hero 5 health", "MAGE", "images\\milad.jpg", 3);
@@ -38,7 +31,7 @@ public class Main {
             Hero WARLOCK = new Hero("WARLOCK", 0, WarlockCards, 35, "improve minion", 2, "images\\warlock.jpg", "images\\warlockPower.png");
             //
             Card behrad = new Card("behrad", 5, 1, 3, 1, "+1damagepermap", "every turn its damage +1 damage", "PALADIN", "images\\behrad.jpg", 3);
-            Card gnomishArmyKnife = new Card("gnomishArmyKnife", 5, 5, "give charge poisonous windfury life teal divideshield taunrt", "give charge poisonous windfury life teal divideshield taunrt", "PALADIN", "images\\gnomisharmyknife.png", 3);
+            Card gnomishArmyKnife = new Card("gnomishArmyKnife", 5, 5, "give charge poisonous windfury lifesteal divideshield taunrt", "give a minion charge poisonous windFury lifeSteal divideShield taunt", "PALADIN", "images\\gnomisharmyknife.png", 3);
             ArrayList<Card> paladinCards = new ArrayList<>();
             paladinCards.add(behrad);
             paladinCards.add(gnomishArmyKnife);
@@ -64,7 +57,7 @@ public class Main {
             Card bloodfenRaptor = new Card("BloodfenRaptor", 7, 2, 3, 2, "", "", "All", "images\\bloodfenraptor.png", 1);
             Card releaseraptors = new Card("ReleaseTheRaptors", 7, 7, "release3raptors", "release three raptors", "All", "images\\releasetheraptors.jpg", 2);
             Card voidwalker = new Card("VoidWalker", 5, 1, 1, 3, "", "", "All", "images\\voidwalker.png", 2);
-            Card hellfire = new Card("HellFire", 4, 4, "damage3toall", "deal 3 damage to all minions", "All", "images\\hellfire.png", 2);
+            Card hellfire = new Card("HellFire", 4, 4, "damage3toall", "deal 3 damage to all characters", "All", "images\\hellfire.png", 2);
             Card sprint = new Card("Sprint", 5, 5, "draw 4 cards", "draw 4 cards", "All", "images\\sprint.jfif", 2);
             Card swarmOfLocusts = new Card("SwarmOfLocusts", 6, 6, "", "summon seven 1/1 locusts with rush", "All", "images\\swarmoflocusts.png", 2);
             Card pharaohsBlessing = new Card("PharaohsBlessing", 6, 6, "", "give a minion 4/4 divide shiled with taunt", "All", "images\\pharaohsblessing.png", 2);
@@ -150,7 +143,7 @@ public class Main {
             fileWriter.write(data + "\r\n");
             fileWriter.close();
         }*/
+
         FirstQuestion.getInstance();
     }
-
 }

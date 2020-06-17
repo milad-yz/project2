@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 
 public class FileWorks {
-    public static void filewrite(String fileName , Object object) throws IOException {
+    public static void fileWrite(String fileName , Object object) throws IOException {
         File myObj = new File(fileName);
         myObj.createNewFile();
         String data = new Gson().toJson(object);

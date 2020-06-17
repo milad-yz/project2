@@ -8,7 +8,7 @@ public class Deck {
     public ArrayList<Card> deckCards;
     public int allGame=0;
     public int winGame=0;
-    Deck(String name,Hero deckHero, ArrayList<Card> deckCards) {
+    public Deck(String name, Hero deckHero, ArrayList<Card> deckCards) {
         this.name=name;
         this.deckCards = deckCards;
         this.deckHero = deckHero;
@@ -18,22 +18,6 @@ public class Deck {
         this.name=name;
         deckCards=new ArrayList<>();
         this.deckHero=hero;
-    }
-    public static ArrayList<Deck> DeckSetter(ArrayList<Hero> heros, ArrayList<Card> cards) {
-        ArrayList<Deck> deck = new ArrayList<>();
-        for (int i = 0; i < heros.size(); i++) {
-            ArrayList<Card> currentCards = new ArrayList<>();
-            for (int j = 0; j < cards.size()&&(j<30); j++) {
-                if (cards.get(j).specialFor.equals("All")) {
-                    currentCards.add(cards.get(j));
-                }
-            }
-            for (int j = 0; j < heros.get(i).HeroCards.size(); j++) {
-                currentCards.add(heros.get(i).HeroCards.get(j));
-            }
-            deck.add(new Deck(heros.get(i).name,heros.get(i), currentCards));
-        }
-        return deck;
     }
 
 
@@ -50,12 +34,12 @@ public class Deck {
         int maxUsage = 0;
         //per usage
         for (int i = 0; i < deckCards.size(); i++) {
-            if (deckCards.get(i).useage >= maxUsage)
-                maxUsage = deckCards.get(i).useage;
+            if (deckCards.get(i).used >= maxUsage)
+                maxUsage = deckCards.get(i).used;
         }
         //rarity
         for (int i = 0; i < deckCards.size(); i++) {
-            if (deckCards.get(i).useage == maxUsage) {
+            if (deckCards.get(i).used == maxUsage) {
                 boolean flag = true;
                 for (int j = 0; j < bestCards.size(); j++) {
                     if (bestCards.get(j).rarity > deckCards.get(i).rarity)
@@ -92,7 +76,7 @@ public class Deck {
         //minions are better
         temp=new ArrayList<>();
         for (int i = 0; i < bestCards.size(); i++) {
-            if(bestCards.get(i).isminion==1)
+            if(bestCards.get(i).getClass().getName().equals("Minion"))
                 temp.add(bestCards.get(i));
         }
         //

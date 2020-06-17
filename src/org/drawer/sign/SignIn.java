@@ -2,8 +2,11 @@ package org.drawer.sign;
 
 import com.google.gson.Gson;
 import org.drawer.Drawer;
+import org.drawer.sign.setters.CardSetter;
+import org.drawer.sign.setters.HeroSetter;
 import org.fileWorks.login;
 import org.player.Player;
+import org.stuff.cards.Minion;
 
 import javax.swing.*;
 import java.io.FileNotFoundException;
@@ -29,21 +32,21 @@ public class SignIn {
         SingInRoom.setBounds(500, 0, 100, 30);
         SingInPanel.add(SingInRoom);
         //
-        JLabel userlabel = new JLabel("Username:");
-        userlabel.setBounds(450, 50, 100, 30);
-        SingInPanel.add(userlabel);
+        JLabel userLabel = new JLabel("Username:");
+        userLabel.setBounds(450, 50, 100, 30);
+        SingInPanel.add(userLabel);
         //
-        JLabel passlabel = new JLabel("Password:");
-        passlabel.setBounds(450, 150, 100, 30);
-        SingInPanel.add(passlabel);
+        JLabel passLabel = new JLabel("Password:");
+        passLabel.setBounds(450, 150, 100, 30);
+        SingInPanel.add(passLabel);
         //
-        JTextField usernametext = new JTextField();
-        usernametext.setBounds(550, 50, 100, 30);
-        SingInPanel.add(usernametext);
+        JTextField usernameText = new JTextField();
+        usernameText.setBounds(550, 50, 100, 30);
+        SingInPanel.add(usernameText);
         //
-        JPasswordField passwordtext = new JPasswordField();
-        passwordtext.setBounds(550, 150, 100, 30);
-        SingInPanel.add(passwordtext);
+        JPasswordField passwordText = new JPasswordField();
+        passwordText.setBounds(550, 150, 100, 30);
+        SingInPanel.add(passwordText);
         //
         JButton loginButton = new JButton("Sing In");
         loginButton.setBounds(650, 250, 100, 30);
@@ -67,8 +70,8 @@ public class SignIn {
             } catch (FileNotFoundException ex) {
                 ex.printStackTrace();
             }
-            String UN = usernametext.getText();
-            String PW = passwordtext.getText();
+            String UN = usernameText.getText();
+            String PW = passwordText.getText();
             boolean c = false;
             while (fileReader.hasNext()) {
                 Player p2 = new Gson().fromJson(fileReader.nextLine(), Player.class);
@@ -76,6 +79,19 @@ public class SignIn {
                     fileReader.close();
                     c = true;
                     p = p2;
+                    p.allCards= CardSetter.arrayCardCaster(p.allCards);
+                    p.currentCards=CardSetter.arrayCardCaster(p.currentCards);
+                    p.currentDeck.deckCards=CardSetter.arrayCardCaster(p.currentDeck.deckCards);
+                    for (int i = 0; i < p.playerDeck.size(); i++) {
+                        p.playerDeck.get(i).deckCards=CardSetter.arrayCardCaster(p.playerDeck.get(i).deckCards);
+                    }
+                    for (int i = 0; i < p.heros.size(); i++) {
+                        p.heros.set(i, HeroSetter.heroCaster(p.heros.get(i)));
+                    }
+                    for (int i = 0; i < p.playerDeck.size(); i++) {
+                        p.playerDeck.get(i).deckHero=HeroSetter.heroCaster(p.playerDeck.get(i).deckHero);
+                    }
+                    p.currentDeck.deckHero=HeroSetter.heroCaster(p.currentDeck.deckHero);
                     break;
                 }
             }

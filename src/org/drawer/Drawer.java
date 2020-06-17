@@ -1,12 +1,13 @@
 package org.drawer;
 
-import org.drawer.battle.Battle;
+import org.drawer.battle.PassiveInfo;
 import org.drawer.mainParts.*;
 import org.drawer.mainParts.collections.Collection;
-import org.drawer.rooms.Buy;
-import org.drawer.rooms.BuyCardShow;
-import org.drawer.rooms.Sell;
-import org.drawer.rooms.SellCardShow;
+import org.drawer.ShopRooms.Buy;
+import org.drawer.ShopRooms.BuyCardShow;
+import org.drawer.ShopRooms.Sell;
+import org.drawer.ShopRooms.SellCardShow;
+import org.drawer.sign.DeletePlayer;
 import org.player.Player;
 import org.stuff.Card;
 
@@ -50,15 +51,15 @@ public class Drawer {
     }
 
     public void play() throws IOException {
-        if (p.currentDeck == null) {
-            JOptionPane.showMessageDialog(frame, "You have no current deck please first choose your main deck next come and play", "null deck", JOptionPane.INFORMATION_MESSAGE);
+        if (p.currentDeck == null||p.currentDeck.deckCards.size()<15) {
+            JOptionPane.showMessageDialog(frame, "You have no current deck or your deck's size is less than 15 please first choose/complete your main deck then come and play", "null deck", JOptionPane.INFORMATION_MESSAGE);
             collection();
         } else {
             for (int i = 0; i < p.currentDeck.deckCards.size(); i++) {
-                p.currentDeck.deckCards.get(i).useage++;
+                p.currentDeck.deckCards.get(i).used++;
             }
-            p.update(p);
-            new Battle(frame,p);
+            p.update();
+            new PassiveInfo(p,frame);
         }
 
     }
@@ -88,12 +89,16 @@ public class Drawer {
     }
 
     public void collection() throws IOException {
-        p.update(p);
-        Collection c1 = new Collection(frame,p);
+        p.update();
+        Collection c1 = new Collection(frame, p);
         c1.collection();
     }
 
     public void setting() {
         new Setting(frame, p);
+    }
+
+    public void deletePlayer(){
+        new DeletePlayer(frame,p);
     }
 }

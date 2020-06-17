@@ -14,21 +14,20 @@ public class Player {
     private String UserName;
     private String PassWord;
     public int diamonds = 10;
-    public ArrayList<Card> currentcards;
-    public ArrayList<Card> allcards;
+    public ArrayList<Card> currentCards;
+    public ArrayList<Card> allCards;
     public ArrayList<Hero> heros;
     public ArrayList<Deck> playerDeck;
     public Deck currentDeck;
-    public Player(String userName, String passWord, ArrayList<Card> currentcards, ArrayList<Card> allcards, ArrayList<Hero> heros, ArrayList<Deck> playerDeck, Deck currentDeck) {
+    public Player(String userName, String passWord, ArrayList<Card> currentCards, ArrayList<Card> allCards, ArrayList<Hero> heros, ArrayList<Deck> playerDeck, Deck currentDeck) {
         this.UserName = userName;
         this.PassWord = passWord;
-        this.currentcards = currentcards;
-        this.allcards = allcards;
+        this.currentCards = currentCards;
+        this.allCards = allCards;
         this.heros = heros;
         this.playerDeck = playerDeck;
         this.currentDeck = currentDeck;
     }
-
 
     public void sellUpdate(Card card) {
         for (int i = 0; i < playerDeck.size(); i++) {
@@ -60,13 +59,13 @@ public class Player {
         }
         Reader.close();
         fileWriter.close();
-        File tempfile = new File("TempFile.txt");
+        File tempFile = new File("TempFile.txt");
         File file = new File("Players.txt");
         file.delete();
-        tempfile.renameTo(file);
+        tempFile.renameTo(file);
     }
 
-    public void update(Player p) throws IOException {
+    public void update() throws IOException {
         File inputFile = new File("Players.txt");
         File tempFile = new File("TempFilePlayer.txt");
 
@@ -77,8 +76,8 @@ public class Player {
             // trim newline when comparing with lineToRemove
             String trimmedLine = currentLine.trim();
             Player p2 = new Gson().fromJson(trimmedLine, Player.class);
-            if (p2.getUserName().equals(p.getUserName())) {
-                writer.write(new Gson().toJson(p) + System.getProperty("line.separator"));
+            if (p2.getUserName().equals(this.getUserName())) {
+                writer.write(new Gson().toJson(this) + System.getProperty("line.separator"));
                 continue;
             }
             writer.write(currentLine + System.getProperty("line.separator"));

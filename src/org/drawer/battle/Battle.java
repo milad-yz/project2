@@ -1,10 +1,15 @@
 package org.drawer.battle;
 
+import org.drawer.CardButton;
 import org.drawer.Drawer;
 import org.fileWorks.login;
 import org.player.Player;
 import org.stuff.Card;
 import org.stuff.Deck;
+import org.stuff.cards.Minion;
+import org.stuff.cards.QuestAndReward;
+import org.stuff.cards.Spell;
+import org.stuff.cards.Weapon;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -26,98 +31,22 @@ public class Battle {
     private int firstMana = 2;
     private int perTurnHeroPower = 1;
     private static int counter = 0;
-    public Battle(JFrame frame,Player p) {
+
+    public Battle(JFrame frame, Player p, Deck deck, int deck2battlePerTurn, int mana, int perTurnHeroPower) {
         this.p = p;
-        this.deck = p.currentDeck;
-        this.mana = firstMana;
-        this.frame=frame;
+        this.frame = frame;
+        this.deck = deck;
+        this.deck2battlePerTurn = deck2battlePerTurn;
+        this.mana = mana;
+        this.perTurnHeroPower = perTurnHeroPower;
         try {
-            passiveInfo();
+            map();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void passiveInfo() throws IOException {
-        login.body(p.getUserName(), "play", "just want to play");
-        HashSet<Integer> randomVariables = new HashSet<>();
-        Random random = new Random();
-        while (randomVariables.size() < 3) {
-            randomVariables.add(random.nextInt(5));
-        }
-        Iterator<Integer> itr = randomVariables.iterator();
-        ArrayList<String> passiveInfo = new ArrayList<>();
-        passiveInfo.add("freePower");
-        passiveInfo.add("twiceDraw");
-        passiveInfo.add("offCards");
-        passiveInfo.add("manaJump");
-        passiveInfo.add("HeroPower");
-        passiveInfo.add("minionDamage");
-        passiveInfo.add("minionHealth");
-        //
-        JPanel passiveInfoPanel = new JPanel(null);
-        passiveInfoPanel.setBounds(0, 0, 1200, 700);
-        //
-        JLabel label = new JLabel("select your passive Info");
-        label.setBounds(500, 0, 300, 30);
-
-        for (int i = 0; i < 3; i++) {
-            JButton button = new JButton(passiveInfo.get(itr.next()));
-            button.setBounds(250 * i + 100, 400, 200, 50);
-            button.addActionListener(e -> {
-                frame.remove(passiveInfoPanel);
-                changePassiveInfo(button.getText());
-                try {
-                    map(button.getText());
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            });
-            passiveInfoPanel.add(button);
-        }
-        //
-        frame.add(passiveInfoPanel);
-        frame.repaint();
-        frame.revalidate();
-    }
-
-    private void changePassiveInfo(String passiveInfo) {
-        switch (passiveInfo) {
-            case "freePower":
-                deck.deckHero.mana -= 1;
-                perTurnHeroPower = 2;
-                break;
-            case "offCards":
-                for (int i = 0; i < deck.deckCards.size(); i++) {
-                    deck.deckCards.get(i).mana -= 1;
-                }
-                break;
-            case "twiceDraw":
-                deck2battlePerTurn = 2;
-                break;
-            case "manaJump":
-                firstMana = 3;
-                mana = 3;
-                break;
-            case "HeroPower":
-                deck.deckHero.health += 10;
-                break;
-            case "minionDamage":
-                for (int i = 0; i < deck.deckCards.size(); i++) {
-                    if (deck.deckCards.get(i).isminion == 1)
-                        deck.deckCards.get(i).damage += 1;
-                }
-                break;
-            case "minionHealth":
-                for (int i = 0; i < deck.deckCards.size(); i++) {
-                    if (deck.deckCards.get(i).isminion == 1)
-                        deck.deckCards.get(i).health += 1;
-                }
-                break;
-        }
-    }
-
-    private void map(String passiveInfo) throws IOException {
+    private void map() throws IOException {
         JPanel mapPanel = new JPanel(null);
         mapPanel.setBounds(0, 0, 1200, 700);
         //
@@ -135,7 +64,13 @@ public class Battle {
         Document eventDoc = eventText.getDocument();
         eventText.setBackground(Color.GREEN);
         eventText.setBounds(900, 200, 200, 300);
-        mapPanel.add(eventText);
+        //
+        JScrollPane textScroll = new JScrollPane(eventText);
+        textScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        textScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        textScroll.setBounds(900, 200, 200, 300);
+        textScroll.setBackground(Color.YELLOW);
+        mapPanel.add(textScroll);
         //
         JScrollPane battlePanel1Scroll = new JScrollPane(battlePanel1);
         battlePanel1Scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -145,6 +80,7 @@ public class Battle {
         mapPanel.add(battlePanel1Scroll);
         //
         ArrayList<Card> inMapCards = shuffleCard(3);
+        chooseYourCard(inMapCards);
         ArrayList<Card> inBattleCards = new ArrayList<>();
         inHandCard(cardPanel, inMapCards, battlePanel1, eventDoc, manaText, inBattleCards);
         //
@@ -158,7 +94,7 @@ public class Battle {
         JButton HeroButton = new JButton();
         BufferedImage HeroPicture = ImageIO.read(new File(deck.deckHero.icon));
         HeroButton.setIcon(new ImageIcon(HeroPicture));
-        HeroButton.setText(deck.deckHero.health + " " + deck.deckHero.heroDefence);
+        HeroButton.setText(deck.deckHero.health + " ");
         HeroButton.setBounds(0, 530, 150, 110);
         HeroButton.addActionListener(e -> {
             frame.repaint();
@@ -216,7 +152,7 @@ public class Battle {
         JButton endGameButton = new JButton("end Game");
         endGameButton.setBounds(950, 20, 150, 30);
         endGameButton.addActionListener(e -> {
-            frame.setVisible(false);
+            frame.remove(mapPanel);
             Drawer.getInstance().Enter();
         });
         mapPanel.add(endGameButton);
@@ -226,19 +162,36 @@ public class Battle {
         frame.revalidate();
     }
 
+    private void chooseYourCard(ArrayList<Card> inMapCards) throws IOException {
+        JPanel chooseYourCardPanel = new JPanel(new GridBagLayout());
+        for (int i = 0; i < inMapCards.size(); i++) {
+            CardButton cardButton = new CardButton(inMapCards.get(i));
+            Card card = inMapCards.get(i);
+            cardButton.addActionListener(e -> {
+                deck.deckCards.add(card);
+                chooseYourCardPanel.remove(cardButton);
+                inMapCards.remove(card);
+                inMapCards.addAll(shuffleCard(1));
+                chooseYourCardPanel.repaint();
+            });
+            chooseYourCardPanel.add(cardButton);
+        }
+        JOptionPane.showMessageDialog(frame, chooseYourCardPanel, "choose your card", JOptionPane.PLAIN_MESSAGE);
+    }
+
     private void justShowCard(JPanel panel) throws IOException {
         Random random = new Random();
         int i = random.nextInt(deck.deckCards.size());
-        JLabel cardlabel = new JLabel();
+        JLabel cardLabel = new JLabel();
         BufferedImage HeroPicture = ImageIO.read(new File(deck.deckCards.get(i).icon));
-        cardlabel.setIcon(new ImageIcon(HeroPicture));
-        cardlabel.setBounds(900, 530, 75, 110);
-        panel.add(cardlabel);
+        cardLabel.setIcon(new ImageIcon(HeroPicture));
+        cardLabel.setBounds(900, 530, 75, 110);
+        panel.add(cardLabel);
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                panel.remove(cardlabel);
+                panel.remove(cardLabel);
                 frame.repaint();
                 frame.revalidate();
                 timer.cancel();
@@ -250,16 +203,12 @@ public class Battle {
     private void inHandCard(JPanel cardPanel, ArrayList<Card> inMapCards, JPanel battlePanel1, Document eventDoc, JLabel manaText, ArrayList<Card> inBattleCards) throws IOException {
         cardPanel.removeAll();
         for (int i = 0; i < inMapCards.size(); i++) {
-            JButton inHandCardButton = new JButton();
-            BufferedImage myPicture = ImageIO.read(new File(inMapCards.get(i).icon));
-            inHandCardButton.setIcon(new ImageIcon(myPicture));
-            inHandCardButton.setText(inMapCards.get(i).mana + " " + inMapCards.get(i).damage + " " + inMapCards.get(i).health);
-            inHandCardButton.setLayout(new GridBagLayout());
+            CardButton inHandCardButton = new CardButton(inMapCards.get(i));
             int finalI = i;
             inHandCardButton.addActionListener(e -> {
-                if (mana >= inMapCards.get(finalI).mana && (inBattleCards.size() <= 7 || inMapCards.get(finalI).isminion != 1)) {
+                if (mana >= inMapCards.get(finalI).mana && (inBattleCards.size() <= 7 || !inMapCards.get(finalI).getClass().getName().equals("Minion"))) {
                     cardPanel.remove(inHandCardButton);
-                    if (inMapCards.get(finalI).isminion == 1) {
+                    if (inMapCards.get(finalI).getClass().getName().equals("org.stuff.cards.Minion")) {
                         inBattleCards.add(inMapCards.get(finalI));
                         battlePanel1.add(inHandCardButton);
                     }

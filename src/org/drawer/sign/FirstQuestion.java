@@ -8,7 +8,7 @@ public class FirstQuestion {
     private JFrame frame;
     private static FirstQuestion single_instance = null;
     public FirstQuestion() {
-        frame=new JFrame();
+        frame=new JFrame("sign room");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1200, 800);
         frame.setVisible(true);

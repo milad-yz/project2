@@ -1,10 +1,14 @@
-package org.drawer.rooms;
+package org.drawer.ShopRooms;
 
 import org.drawer.mainParts.collections.Collection;
 import org.drawer.Drawer;
 import org.fileWorks.login;
 import org.player.Player;
 import org.stuff.Card;
+import org.stuff.cards.Minion;
+import org.stuff.cards.QuestAndReward;
+import org.stuff.cards.Spell;
+import org.stuff.cards.Weapon;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -40,9 +44,22 @@ public class BuyCardShow {
         buyLabel.setBounds(500, 0, 400, 30);
         buyCardShowPanel.add(buyLabel);
         //
-        JLabel information1 = new JLabel("mana: " + card.mana + " damage: " + card.damage + " health: " + card.health);
+        JLabel information1=new JLabel();
         information1.setBounds(500, 200, 500, 100);
         information1.setFont(new Font("serif", Font.BOLD, 15));
+        if(card.getClass().getSuperclass().getName().equals("org.stuff.cards.Minion")) {
+            Minion tempCard=(Minion)card;
+            information1.setText("mana: " + card.mana + " damage: " + tempCard.getDamage() + " health: " + tempCard.getHealth());
+        }else if(card.getClass().getSuperclass().getName().equals("org.stuff.cards.Spell")){
+            Spell tempCard=(Spell)card;
+            information1.setText("mana: " + card.mana);
+        }else if(card.getClass().getSuperclass().getName().equals("org.stuff.cards.QuestAndReward")){
+            QuestAndReward tempCard=(QuestAndReward) card;
+            information1.setText("mana: " + card.mana);
+        }else{
+            Weapon tempCard=(Weapon) card;
+            information1.setText("mana: " + card.mana + " damage: " + tempCard.getDamage() + " defence: " + tempCard.getDefence());
+        }
         buyCardShowPanel.add(information1);
         //
         JLabel information2 = new JLabel("description: " + card.description);
@@ -71,7 +88,7 @@ public class BuyCardShow {
                 try {
                     login.body(p.getUserName(), "back button", "went to card room");
                     Collection c1 = new Collection(frame,p);
-                    p.update(p);
+                    p.update();
                     c1.cards("", 20, 1, null);
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -91,7 +108,7 @@ public class BuyCardShow {
             frame.remove(buyCardShowPanel);
             if (p.diamonds >= card.cost) {
                 p.diamonds -= card.cost;
-                p.currentcards.add(card);
+                p.currentCards.add(card);
                 try {
                     login.body(p.getUserName(), card.name, "have bought this card");
                 } catch (IOException ex) {
@@ -112,7 +129,7 @@ public class BuyCardShow {
                 }
             }
             try {
-                p.update(p);
+                p.update();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

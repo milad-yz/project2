@@ -1,10 +1,14 @@
-package org.drawer.rooms;
+package org.drawer.ShopRooms;
 
 import org.drawer.mainParts.collections.Collection;
 import org.drawer.Drawer;
 import org.fileWorks.login;
 import org.player.Player;
 import org.stuff.Card;
+import org.stuff.cards.Minion;
+import org.stuff.cards.QuestAndReward;
+import org.stuff.cards.Spell;
+import org.stuff.cards.Weapon;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -38,18 +42,31 @@ public class SellCardShow {
         sellCardShowPanel.setLayout(null);
         sellCardShowPanel.setBounds(0, 0, 1200, 800);
         //
-        JLabel buylabel = new JLabel("your diamond is = " + p.diamonds);
-        buylabel.setBounds(500, 0, 400, 30);
-        sellCardShowPanel.add(buylabel);
+        JLabel sellLabel = new JLabel("your diamond is = " + p.diamonds);
+        sellLabel.setBounds(500, 0, 400, 30);
+        sellCardShowPanel.add(sellLabel);
         //
         JLabel massagelabel = new JLabel(massage);
         massagelabel.setBounds(500, 600, 400, 30);
         massagelabel.setForeground(Color.red);
         sellCardShowPanel.add(massagelabel);
         //
-        JLabel information1 = new JLabel("mana: " + card.mana + " damage: " + card.damage + " health: " + card.health);
+        JLabel information1=new JLabel();
         information1.setBounds(500, 200, 500, 100);
         information1.setFont(new Font("serif", Font.BOLD, 15));
+        if(card.getClass().getSuperclass().getName().equals("org.stuff.cards.Minion")) {
+            Minion tempCard=(Minion)card;
+            information1.setText("mana: " + card.mana + " damage: " + tempCard.getDamage() + " health: " + tempCard.getHealth());
+        }else if(card.getClass().getSuperclass().getName().equals("org.stuff.cards.Spell")){
+            Spell tempCard=(Spell)card;
+            information1.setText("mana: " + card.mana);
+        }else if(card.getClass().getSuperclass().getName().equals("org.stuff.cards.QuestAndReward")){
+            QuestAndReward tempCard=(QuestAndReward) card;
+            information1.setText("mana: " + card.mana);
+        }else{
+            Weapon tempCard=(Weapon) card;
+            information1.setText("mana: " + card.mana + " damage: " + tempCard.getDamage() + " defence: " + tempCard.getDefence());
+        }
         sellCardShowPanel.add(information1);
         //
         JLabel information2 = new JLabel("description: " + card.description);
@@ -77,7 +94,7 @@ public class SellCardShow {
             } else if (n == 2) {
                 try {
                     login.body(p.getUserName(), "back button", "went to card room");
-                    p.update(p);
+                    p.update();
                     Collection c1 = new Collection(frame,p);
                     c1.cards("", 20, 1, null);
                 } catch (IOException ex) {
@@ -98,7 +115,7 @@ public class SellCardShow {
             frame.remove(sellCardShowPanel);
             p.diamonds += card.cost / 2;
             forceSell(card);
-            p.currentcards.remove(card);
+            p.currentCards.remove(card);
             p.sellUpdate(card);
             JOptionPane.showMessageDialog(frame, "you have sold it successfully", "sell", JOptionPane.INFORMATION_MESSAGE);
             if (n == 1) {
@@ -113,7 +130,7 @@ public class SellCardShow {
             }
             try {
                 login.body(p.getUserName(), card.name, "have sold this card");
-                p.update(p);
+                p.update();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -125,10 +142,10 @@ public class SellCardShow {
     }
 
     private void forceSell(Card card) {
-        for (int i = 0; i < p.currentcards.size(); i++) {
-            if(card.name.equals(p.currentcards.get(i).name)){
-                System.out.println(p.currentcards.get(i).name);
-                p.currentcards.remove(i);
+        for (int i = 0; i < p.currentCards.size(); i++) {
+            if(card.name.equals(p.currentCards.get(i).name)){
+                System.out.println(p.currentCards.get(i).name);
+                p.currentCards.remove(i);
                 break;
             }
         }

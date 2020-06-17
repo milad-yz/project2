@@ -1,9 +1,14 @@
 package org.drawer.mainParts.collections;
 
+import org.drawer.CardButton;
 import org.fileWorks.login;
 import org.player.Player;
 import org.stuff.Card;
 import org.stuff.Deck;
+import org.stuff.cards.Minion;
+import org.stuff.cards.QuestAndReward;
+import org.stuff.cards.Spell;
+import org.stuff.cards.Weapon;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -33,9 +38,9 @@ public class DeckShowRoom {
         deckPanel.setLayout(null);
         deckPanel.setBounds(0, 0, 1200, 800);
         //
-        JLabel decklabel = new JLabel("this is all deck");
-        decklabel.setBounds(500, 0, 400, 30);
-        deckPanel.add(decklabel);
+        JLabel deckLabel = new JLabel("this is all deck");
+        deckLabel.setBounds(500, 0, 400, 30);
+        deckPanel.add(deckLabel);
         //
         JButton backButton = new JButton("back");
         backButton.setBounds(500, 630, 100, 30);
@@ -43,17 +48,17 @@ public class DeckShowRoom {
         backButton.addActionListener(e -> {
             frame.remove(deckPanel);
             try {
-                login.body(p.getUserName(), "back buuton", "went to collection");
+                login.body(p.getUserName(), "back button", "went to collection");
                 collection.collection();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
         });
         //
-        JButton newdDeckButton = new JButton("new deck");
-        newdDeckButton.setBounds(600, 630, 100, 30);
-        deckPanel.add(newdDeckButton);
-        newdDeckButton.addActionListener(e -> {
+        JButton newDeckButton = new JButton("new deck");
+        newDeckButton.setBounds(600, 630, 100, 30);
+        deckPanel.add(newDeckButton);
+        newDeckButton.addActionListener(e -> {
             frame.remove(deckPanel);
             try {
                 login.body(p.getUserName(), "sing new deck", "went to sign new deck");
@@ -91,17 +96,17 @@ public class DeckShowRoom {
         ArrayList<JRadioButton> arb = new ArrayList<>();
         for (int i = 0; i < p.playerDeck.size(); i++) {
             JRadioButton radioButton = new JRadioButton(p.playerDeck.get(i).name);
-            radioButton.setBounds((i % 5) * 150 + 150, 400, 100, 30);
+            radioButton.setBounds(i  * 100 + 150, 400, 100, 30);
             buttonGroup.add(radioButton);
             deckPanel.add(radioButton);
             arb.add(radioButton);
         }
         //
-        JButton chageDeckButton = new JButton("change current deck");
-        chageDeckButton.setBounds(500, 450, 200, 30);
-        chageDeckButton.setFont(new Font("serif", Font.BOLD, 14));
-        deckPanel.add(chageDeckButton);
-        chageDeckButton.addActionListener(e -> {
+        JButton changeDeckButton = new JButton("change current deck");
+        changeDeckButton.setBounds(500, 450, 200, 30);
+        changeDeckButton.setFont(new Font("serif", Font.BOLD, 14));
+        deckPanel.add(changeDeckButton);
+        changeDeckButton.addActionListener(e -> {
             int i = 0;
             for (i = 0; i < arb.size(); i++) {
                 if (arb.get(i).isSelected())
@@ -109,15 +114,12 @@ public class DeckShowRoom {
             }
             p.currentDeck = p.playerDeck.get(i);
             try {
-                login.body(p.getUserName(), "change current deck", "currnetn deck:" + p.playerDeck.get(i).name);
-                p.update(p);
+                login.body(p.getUserName(), "change current deck", "current deck:" + p.playerDeck.get(i).name);
+                p.update();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            JLabel successlabel = new JLabel("you have changed your main deck successfully");
-            successlabel.setBounds(500, 500, 300, 30);
-            successlabel.setFont(new Font("serif", Font.BOLD, 14));
-            deckPanel.add(successlabel);
+            JOptionPane.showMessageDialog(frame, "you have changed your main deck successfully", "change main deck", JOptionPane.INFORMATION_MESSAGE);
         });
         //
         frame.add(deckPanel);
@@ -158,7 +160,7 @@ public class DeckShowRoom {
                 p.currentDeck = null;
             try {
                 login.body(p.getUserName(), "remove deck", "remove deck:" + deck.name);
-                p.update(p);
+                p.update();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -170,10 +172,7 @@ public class DeckShowRoom {
         //
         for (int i = 0; i < tempCardArray.size(); i++) {
             if((searchCard==null||searchCard.name.equals(tempCardArray.get(i).name))&&(tempCardArray.get(i).mana==filterCards||filterCards==20)&&(Hero.equals("")||Hero.equals(tempCardArray.get(i).specialFor))) {
-                BufferedImage myPicture = ImageIO.read(new File(tempCardArray.get(i).icon));
-                JButton cardButton = new JButton();
-                cardButton.setIcon(new ImageIcon(myPicture));
-                cardButton.setBounds((i % 4) * 150, (i / 4) * 200, 150, 200);
+                CardButton cardButton = new CardButton(tempCardArray.get(i));
                 cardButton.setText(numberInArray(tempCardArray.get(i), deck.deckCards) + "x");
                 temp.add(cardButton);
                 int finalI = i;
@@ -201,18 +200,18 @@ public class DeckShowRoom {
         JPanel temp2 = new JPanel(new GridBagLayout());
         temp2.setBounds(20, 40, 900, 2000);
         //
-        for (int i = 0; i < p.currentcards.size(); i++) {
+        for (int i = 0; i < p.currentCards.size(); i++) {
             boolean flag = true;
             for (int j = 0; j < deck.deckCards.size(); j++) {
-                if (deck.deckCards.get(j).name.equals(p.currentcards.get(i).name)&&numberInArray(deck.deckCards.get(j),deck.deckCards)>=2) {
+                if (deck.deckCards.get(j).name.equals(p.currentCards.get(i).name)&&numberInArray(deck.deckCards.get(j),deck.deckCards)>=2) {
                     flag = false;
                     break;
                 }
             }
-            if (flag && (p.currentcards.get(i).specialFor.equals("All") || deck.deckHero.name.equals(p.currentcards.get(i).specialFor))) {
-                if((searchCard==null||searchCard.name.equals(p.currentcards.get(i).name))&&(filterCards==20||p.currentcards.get(i).mana==filterCards)&&(Hero.equals("")||Hero.equals(p.currentcards.get(i).specialFor))) {
-                    BufferedImage myPicture = ImageIO.read(new File(p.currentcards.get(i).icon));
-                    JButton cardButton = new JButton((2 - numberInArray(p.currentcards.get(i), deck.deckCards)) + "x");
+            if (flag && (p.currentCards.get(i).specialFor.equals("All") || deck.deckHero.name.equals(p.currentCards.get(i).specialFor))) {
+                if((searchCard==null||searchCard.name.equals(p.currentCards.get(i).name))&&(filterCards==20||p.currentCards.get(i).mana==filterCards)&&(Hero.equals("")||Hero.equals(p.currentCards.get(i).specialFor))) {
+                    BufferedImage myPicture = ImageIO.read(new File(p.currentCards.get(i).icon));
+                    JButton cardButton = new JButton((2 - numberInArray(p.currentCards.get(i), deck.deckCards)) + "x");
                     cardButton.setIcon(new ImageIcon(myPicture));
                     cardButton.setBounds((i % 4) * 150, (i / 4) * 200, 150, 200);
                     temp2.add(cardButton);
@@ -220,8 +219,8 @@ public class DeckShowRoom {
                     cardButton.addActionListener(e -> {
                         frame.remove(deckShowPanel);
                         try {
-                            login.body(p.getUserName(), "card show", "went to card show room for:" + p.currentcards.get(finalI).name);
-                            cardShow(p.currentcards.get(finalI), 2, deck);
+                            login.body(p.getUserName(), "card show", "went to card show room for:" + p.currentCards.get(finalI).name);
+                            cardShow(p.currentCards.get(finalI), 2, deck);
                         } catch (IOException ex) {
                             ex.printStackTrace();
                         }
@@ -256,7 +255,7 @@ public class DeckShowRoom {
             frame.remove(deckShowPanel);
             ArrayList<Card>tempCards=new ArrayList<>();
             try {
-                deckShow(deck,collection.textFinder(searchText.getText(),p.allcards),20,"");
+                deckShow(deck,collection.textFinder(searchText.getText(),p.allCards),20,"");
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -333,7 +332,6 @@ public class DeckShowRoom {
         frame.repaint();
         frame.revalidate();
     }
-    //return cards that dont have same cards
     private ArrayList<Card> purifyCards(ArrayList<Card> cards) {
         ArrayList<Card> tempCards = new ArrayList<>();
         for (int i = 0; i < cards.size(); i++) {
@@ -419,7 +417,7 @@ public class DeckShowRoom {
             }
             p.playerDeck.add(deck);
             try {
-                p.update(p);
+                p.update();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -465,9 +463,22 @@ public class DeckShowRoom {
             }
         });
         //
-        JLabel information1 = new JLabel("mana: " + card.mana + " damage: " + card.damage + " health: " + card.health);
+        JLabel information1=new JLabel();
         information1.setBounds(500, 200, 500, 100);
         information1.setFont(new Font("serif", Font.BOLD, 15));
+        if(card.getClass().getSuperclass().getName().equals("org.stuff.cards.Minion")) {
+            Minion tempCard=(Minion)card;
+            information1.setText("mana: " + card.mana + " damage: " + tempCard.getDamage() + " health: " + tempCard.getHealth());
+        }else if(card.getClass().getSuperclass().getName().equals("org.stuff.cards.Spell")){
+            Spell tempCard=(Spell)card;
+            information1.setText("mana: " + card.mana);
+        }else if(card.getClass().getSuperclass().getName().equals("org.stuff.cards.QuestAndReward")){
+            QuestAndReward tempCard=(QuestAndReward) card;
+            information1.setText("mana: " + card.mana);
+        }else{
+            Weapon tempCard=(Weapon) card;
+            information1.setText("mana: " + card.mana + " damage: " + tempCard.getDamage() + " defence: " + tempCard.getDefence());
+        }
         cardShowPanel.add(information1);
         //
         JLabel information2 = new JLabel("description: " + card.description);
@@ -498,7 +509,7 @@ public class DeckShowRoom {
                 frame.remove(cardShowPanel);
                 deck.deckCards.remove(card);
                 try {
-                    p.update(p);
+                    p.update();
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -521,7 +532,7 @@ public class DeckShowRoom {
                 frame.remove(cardShowPanel);
                 deck.deckCards.add(card);
                 try {
-                    p.update(p);
+                    p.update();
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }

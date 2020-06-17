@@ -4,12 +4,8 @@ import org.drawer.Drawer;
 import org.fileWorks.login;
 import org.player.Player;
 import org.stuff.Card;
-import org.stuff.Deck;
-import javax.imageio.ImageIO;
+
 import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -33,7 +29,7 @@ public class Collection {
         backButton.addActionListener(e -> {
             try {
                 login.body(p.getUserName(), "back buton", "went to menu");
-                p.update(p);
+                p.update();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

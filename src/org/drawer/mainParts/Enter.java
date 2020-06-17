@@ -6,6 +6,7 @@ import org.fileWorks.login;
 import org.player.Player;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 public class Enter {
@@ -102,19 +103,34 @@ public class Enter {
             Drawer.getInstance().setting();
         });
         //
-        JButton signoutButton = new JButton("Sing out");
-        signoutButton.setBounds(500, 480, 100, 30);
-        EnterPanel.add(signoutButton);
-        signoutButton.addActionListener(e -> {
+        JButton signOutButton = new JButton("Sing out");
+        signOutButton.setBounds(500, 480, 100, 30);
+        EnterPanel.add(signOutButton);
+        signOutButton.addActionListener(e -> {
             frame.remove(EnterPanel);
             try {
                 login.body(p.getUserName(), "exit", "exit");
-                p.update(p);
+                p.update();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
             frame.setVisible(false);
             FirstQuestion.getInstance().draw();
+        });
+        //
+        JButton deleteButton = new JButton("delete account");
+        deleteButton.setBounds(500, 560, 100, 30);
+        deleteButton.setFont(new Font("Verdana", Font.PLAIN, 8));
+        EnterPanel.add(deleteButton);
+        deleteButton.addActionListener(e -> {
+            frame.remove(EnterPanel);
+            try {
+                login.body(p.getUserName(), "want to delete", "");
+                p.update();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            Drawer.getInstance().deletePlayer();
         });
         //
         frame.add(EnterPanel);

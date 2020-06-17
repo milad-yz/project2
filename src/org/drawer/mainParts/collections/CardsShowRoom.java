@@ -53,16 +53,16 @@ public class CardsShowRoom {
         });
         //
         JPanel temp = new JPanel(new GridBagLayout());
-        for (int i = 0; i < p.allcards.size(); i++) {
+        for (int i = 0; i < p.allCards.size(); i++) {
             boolean flag = true;
-            for (int j = 0; j < p.currentcards.size(); j++) {
-                if (p.currentcards.get(j).name.equals(p.allcards.get(i).name)) {
+            for (int j = 0; j < p.currentCards.size(); j++) {
+                if (p.currentCards.get(j).name.equals(p.allCards.get(i).name)) {
                     flag = false;
                     break;
                 }
             }
-            if (flag && (searchCard == null || searchCard == p.allcards.get(i)) && (filterCards == 1 || filterCards == 3) && (p.allcards.get(i).mana == mana || mana == 20) && (p.allcards.get(i).specialFor.equals(Hero) || Hero.equals(""))) {
-                BufferedImage myPicture = ImageIO.read(new File(p.allcards.get(i).icon));
+            if (flag && (searchCard == null || searchCard == p.allCards.get(i)) && (filterCards == 1 || filterCards == 3) && (p.allCards.get(i).mana == mana || mana == 20) && (p.allCards.get(i).specialFor.equals(Hero) || Hero.equals(""))) {
+                BufferedImage myPicture = ImageIO.read(new File(p.allCards.get(i).icon));
                 ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
                 ColorConvertOp ccop = new ColorConvertOp(cs, null);
                 myPicture = ccop.filter(myPicture, null);
@@ -75,15 +75,15 @@ public class CardsShowRoom {
                 cardButton.addActionListener(e -> {
                     frame.remove(cardsPanel);
                     try {
-                        login.body(p.getUserName(), "buy", "want to buy" + p.allcards.get(finalI).name);
-                        p.update(p);
-                        Drawer.getInstance().buyCardShow(p.allcards.get(finalI), 2);
+                        login.body(p.getUserName(), "buy", "want to buy" + p.allCards.get(finalI).name);
+                        p.update();
+                        Drawer.getInstance().buyCardShow(p.allCards.get(finalI), 2);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
                 });
-            } else if (!flag && (searchCard == null || searchCard == p.allcards.get(i)) && (filterCards == 1 || filterCards == 2) && (p.allcards.get(i).mana == mana || mana == 20) && (p.allcards.get(i).specialFor.equals(Hero) || Hero.equals(""))) {
-                BufferedImage myPicture = ImageIO.read(new File(p.allcards.get(i).icon));
+            } else if (!flag && (searchCard == null || searchCard == p.allCards.get(i)) && (filterCards == 1 || filterCards == 2) && (p.allCards.get(i).mana == mana || mana == 20) && (p.allCards.get(i).specialFor.equals(Hero) || Hero.equals(""))) {
+                BufferedImage myPicture = ImageIO.read(new File(p.allCards.get(i).icon));
                 JButton cardButton = new JButton();
                 cardButton.setIcon(new ImageIcon(myPicture));
                 cardButton.setBounds((i % 4) * 150, (i / 4) * 200, 75, 100);
@@ -92,9 +92,9 @@ public class CardsShowRoom {
                 cardButton.addActionListener(e -> {
                     frame.remove(cardsPanel);
                     try {
-                        login.body(p.getUserName(), "sell", "want to sell" + p.allcards.get(finalI).name);
-                        p.update(p);
-                        Drawer.getInstance().sellCardShow(p.allcards.get(finalI), "", 2);
+                        login.body(p.getUserName(), "sell", "want to sell" + p.allCards.get(finalI).name);
+                        p.update();
+                        Drawer.getInstance().sellCardShow(p.allCards.get(finalI), "", 2);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -138,6 +138,18 @@ public class CardsShowRoom {
         JScrollPane scrollableMana = new JScrollPane(temp2);
         scrollableMana.setBounds(50, 500, 800, 100);
         cardsPanel.add(scrollableMana);
+        //
+        JButton allHeroButton = new JButton("All");
+        allHeroButton.setBounds(900, 70, 100, 30);
+        allHeroButton.addActionListener(e -> {
+            frame.remove(cardsPanel);
+            try {
+                cards("", mana, filterCards, null);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+        cardsPanel.add(allHeroButton);
         //
         for (int i = 0; i < p.heros.size(); i++) {
             JButton HeroButton = new JButton(p.heros.get(i).name);
@@ -189,16 +201,16 @@ public class CardsShowRoom {
         });
         cardsPanel.add(filterCardsButton3);
         //
-        JTextField searchtext = new JTextField();
-        searchtext.setBounds(450, 400, 100, 30);
-        cardsPanel.add(searchtext);
+        JTextField searchText = new JTextField();
+        searchText.setBounds(450, 400, 100, 30);
+        cardsPanel.add(searchText);
         //
         JButton searchButton = new JButton("search");
         searchButton.setBounds(550, 400, 100, 30);
         searchButton.addActionListener(e -> {
             frame.remove(cardsPanel);
             try {
-                cards(Hero, mana, 1, collection.textFinder(searchtext.getText(),p.allcards));
+                cards(Hero, mana, 1, collection.textFinder(searchText.getText(),p.allCards));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

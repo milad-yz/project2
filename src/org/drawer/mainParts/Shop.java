@@ -22,9 +22,9 @@ public class Shop {
         shopPanel.setLayout(null);
         shopPanel.setBounds(0, 0, 1200, 800);
         //
-        JLabel shoplabel = new JLabel("what do you want?");
-        shoplabel.setBounds(500, 0, 200, 30);
-        shopPanel.add(shoplabel);
+        JLabel shopLabel = new JLabel("what do you want?");
+        shopLabel.setBounds(500, 0, 200, 30);
+        shopPanel.add(shopLabel);
         //
         JButton buyButton = new JButton("buy");
         buyButton.setBounds(500, 100, 100, 30);
