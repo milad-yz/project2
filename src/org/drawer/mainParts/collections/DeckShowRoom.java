@@ -1,6 +1,6 @@
 package org.drawer.mainParts.collections;
 
-import org.drawer.CardButton;
+import org.drawer.labelsAndButtons.CardButton;
 import org.fileWorks.login;
 import org.player.Player;
 import org.stuff.Card;
@@ -437,9 +437,9 @@ public class DeckShowRoom {
         cardShowPanel.setLayout(null);
         cardShowPanel.setBounds(0, 0, 1200, 800);
         //
-        JLabel cardShowlabel = new JLabel(card.name + ":");
-        cardShowlabel.setBounds(500, 0, 400, 30);
-        cardShowPanel.add(cardShowlabel);
+        JLabel cardShowLabel = new JLabel(card.name + ":");
+        cardShowLabel.setBounds(500, 0, 400, 30);
+        cardShowPanel.add(cardShowLabel);
         //
         JButton backButton = new JButton("back");
         backButton.setBounds(500, 630, 100, 30);

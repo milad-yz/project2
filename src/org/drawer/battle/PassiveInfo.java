@@ -23,7 +23,7 @@ public class PassiveInfo {
 
     public PassiveInfo(Player p, JFrame frame) {
         this.p = p;
-        this.deck = p.currentDeck;
+        this.deck = p.currentDeck.getClone();
         this.mana = firstMana;
         this.frame = frame;
         draw();
@@ -62,7 +62,7 @@ public class PassiveInfo {
             button.addActionListener(e -> {
                 frame.remove(passiveInfoPanel);
                 changePassiveInfo(button.getText());
-                new Battle(frame,p,deck,deck2battlePerTurn,mana,perTurnHeroPower);
+                new Battle(frame,p,deck,deck2battlePerTurn,mana,perTurnHeroPower,firstMana);
             });
             passiveInfoPanel.add(button);
         }

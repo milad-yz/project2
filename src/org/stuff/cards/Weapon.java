@@ -7,6 +7,13 @@ public class Weapon extends Card {
     private int defence;
     public Weapon(String name, int cost, int mana,int damage,int defence, String description, String specialFor, String icon, int rarity) {
         super(name, cost, mana, description, specialFor, icon, rarity);
+        this.damage=damage;
+        this.defence=defence;
+    }
+
+    @Override
+    public Card getClone() {
+        return new Weapon(this.name,this.cost,this.mana,this.damage,this.defence,this.description,this.specialFor,this.icon,this.rarity);
     }
 
     @Override

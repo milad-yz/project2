@@ -1,5 +1,6 @@
 package org.drawer.mainParts.collections;
 
+import org.drawer.labelsAndButtons.CardButton;
 import org.drawer.Drawer;
 import org.fileWorks.login;
 import org.player.Player;
@@ -83,10 +84,7 @@ public class CardsShowRoom {
                     }
                 });
             } else if (!flag && (searchCard == null || searchCard == p.allCards.get(i)) && (filterCards == 1 || filterCards == 2) && (p.allCards.get(i).mana == mana || mana == 20) && (p.allCards.get(i).specialFor.equals(Hero) || Hero.equals(""))) {
-                BufferedImage myPicture = ImageIO.read(new File(p.allCards.get(i).icon));
-                JButton cardButton = new JButton();
-                cardButton.setIcon(new ImageIcon(myPicture));
-                cardButton.setBounds((i % 4) * 150, (i / 4) * 200, 75, 100);
+                CardButton cardButton = new CardButton(p.allCards.get(i));
                 temp.add(cardButton);
                 int finalI = i;
                 cardButton.addActionListener(e -> {

@@ -82,4 +82,9 @@ public class Deck {
         //
         return bestCards.get(0);
     }
+    public Deck getClone(){
+        ArrayList<Card> NEW=new ArrayList<>(this.deckCards);
+        NEW.replaceAll(Card::getClone);
+        return new Deck(this.name,this.deckHero.getClone(),NEW);
+    }
 }

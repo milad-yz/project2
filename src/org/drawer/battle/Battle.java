@@ -1,65 +1,92 @@
 package org.drawer.battle;
 
-import org.drawer.CardButton;
+import org.drawer.labelsAndButtons.CardButton;
 import org.drawer.Drawer;
-import org.fileWorks.login;
+import org.drawer.labelsAndButtons.HeroButton;
+import org.drawer.labelsAndButtons.HeroPowerButton;
 import org.player.Player;
 import org.stuff.Card;
 import org.stuff.Deck;
 import org.stuff.cards.Minion;
-import org.stuff.cards.QuestAndReward;
-import org.stuff.cards.Spell;
-import org.stuff.cards.Weapon;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.Timer;
 
-public class Battle {
+public class Battle implements Runnable {
     private Player p;
     private Deck deck;
-    private JFrame frame;
+    private Deck deck2;
     private int deck2battlePerTurn = 1;
     private int mana;
     private int firstMana = 2;
     private int perTurnHeroPower = 1;
     private static int counter = 0;
+    private HashMap<Integer, Minion> battleCards = new HashMap<>(7);
+    private HashMap<Integer, Minion> battleCards2 = new HashMap<>(7);
+    private ArrayList<Card> handCards = new ArrayList<>();
+    private ArrayList<Card> handCards2 = new ArrayList<>();
+    private JPanel mapPanel;
+    public JFrame frame;
+    private PlayerDisplay playerDisplay;
+    private PlayerDisplay playerDisplay2;
+    private boolean playerTurn=true;
 
-    public Battle(JFrame frame, Player p, Deck deck, int deck2battlePerTurn, int mana, int perTurnHeroPower) {
+    public Battle(JFrame frame, Player p, Deck deck, int deck2battlePerTurn, int mana, int perTurnHeroPower,int firstMana) {
         this.p = p;
-        this.frame = frame;
         this.deck = deck;
+        deck2=deck.getClone();
         this.deck2battlePerTurn = deck2battlePerTurn;
         this.mana = mana;
+        this.frame = frame;
         this.perTurnHeroPower = perTurnHeroPower;
-        try {
-            map();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.firstMana=firstMana;
+        Thread thread = new Thread(this);
+        thread.start();
     }
 
-    private void map() throws IOException {
-        JPanel mapPanel = new JPanel(null);
+    private void init() {
+        mapPanel = new JPanel(null);
         mapPanel.setBounds(0, 0, 1200, 700);
         //
-        JPanel cardPanel = new JPanel(new GridBagLayout());
+        JPanel handPanel = new JPanel(new GridBagLayout());
+        JScrollPane handScroll = new JScrollPane(handPanel);
+        handScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        handScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        handScroll.setBounds(230, 530, 500, 130);
+        mapPanel.add(handScroll);
         //
-        JPanel battlePanel1 = new JPanel(new GridBagLayout());
+        JPanel handPanel2 = new JPanel(new GridBagLayout());
+        JScrollPane handScroll2 = new JScrollPane(handPanel2);
+        handScroll2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        handScroll2.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        handScroll2.setBounds(230, 0, 500, 130);
+        mapPanel.add(handScroll2);
         //
+        JPanel battlePanel = new JPanel(null);
+        battlePanel.setBounds(0, 0, 770, 120);
+        JScrollPane battleScroll = new JScrollPane(battlePanel);
+        battleScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        battleScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        battleScroll.setBounds(100, 380, 700, 120);
+        mapPanel.add(battleScroll);
+        //
+        JPanel battlePanel2 = new JPanel(null);
+        battlePanel2.setBounds(0, 0, 770, 120);
+        JScrollPane battleScroll2 = new JScrollPane(battlePanel2);
+        battleScroll2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        battleScroll2.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        battleScroll2.setBounds(100, 150, 700, 120);
+        mapPanel.add(battleScroll2);
+        //mana text
         JLabel manaText = new JLabel();
         manaText.setText("your mana is : \n" + mana);
         manaText.setBounds(750, 530, 150, 110);
         manaText.setBackground(Color.CYAN);
         mapPanel.add(manaText);
-        //
+        //event text
         JTextArea eventText = new JTextArea();
         Document eventDoc = eventText.getDocument();
         eventText.setBackground(Color.GREEN);
@@ -72,45 +99,33 @@ public class Battle {
         textScroll.setBackground(Color.YELLOW);
         mapPanel.add(textScroll);
         //
-        JScrollPane battlePanel1Scroll = new JScrollPane(battlePanel1);
-        battlePanel1Scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        battlePanel1Scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        battlePanel1Scroll.setBounds(0, 350, 900, 150);
-        battlePanel1Scroll.setBackground(Color.GRAY);
-        mapPanel.add(battlePanel1Scroll);
+        JPanel heroPanel = new JPanel(null);
+        heroPanel.setBounds(0, 0, 150, 120);
+        JScrollPane heroScroll = new JScrollPane(heroPanel);
+        heroScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        heroScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        heroScroll.setBounds(0, 530, 150, 120);
+        mapPanel.add(heroScroll);
         //
-        ArrayList<Card> inMapCards = shuffleCard(3);
-        chooseYourCard(inMapCards);
-        ArrayList<Card> inBattleCards = new ArrayList<>();
-        inHandCard(cardPanel, inMapCards, battlePanel1, eventDoc, manaText, inBattleCards);
+        JPanel heroPanel2 = new JPanel(null);
+        heroPanel2.setBounds(0, 0, 110, 120);
+        JScrollPane heroScroll2 = new JScrollPane(heroPanel2);
+        heroScroll2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        heroScroll2.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        heroScroll2.setBounds(0, 20, 150, 120);
+        mapPanel.add(heroScroll2);
         //
-        JScrollPane cardScroll = new JScrollPane(cardPanel);
-        cardScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        cardScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        cardScroll.setBounds(230, 500, 500, 150);
-        cardScroll.setBackground(Color.YELLOW);
-        mapPanel.add(cardScroll);
-        //
-        JButton HeroButton = new JButton();
-        BufferedImage HeroPicture = ImageIO.read(new File(deck.deckHero.icon));
-        HeroButton.setIcon(new ImageIcon(HeroPicture));
-        HeroButton.setText(deck.deckHero.health + " ");
-        HeroButton.setBounds(0, 530, 150, 110);
-        HeroButton.addActionListener(e -> {
-            frame.repaint();
-            frame.revalidate();
-        });
-        mapPanel.add(HeroButton);
-        //
-        JButton HeroPowerButton = new JButton();
-        BufferedImage HeroPowerPicture = ImageIO.read(new File(deck.deckHero.HeroPowerIcon));
-        HeroPowerButton.setIcon(new ImageIcon(HeroPowerPicture));
-        HeroPowerButton.setBounds(150, 530, 75, 100);
-        HeroPowerButton.addActionListener(e -> {
-            frame.repaint();
-            frame.revalidate();
-        });
-        mapPanel.add(HeroPowerButton);
+        handCards = shuffleCard(3, deck);
+        handCards2 = shuffleCard(3, deck2);
+        chooseYourCard();
+        for (int i = 0; i < 7; i++) {
+            battleCards.put(i, null);
+            battleCards2.put(i, null);
+        }
+        playerDisplay = new PlayerDisplay(handPanel, battlePanel, handCards, battleCards, mana, eventDoc, manaText, deck.deckHero, heroPanel,this,deck);
+        playerDisplay2 = new PlayerDisplay(handPanel2, battlePanel2, handCards2, battleCards2, 100, eventDoc, new JLabel(), deck2.deckHero, heroPanel2,this,deck2);
+        playerDisplay.setN(1);
+        playerDisplay2.setN(3);
         //
         JLabel deckSize = new JLabel();
         deckSize.setText("your deck size is : \n" + deck.deckCards.size());
@@ -121,29 +136,38 @@ public class Battle {
         JButton endTurnButton = new JButton("end turn");
         endTurnButton.setBounds(950, 60, 150, 30);
         endTurnButton.addActionListener(e -> {
-            counter++;
-            if (counter < 10)
-                mana = counter + firstMana;
-            else
-                mana = 10;
-            if (mana > 10)
-                mana = 10;
-            manaText.setText("your mana is : \n" + mana);
-            if (inMapCards.size() + deck2battlePerTurn <= 12)
-                inMapCards.addAll(shuffleCard(deck2battlePerTurn));
-            else {
-                try {
-                    justShowCard(mapPanel);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
+            if(!playerTurn) {
+                counter++;
+                if (counter < 10)
+                    mana = counter + firstMana;
+                else
+                    mana = 10;
+                if (mana > 10)
+                    mana = 10;
+                playerDisplay.setMana(mana);
+                manaText.setText("your mana is : \n" + mana);
+                if (handCards.size() + deck2battlePerTurn <= 12)
+                    handCards.addAll(shuffleCard(deck2battlePerTurn, deck));
+                else {
+                    try {
+                        playerDisplay.justShowCard(frame, deck, mapPanel);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+                deckSize.setText("your deck size is : \n" + deck.deckCards.size());
+            }else{
+                if (handCards2.size() + deck2battlePerTurn <= 12)
+                    handCards2.addAll(shuffleCard(deck2battlePerTurn, deck2));
+                else {
+                    try {
+                        playerDisplay2.justShowCard(frame, deck2, mapPanel);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                 }
             }
-            try {
-                inHandCard(cardPanel, inMapCards, battlePanel1, eventDoc, manaText, inBattleCards);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            deckSize.setText("your deck size is : \n" + deck.deckCards.size());
+            changeTurn();
             frame.repaint();
             frame.revalidate();
         });
@@ -162,86 +186,26 @@ public class Battle {
         frame.revalidate();
     }
 
-    private void chooseYourCard(ArrayList<Card> inMapCards) throws IOException {
-        JPanel chooseYourCardPanel = new JPanel(new GridBagLayout());
-        for (int i = 0; i < inMapCards.size(); i++) {
-            CardButton cardButton = new CardButton(inMapCards.get(i));
-            Card card = inMapCards.get(i);
-            cardButton.addActionListener(e -> {
-                deck.deckCards.add(card);
-                chooseYourCardPanel.remove(cardButton);
-                inMapCards.remove(card);
-                inMapCards.addAll(shuffleCard(1));
-                chooseYourCardPanel.repaint();
-            });
-            chooseYourCardPanel.add(cardButton);
+    private void changeTurn() {
+        if(playerTurn){
+            playerTurn=false;
+            playerDisplay2.setN(1);
+            playerDisplay.setN(3);
+        }else{
+            playerTurn=true;
+            playerDisplay2.setN(3);
+            playerDisplay.setN(1);
         }
-        JOptionPane.showMessageDialog(frame, chooseYourCardPanel, "choose your card", JOptionPane.PLAIN_MESSAGE);
+        playerDisplay2.endTurnNotify();
+        playerDisplay.endTurnNotify();
+        semaphoreNotify();
+    }
+    public void semaphoreNotify(){
+        playerDisplay.semaphoreNotify();
+        playerDisplay2.semaphoreNotify();
     }
 
-    private void justShowCard(JPanel panel) throws IOException {
-        Random random = new Random();
-        int i = random.nextInt(deck.deckCards.size());
-        JLabel cardLabel = new JLabel();
-        BufferedImage HeroPicture = ImageIO.read(new File(deck.deckCards.get(i).icon));
-        cardLabel.setIcon(new ImageIcon(HeroPicture));
-        cardLabel.setBounds(900, 530, 75, 110);
-        panel.add(cardLabel);
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                panel.remove(cardLabel);
-                frame.repaint();
-                frame.revalidate();
-                timer.cancel();
-            }
-        }, 2000);
-        deck.deckCards.remove(i);
-    }
-
-    private void inHandCard(JPanel cardPanel, ArrayList<Card> inMapCards, JPanel battlePanel1, Document eventDoc, JLabel manaText, ArrayList<Card> inBattleCards) throws IOException {
-        cardPanel.removeAll();
-        for (int i = 0; i < inMapCards.size(); i++) {
-            CardButton inHandCardButton = new CardButton(inMapCards.get(i));
-            int finalI = i;
-            inHandCardButton.addActionListener(e -> {
-                if (mana >= inMapCards.get(finalI).mana && (inBattleCards.size() <= 7 || !inMapCards.get(finalI).getClass().getName().equals("Minion"))) {
-                    cardPanel.remove(inHandCardButton);
-                    if (inMapCards.get(finalI).getClass().getName().equals("org.stuff.cards.Minion")) {
-                        inBattleCards.add(inMapCards.get(finalI));
-                        battlePanel1.add(inHandCardButton);
-                    }
-                    mana -= inMapCards.get(finalI).mana;
-                    try {
-                        eventDoc.insertString(eventDoc.getLength(), p.getUserName() + " played " + inMapCards.get(finalI).name + "\n", null);
-                    } catch (BadLocationException ex) {
-                        ex.printStackTrace();
-                    }
-                    manaText.setText("your mana is : \n" + mana);
-                    try {
-                        login.body(p.getUserName(), p.getUserName(), " played " + inMapCards.get(finalI).name);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                    inMapCards.remove(finalI);
-                    try {
-                        inHandCard(cardPanel, inMapCards, battlePanel1, eventDoc, manaText, inBattleCards);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                    frame.repaint();
-                    frame.revalidate();
-                } else {
-                    frame.repaint();
-                    frame.revalidate();
-                }
-            });
-            cardPanel.add(inHandCardButton);
-        }
-    }
-
-    private ArrayList<Card> shuffleCard(int n) {
+    private ArrayList<Card> shuffleCard(int n, Deck deck) {
         ArrayList<Card> cards = new ArrayList<>();
         Random random = new Random();
         while (n > 0 && deck.deckCards.size() != 0) {
@@ -251,5 +215,83 @@ public class Battle {
             n--;
         }
         return cards;
+    }
+
+    public void chooseYourCard() {
+        JPanel chooseYourCardPanel = new JPanel(new GridBagLayout());
+        for (int i = 0; i < handCards.size(); i++) {
+            CardButton cardButton = new CardButton(handCards.get(i));
+            Card card = handCards.get(i);
+            cardButton.addActionListener(e -> {
+                deck.deckCards.add(card);
+                chooseYourCardPanel.remove(cardButton);
+                handCards.remove(card);
+                handCards.addAll(shuffleCard(1,deck));
+                chooseYourCardPanel.repaint();
+            });
+            chooseYourCardPanel.add(cardButton);
+        }
+        JOptionPane.showMessageDialog(frame, chooseYourCardPanel, "choose your card", JOptionPane.PLAIN_MESSAGE);
+    }
+
+    public void wants2attack(Minion minion){
+        if(playerTurn){
+            playerDisplay.setN(5);
+            playerDisplay2.setN(4);
+            playerDisplay2.enemyAttack(minion);
+        }else{
+            playerDisplay.setN(4);
+            playerDisplay2.setN(5);
+            playerDisplay.enemyAttack(minion);
+        }
+        playerDisplay.semaphoreNotify();
+        playerDisplay2.semaphoreNotify();
+    }
+    @Override
+    public void run() {
+        init();
+
+        boolean running = true;
+        while (running) {
+            frame.repaint();
+            frame.revalidate();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    public void enemySetN(int n) {
+        if(playerTurn)
+            playerDisplay.setN(n);
+        else
+            playerDisplay2.setN(n);
+    }
+    public void enemySetM(int m) {
+        if(playerTurn)
+            playerDisplay.setM(m);
+        else
+            playerDisplay2.setM(m);
+    }
+
+    public void finishTheGame() {
+        JOptionPane.showMessageDialog(frame, "Game finished","Game finished" ,JOptionPane.INFORMATION_MESSAGE);
+        frame.remove(mapPanel);
+        Drawer.getInstance().Enter();
+    }
+    public PlayerDisplay whoseTurn(){
+        if(playerTurn)
+            return playerDisplay;
+        else
+            return playerDisplay2;
+    }
+    public PlayerDisplay whoseNotTurn(){
+        if(playerTurn)
+            return playerDisplay2;
+        else
+            return playerDisplay;
     }
 }

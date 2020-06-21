@@ -1,5 +1,6 @@
 package org.stuff.cards.spell;
 
+import org.stuff.Card;
 import org.stuff.cards.Spell;
 
 public class Polymorph extends Spell {
@@ -13,5 +14,10 @@ public class Polymorph extends Spell {
     public void coming2battle() {
         super.coming2battle();
 
+    }
+
+    @Override
+    public Card getClone() {
+        return new Polymorph();
     }
 }

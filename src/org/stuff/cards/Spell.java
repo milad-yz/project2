@@ -9,6 +9,11 @@ public class Spell extends Card {
     }
 
     @Override
+    public Card getClone() {
+        return new Spell(this.name,this.cost,this.mana,this.description,this.specialFor,this.icon,this.rarity);
+    }
+
+    @Override
     public String toString() {
         return "Spell{" +
                 "name='" + name + '\'' +

@@ -8,24 +8,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Card {
-    public String name;
+public class Card extends Stuff{
     public int cost;
-    public int mana;
     public String description;
     public String specialFor;
-    public String icon;
     public int rarity;
     public int used = 0;
 
     public Card(String name, int cost, int mana, String description, String specialFor, String icon, int rarity) {
-        this.name = name;
+        super(name,icon,mana);
         this.cost = cost;
-        this.mana = mana;
         this.description = description;
         this.specialFor = specialFor;
-        this.icon = icon;
         this.rarity = rarity;
+    }
+    public Card getClone(){
+        System.out.println(this.getClass().getSuperclass().getName());
+        return new Card(this.name,this.cost,this.mana,this.description,this.specialFor,this.icon,this.rarity);
     }
 
     @Override

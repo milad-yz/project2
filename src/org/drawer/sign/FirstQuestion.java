@@ -13,6 +13,7 @@ public class FirstQuestion {
         frame.setSize(1200, 800);
         frame.setVisible(true);
         frame.setLayout(null);
+        frame.setResizable(false);
         draw();
     }
     public static FirstQuestion getInstance() {

@@ -1,117 +1,72 @@
 USER:milad
-CREATED_AT:2020/06/17 16:12:24(timestamp)
+CREATED_AT:2020/06/21 17:29:22(timestamp)
 PASSWORD:1234
 
-shop 2020/06/17 16:12:28 went to the shop
-buy room 2020/06/17 16:12:29 went to buy room
-back button 2020/06/17 16:12:31 went to shop
-sell room 2020/06/17 16:12:32 went to sell room
-signIn 2020/06/17 16:12:48 ap2020
-shop 2020/06/17 16:12:53 went to the shop
-sell room 2020/06/17 16:12:54 went to sell room
-signIn 2020/06/17 16:25:45 ap2020
-shop 2020/06/17 16:25:47 went to the shop
-buy room 2020/06/17 16:25:48 went to buy room
-card show 2020/06/17 16:25:49 want to buyCrazedAlchemist
-back button 2020/06/17 16:25:50 went to buy room
-back button 2020/06/17 16:25:52 went to shop
-sell room 2020/06/17 16:25:53 went to sell room
-card show 2020/06/17 16:25:54 want to sellSathrovarr
-signIn 2020/06/17 16:28:29 ap2020
-shop 2020/06/17 16:28:32 went to the shop
-buy room 2020/06/17 16:28:34 went to buy room
-card show 2020/06/17 16:28:35 want to buyCrazedAlchemist
-back button 2020/06/17 16:28:38 went to buy room
-back button 2020/06/17 16:28:40 went to shop
-sell room 2020/06/17 16:28:42 went to sell room
-signIn 2020/06/17 16:31:39 ap2020
-Collection 2020/06/17 16:31:42 went to Collection
-deck 2020/06/17 16:31:43 went to deck room
-back buuton 2020/06/17 16:31:49 went to collection
-card 2020/06/17 16:31:51 went to card room
-sell 2020/06/17 16:31:56 want to sellRavagingGhoul
-back button 2020/06/17 16:31:58 went to card room
-buy 2020/06/17 16:32:05 want to buyBehrad
-Behrad 2020/06/17 16:32:09 have bought this card
-signIn 2020/06/17 16:36:33 ap2020
-Collection 2020/06/17 16:36:34 went to Collection
-card 2020/06/17 16:36:41 went to card room
-buy 2020/06/17 16:36:45 want to buyCrazedAlchemist
-back button 2020/06/17 16:36:47 went to card room
-sell 2020/06/17 16:36:59 want to sellShahzad
-Shahzad 2020/06/17 16:37:03 have sold this card
-signIn 2020/06/17 16:40:21 ap2020
-Collection 2020/06/17 16:40:23 went to Collection
-deck 2020/06/17 16:40:25 went to deck room
-change current deck 2020/06/17 16:40:29 current deck:PRIEST
-sing new deck 2020/06/17 16:40:34 went to sign new deck
-create new deck 2020/06/17 16:40:47 have created myNewDeckto deck collection
-card show 2020/06/17 16:40:54 went to card show room for:RavagingGhoul
-signIn 2020/06/17 16:42:33 ap2020
-Collection 2020/06/17 16:42:35 went to Collection
-card 2020/06/17 16:42:36 went to card room
-back button 2020/06/17 16:42:42 went to collection
-deck 2020/06/17 16:42:45 went to deck room
-deck show 2020/06/17 16:42:52 went to deck show room formyNewDeck
-card show 2020/06/17 16:42:54 went to card show room for:Sathrovarr
-Sathrovarr 2020/06/17 16:42:56 add this card tomyNewDeck
-card show 2020/06/17 16:42:57 went to card show room for:Sathrovarr
-Sathrovarr 2020/06/17 16:42:59 add this card tomyNewDeck
-card show 2020/06/17 16:43:02 went to card show room for:SecurityRover
-SecurityRover 2020/06/17 16:43:04 add this card tomyNewDeck
-card show 2020/06/17 16:43:05 went to card show room for:RavagingGhoul
-RavagingGhoul 2020/06/17 16:43:06 add this card tomyNewDeck
-signIn 2020/06/17 16:44:11 ap2020
-Collection 2020/06/17 16:44:13 went to Collection
-deck 2020/06/17 16:44:15 went to deck room
-signIn 2020/06/17 16:47:29 ap2020
-Collection 2020/06/17 16:47:31 went to Collection
-deck 2020/06/17 16:47:33 went to deck room
-signIn 2020/06/17 16:48:38 ap2020
-Collection 2020/06/17 16:48:39 went to Collection
-deck 2020/06/17 16:48:41 went to deck room
-signIn 2020/06/17 16:49:09 ap2020
-Collection 2020/06/17 16:49:11 went to Collection
-deck 2020/06/17 16:49:13 went to deck room
-change current deck 2020/06/17 16:49:15 current deck:myNewDeck
-back button 2020/06/17 16:49:18 went to collection
-back buton 2020/06/17 16:49:20 went to menu
-play 2020/06/17 16:49:21 wants to play
-signIn 2020/06/17 16:51:02 ap2020
-shop 2020/06/17 16:51:09 went to the shop
-buy room 2020/06/17 16:51:10 went to buy room
-back button 2020/06/17 16:51:12 went to shop
-back button 2020/06/17 16:51:13 went to menu
-play 2020/06/17 16:51:14 wants to play
-deck 2020/06/17 16:51:17 went to deck room
-change current deck 2020/06/17 16:51:19 current deck:PRIEST
-back button 2020/06/17 16:51:22 went to collection
-back buton 2020/06/17 16:51:24 went to menu
-play 2020/06/17 16:51:25 wants to play
-play 2020/06/17 16:51:25 just want to play
-signIn 2020/06/17 16:54:42 ap2020
-play 2020/06/17 16:54:44 wants to play
-play 2020/06/17 16:54:44 just want to play
-signIn 2020/06/17 16:56:21 ap2020
-play 2020/06/17 16:56:22 wants to play
-play 2020/06/17 16:56:22 just want to play
-milad 2020/06/17 16:56:33  played RaidLeader
-signIn 2020/06/17 16:56:59 ap2020
-play 2020/06/17 16:57:00 wants to play
-play 2020/06/17 16:57:00 just want to play
-signIn 2020/06/17 16:57:31 ap2020
-play 2020/06/17 16:57:32 wants to play
-play 2020/06/17 16:57:32 just want to play
-milad 2020/06/17 16:57:47  played StrengthInNumbers
-signIn 2020/06/17 16:58:39 ap2020
-Collection 2020/06/17 16:58:41 went to Collection
-deck 2020/06/17 16:58:42 went to deck room
-deck show 2020/06/17 16:58:46 went to deck show room forWARLOCK
-signIn 2020/06/17 17:02:26 ap2020
-Collection 2020/06/17 17:02:28 went to Collection
-card 2020/06/17 17:02:29 went to card room
-signIn 2020/06/17 17:04:20 ap2020
-Collection 2020/06/17 17:04:21 went to Collection
-deck 2020/06/17 17:04:23 went to deck room
-back button 2020/06/17 17:04:25 went to collection
-card 2020/06/17 17:04:26 went to card room
+Collection 2020/06/21 17:29:24 went to Collection
+card 2020/06/21 17:29:24 went to card room
+back button 2020/06/21 17:30:02 went to collection
+deck 2020/06/21 17:30:03 went to deck room
+change current deck 2020/06/21 17:30:06 current deck:MAGE
+deck show 2020/06/21 17:30:08 went to deck show room forMAGE
+card show 2020/06/21 17:30:15 went to card show room for:BookOfSpecters
+BookOfSpecters 2020/06/21 17:30:16 add this card toMAGE
+card show 2020/06/21 17:30:18 went to card show room for:FireBall
+FireBall 2020/06/21 17:30:21 add this card toMAGE
+back button 2020/06/21 17:30:22 went to deck room
+back button 2020/06/21 17:30:23 went to collection
+back buton 2020/06/21 17:30:24 went to menu
+play 2020/06/21 17:30:25 wants to play
+play 2020/06/21 17:30:25 just want to play
+signIn 2020/06/21 17:34:13 ap2020
+play 2020/06/21 17:34:13 wants to play
+play 2020/06/21 17:34:13 just want to play
+signIn 2020/06/21 17:36:50 ap2020
+play 2020/06/21 17:36:51 wants to play
+play 2020/06/21 17:36:51 just want to play
+signIn 2020/06/21 17:37:27 ap2020
+play 2020/06/21 17:37:28 wants to play
+play 2020/06/21 17:37:28 just want to play
+signIn 2020/06/21 17:41:21 ap2020
+play 2020/06/21 17:41:25 wants to play
+play 2020/06/21 17:41:25 just want to play
+signIn 2020/06/21 20:14:16 ap2020
+play 2020/06/21 20:14:17 wants to play
+play 2020/06/21 20:14:17 just want to play
+Collection 2020/06/21 20:15:55 went to Collection
+card 2020/06/21 20:15:57 went to card room
+back button 2020/06/21 20:16:03 went to collection
+deck 2020/06/21 20:16:03 went to deck room
+change current deck 2020/06/21 20:16:07 current deck:ROGUE
+deck show 2020/06/21 20:16:09 went to deck show room forROGUE
+card show 2020/06/21 20:16:15 went to card show room for:Foad
+Foad 2020/06/21 20:16:15 add this card toROGUE
+back button 2020/06/21 20:16:16 went to deck room
+back button 2020/06/21 20:16:17 went to collection
+back buton 2020/06/21 20:16:17 went to menu
+play 2020/06/21 20:16:19 wants to play
+play 2020/06/21 20:16:19 just want to play
+signIn 2020/06/21 20:43:13 ap2020
+Collection 2020/06/21 20:43:14 went to Collection
+card 2020/06/21 20:43:14 went to card room
+back button 2020/06/21 20:43:33 went to collection
+deck 2020/06/21 20:43:34 went to deck room
+deck show 2020/06/21 20:43:36 went to deck show room forMAGE
+back button 2020/06/21 20:43:58 went to deck room
+back button 2020/06/21 20:44:00 went to collection
+card 2020/06/21 20:44:00 went to card room
+sell 2020/06/21 20:44:12 want to sellFriendlySmith
+back button 2020/06/21 20:44:17 went to card room
+back button 2020/06/21 20:44:18 went to collection
+deck 2020/06/21 20:44:20 went to deck room
+deck show 2020/06/21 20:44:21 went to deck show room forROGUE
+card show 2020/06/21 20:44:25 went to card show room for:FriendlySmith
+FriendlySmith 2020/06/21 20:44:25 add this card toROGUE
+back button 2020/06/21 20:44:26 went to deck room
+change current deck 2020/06/21 20:44:28 current deck:ROGUE
+back button 2020/06/21 20:44:30 went to collection
+back buton 2020/06/21 20:44:31 went to menu
+play 2020/06/21 20:44:32 wants to play
+play 2020/06/21 20:44:32 just want to play
+signIn 2020/06/21 20:45:25 ap2020
+play 2020/06/21 20:45:26 wants to play
+play 2020/06/21 20:45:26 just want to play
