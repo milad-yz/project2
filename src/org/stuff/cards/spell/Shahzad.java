@@ -5,7 +5,7 @@ import org.stuff.cards.Spell;
 
 public class Shahzad extends Spell {
     public Shahzad() {
-        super("Shahzad", 3, 3, "give all minions +2 health", "PRIEST", "images\\shahzad.jpg", 2);
+        super("Shahzad", 3, 3, "give all friendly minions +2 health", "PRIEST", "images\\shahzad.jpg", 2);
     }
 
     @Override
@@ -13,4 +13,5 @@ public class Shahzad extends Spell {
         return new Shahzad();
     }
     //Card shahzad = new Card("shahzad", 3, 3, "give all minions +2 health", "give all minions +2 health", "PRIEST", "images\\shahzad.jpg", 2);
+    //finish
 }

@@ -1,5 +1,7 @@
-package org.drawer.battle;
+package org.drawer.battle.functions;
 
+import org.drawer.battle.Battle;
+import org.drawer.battle.PlayerDisplay;
 import org.drawer.labelsAndButtons.CardLabel;
 import org.stuff.Card;
 import org.stuff.Deck;
@@ -30,8 +32,10 @@ public class BattleCryFunction {
         Random random = new Random();
         while (n > 0 && deck.deckCards.size() != 0) {
             int i = random.nextInt(deck.deckCards.size());
-            cards.add(deck.deckCards.get(i));
-            deck.deckCards.remove(i);
+            if(deck.deckCards.size()>i) {
+                cards.add(deck.deckCards.get(i));
+                deck.deckCards.remove(i);
+            }
             n--;
         }
         return cards;

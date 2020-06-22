@@ -22,11 +22,16 @@ public class HeroButton extends JButton {
         }
         Graphics g = myPicture.getGraphics();
         g.setFont(new Font("Impact", Font.BOLD, 12));
-        g.setColor(Color.RED);
-        g.drawString(hero.health + "", 35, 100);
+        g.setColor(Color.BLUE);
+        g.drawString(hero.health + "", 20, 100);
         setIcon(new ImageIcon(myPicture));
+        g.setColor(Color.YELLOW);
+        g.drawString(hero.damage+"",40,100);
+        g.setColor(Color.BLUE);
+        g.drawString(hero.damage+"",60,100);
     }
     HeroButton(Hero hero,int n){
+        this.hero=hero;
         setBounds(0,0,75,100);
         BufferedImage myPicture = null;
         try {
@@ -36,12 +41,8 @@ public class HeroButton extends JButton {
         }
         Graphics g = myPicture.getGraphics();
         g.setFont(new Font("Impact", Font.BOLD, 12));
-        g.setColor(Color.BLUE);
-        g.drawString(hero.health + "", 20, 100);
+        g.setColor(Color.RED);
+        g.drawString(hero.health + "", 35, 100);
         setIcon(new ImageIcon(myPicture));
-        g.setColor(Color.YELLOW);
-        g.drawString(hero.damage+"",40,100);
-        g.setColor(Color.BLUE);
-        g.drawString(hero.damage+"",60,100);
     }
 }

@@ -13,4 +13,5 @@ public class SwarmOfLocusts extends Spell {
         return new SwarmOfLocusts();
     }
     //Card swarmOfLocusts = new Card("SwarmOfLocusts", 6, 6, "", "summon seven 1/1 locusts with rush", "All", "images\\swarmoflocusts.png", 2);
+    //finish
 }

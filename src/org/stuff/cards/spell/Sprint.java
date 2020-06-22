@@ -13,4 +13,5 @@ public class Sprint extends Spell {
         return new Sprint();
     }
     //Card sprint = new Card("Sprint", 5, 5, "draw 4 cards", "draw 4 cards", "All", "images\\sprint.jfif", 2);
+    //finish
 }

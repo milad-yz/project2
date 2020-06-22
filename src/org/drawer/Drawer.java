@@ -25,6 +25,7 @@ public class Drawer {
         frame.setSize(1200, 800);
         frame.setVisible(true);
         frame.setLayout(null);
+        frame.setResizable(false);
         this.p = p;
     }
 

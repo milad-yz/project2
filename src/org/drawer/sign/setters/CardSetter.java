@@ -82,7 +82,6 @@ public class CardSetter {
     public static ArrayList<Card> currentCardsSetter() {
         ArrayList<Card> currentCards = new ArrayList<>();
         currentCards.addAll(allCardsSetter());
-        currentCards.replaceAll(Card::getClone);
         for (int i = 0; i < 10; i++) {
             int randomInt = (int) (Math.random() * (currentCards.size()));
             currentCards.remove(randomInt);

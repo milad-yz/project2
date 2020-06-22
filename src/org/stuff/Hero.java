@@ -7,6 +7,8 @@ public class Hero extends Stuff{
     public int health;
     public ArrayList<Card> HeroCards;
     public String HeroPowerIcon;
+    public int defence=0;
+    public int rush;
     public Hero(String name, int damage, int health, int mana, String icon, String HeroPowerIcon,Card card1,Card card2) {
         super(name,icon,mana);
         this.damage = damage;

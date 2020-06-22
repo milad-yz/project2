@@ -14,4 +14,5 @@ public class Milad extends Spell {
         return new Milad();
     }
     //Card milad = new Card("milad", 3, 3, "hero-hp+5", "give your hero 5 health", "MAGE", "images\\milad.jpg", 3);
+    //finish
 }

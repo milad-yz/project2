@@ -70,3 +70,270 @@ play 2020/06/21 20:44:32 just want to play
 signIn 2020/06/21 20:45:25 ap2020
 play 2020/06/21 20:45:26 wants to play
 play 2020/06/21 20:45:26 just want to play
+signIn 2020/06/21 20:56:44 ap2020
+play 2020/06/21 20:56:45 wants to play
+play 2020/06/21 20:56:45 just want to play
+Collection 2020/06/21 20:56:55 went to Collection
+card 2020/06/21 20:56:57 went to card room
+buy 2020/06/21 20:57:10 want to buyHellFire
+HellFire 2020/06/21 20:57:18 have bought this card
+back button 2020/06/21 20:57:21 went to collection
+deck 2020/06/21 20:57:23 went to deck room
+deck show 2020/06/21 20:57:26 went to deck show room forROGUE
+card show 2020/06/21 20:57:29 went to card show room for:HellFire
+HellFire 2020/06/21 20:57:30 add this card toROGUE
+card show 2020/06/21 20:57:32 went to card show room for:HellFire
+HellFire 2020/06/21 20:57:32 add this card toROGUE
+back button 2020/06/21 20:57:34 went to deck room
+back button 2020/06/21 20:57:34 went to collection
+back buton 2020/06/21 20:57:35 went to menu
+play 2020/06/21 20:57:36 wants to play
+play 2020/06/21 20:57:36 just want to play
+Collection 2020/06/21 21:00:19 went to Collection
+deck 2020/06/21 21:00:21 went to deck room
+deck show 2020/06/21 21:00:22 went to deck show room forROGUE
+back button 2020/06/21 21:00:31 went to deck room
+back button 2020/06/21 21:00:32 went to collection
+back buton 2020/06/21 21:00:33 went to menu
+play 2020/06/21 21:00:34 wants to play
+play 2020/06/21 21:00:34 just want to play
+Collection 2020/06/21 21:02:43 went to Collection
+card 2020/06/21 21:02:44 went to card room
+back button 2020/06/21 21:02:46 went to collection
+deck 2020/06/21 21:02:47 went to deck room
+deck show 2020/06/21 21:02:49 went to deck show room forROGUE
+card show 2020/06/21 21:02:55 went to card show forHellFire
+back button 2020/06/21 21:02:57 went to deck show
+back button 2020/06/21 21:02:58 went to deck room
+back button 2020/06/21 21:02:59 went to collection
+deck 2020/06/21 21:03:01 went to deck room
+deck show 2020/06/21 21:03:02 went to deck show room forMAGE
+card show 2020/06/21 21:03:04 went to card show room for:HellFire
+HellFire 2020/06/21 21:03:05 add this card toMAGE
+card show 2020/06/21 21:03:07 went to card show room for:HellFire
+HellFire 2020/06/21 21:03:08 add this card toMAGE
+back button 2020/06/21 21:03:46 went to deck room
+change current deck 2020/06/21 21:03:49 current deck:MAGE
+back button 2020/06/21 21:03:50 went to collection
+back buton 2020/06/21 21:03:51 went to menu
+play 2020/06/21 21:03:52 wants to play
+play 2020/06/21 21:03:52 just want to play
+signIn 2020/06/21 21:07:31 ap2020
+Collection 2020/06/21 21:07:33 went to Collection
+deck 2020/06/21 21:07:34 went to deck room
+change current deck 2020/06/21 21:07:36 current deck:MAGE
+deck show 2020/06/21 21:07:38 went to deck show room forMAGE
+card show 2020/06/21 21:07:41 went to card show forBatterHead
+BatterHead 2020/06/21 21:07:42 remove the card from MAGE
+card show 2020/06/21 21:07:42 went to card show forCrazedAlchemist
+CrazedAlchemist 2020/06/21 21:07:43 remove the card from MAGE
+card show 2020/06/21 21:07:44 went to card show forCurioCollector
+CurioCollector 2020/06/21 21:07:45 remove the card from MAGE
+card show 2020/06/21 21:07:45 went to card show forLootHoarder
+LootHoarder 2020/06/21 21:07:46 remove the card from MAGE
+card show 2020/06/21 21:07:46 went to card show forMagmaRager
+MagmaRager 2020/06/21 21:07:47 remove the card from MAGE
+card show 2020/06/21 21:07:47 went to card show forRaidLeader
+RaidLeader 2020/06/21 21:07:48 remove the card from MAGE
+card show 2020/06/21 21:07:49 went to card show forRavagingGhoul
+RavagingGhoul 2020/06/21 21:07:49 remove the card from MAGE
+card show 2020/06/21 21:07:50 went to card show forSathrovarr
+Sathrovarr 2020/06/21 21:07:50 remove the card from MAGE
+card show 2020/06/21 21:07:51 went to card show forWolfRider
+WolfRider 2020/06/21 21:07:52 remove the card from MAGE
+card show 2020/06/21 21:07:53 went to card show forBookOfSpecters
+BookOfSpecters 2020/06/21 21:07:53 remove the card from MAGE
+card show 2020/06/21 21:07:54 went to card show forFireBall
+FireBall 2020/06/21 21:07:55 remove the card from MAGE
+card show 2020/06/21 21:07:55 went to card show forMilad
+Milad 2020/06/21 21:07:56 remove the card from MAGE
+card show 2020/06/21 21:08:00 went to card show forAzureDrake
+AzureDrake 2020/06/21 21:08:01 remove the card from MAGE
+card show 2020/06/21 21:08:02 went to card show forPharaohsBlessing
+PharaohsBlessing 2020/06/21 21:08:02 remove the card from MAGE
+card show 2020/06/21 21:08:03 went to card show forPolymorph
+Polymorph 2020/06/21 21:08:04 remove the card from MAGE
+card show 2020/06/21 21:08:05 went to card show forReleaseTheRaptors
+ReleaseTheRaptors 2020/06/21 21:08:06 remove the card from MAGE
+back button 2020/06/21 21:08:07 went to deck room
+back button 2020/06/21 21:08:08 went to collection
+back buton 2020/06/21 21:08:09 went to menu
+play 2020/06/21 21:08:10 wants to play
+deck 2020/06/21 21:08:15 went to deck room
+deck show 2020/06/21 21:08:16 went to deck show room forROGUE
+back button 2020/06/21 21:08:22 went to deck room
+change current deck 2020/06/21 21:08:25 current deck:ROGUE
+deck show 2020/06/21 21:08:27 went to deck show room forROGUE
+back button 2020/06/21 21:08:29 went to deck room
+back button 2020/06/21 21:08:30 went to collection
+back buton 2020/06/21 21:08:31 went to menu
+play 2020/06/21 21:08:31 wants to play
+play 2020/06/21 21:08:31 just want to play
+signIn 2020/06/21 23:05:30 ap2020
+Collection 2020/06/21 23:05:32 went to Collection
+card 2020/06/21 23:05:33 went to card room
+back button 2020/06/21 23:06:24 went to collection
+deck 2020/06/21 23:06:25 went to deck room
+deck show 2020/06/21 23:06:31 went to deck show room forROGUE
+back button 2020/06/21 23:06:40 went to deck room
+deck show 2020/06/21 23:06:42 went to deck show room forMAGE
+card show 2020/06/21 23:06:51 went to card show room for:Polymorph
+Polymorph 2020/06/21 23:06:53 add this card toMAGE
+card show 2020/06/21 23:07:00 went to card show room for:Polymorph
+Polymorph 2020/06/21 23:07:01 add this card toMAGE
+card show 2020/06/21 23:07:06 went to card show room for:Milad
+Milad 2020/06/21 23:07:08 add this card toMAGE
+card show 2020/06/21 23:07:13 went to card show room for:Milad
+Milad 2020/06/21 23:07:15 add this card toMAGE
+card show 2020/06/21 23:07:16 went to card show room for:BloodFenRaptor
+BloodFenRaptor 2020/06/21 23:07:18 add this card toMAGE
+card show 2020/06/21 23:07:20 went to card show room for:MagmaRager
+MagmaRager 2020/06/21 23:07:21 add this card toMAGE
+card show 2020/06/21 23:07:24 went to card show room for:MagmaRager
+MagmaRager 2020/06/21 23:07:25 add this card toMAGE
+back button 2020/06/21 23:07:26 went to deck room
+back button 2020/06/21 23:07:27 went to collection
+deck 2020/06/21 23:07:29 went to deck room
+change current deck 2020/06/21 23:07:31 current deck:MAGE
+back button 2020/06/21 23:07:34 went to collection
+back buton 2020/06/21 23:07:36 went to menu
+play 2020/06/21 23:07:52 wants to play
+play 2020/06/21 23:07:52 just want to play
+signIn 2020/06/21 23:10:44 ap2020
+play 2020/06/21 23:10:46 wants to play
+play 2020/06/21 23:10:46 just want to play
+signIn 2020/06/21 23:22:52 ap2020
+play 2020/06/21 23:22:54 wants to play
+play 2020/06/21 23:22:54 just want to play
+signIn 2020/06/21 23:26:40 ap2020
+Collection 2020/06/21 23:26:41 went to Collection
+deck 2020/06/21 23:26:42 went to deck room
+deck show 2020/06/21 23:26:44 went to deck show room forROGUE
+back button 2020/06/21 23:26:56 went to deck room
+change current deck 2020/06/21 23:26:58 current deck:ROGUE
+back button 2020/06/21 23:27:01 went to collection
+back buton 2020/06/21 23:27:02 went to menu
+play 2020/06/21 23:27:04 wants to play
+play 2020/06/21 23:27:04 just want to play
+signIn 2020/06/21 23:28:31 ap2020
+Collection 2020/06/21 23:28:45 went to Collection
+deck 2020/06/21 23:28:47 went to deck room
+change current deck 2020/06/21 23:28:50 current deck:MAGE
+back button 2020/06/21 23:28:52 went to collection
+back buton 2020/06/21 23:28:54 went to menu
+play 2020/06/21 23:28:55 wants to play
+play 2020/06/21 23:28:55 just want to play
+signIn 2020/06/22 09:32:27 ap2020
+Collection 2020/06/22 09:32:35 went to Collection
+card 2020/06/22 09:32:36 went to card room
+sell 2020/06/22 09:32:44 want to sellReleaseTheRaptors
+back button 2020/06/22 09:32:45 went to card room
+back button 2020/06/22 09:32:46 went to collection
+deck 2020/06/22 09:32:48 went to deck room
+deck show 2020/06/22 09:32:49 went to deck show room forMAGE
+card show 2020/06/22 09:32:52 went to card show room for:ReleaseTheRaptors
+ReleaseTheRaptors 2020/06/22 09:32:53 add this card toMAGE
+card show 2020/06/22 09:32:55 went to card show room for:ReleaseTheRaptors
+ReleaseTheRaptors 2020/06/22 09:32:56 add this card toMAGE
+back button 2020/06/22 09:32:58 went to deck room
+change current deck 2020/06/22 09:33:01 current deck:MAGE
+back button 2020/06/22 09:33:02 went to collection
+back buton 2020/06/22 09:33:03 went to menu
+play 2020/06/22 09:33:04 wants to play
+play 2020/06/22 09:33:04 just want to play
+signIn 2020/06/22 09:33:37 ap2020
+play 2020/06/22 09:33:37 wants to play
+play 2020/06/22 09:33:37 just want to play
+signIn 2020/06/22 09:39:28 ap2020
+Collection 2020/06/22 09:39:29 went to Collection
+card 2020/06/22 09:39:29 went to card room
+buy 2020/06/22 09:39:39 want to buyShahzad
+Shahzad 2020/06/22 09:39:40 have bought this card
+back button 2020/06/22 09:39:43 went to collection
+deck 2020/06/22 09:39:44 went to deck room
+deck show 2020/06/22 09:39:45 went to deck show room forPRIEST
+card show 2020/06/22 09:39:48 went to card show room for:Shahzad
+Shahzad 2020/06/22 09:39:49 add this card toPRIEST
+card show 2020/06/22 09:39:51 went to card show room for:Shahzad
+Shahzad 2020/06/22 09:39:52 add this card toPRIEST
+back button 2020/06/22 09:39:54 went to deck room
+back button 2020/06/22 09:39:56 went to collection
+back buton 2020/06/22 09:39:57 went to menu
+play 2020/06/22 09:39:58 wants to play
+play 2020/06/22 09:39:58 just want to play
+Collection 2020/06/22 09:40:24 went to Collection
+deck 2020/06/22 09:40:24 went to deck room
+change current deck 2020/06/22 09:40:26 current deck:PRIEST
+back button 2020/06/22 09:40:28 went to collection
+back buton 2020/06/22 09:40:29 went to menu
+play 2020/06/22 09:40:30 wants to play
+play 2020/06/22 09:40:30 just want to play
+signIn 2020/06/22 09:48:59 ap2020
+Collection 2020/06/22 09:49:00 went to Collection
+card 2020/06/22 09:49:02 went to card room
+sell 2020/06/22 09:49:22 want to sellSwarmOfLocusts
+back button 2020/06/22 09:49:24 went to card room
+back button 2020/06/22 09:49:25 went to collection
+deck 2020/06/22 09:49:26 went to deck room
+deck show 2020/06/22 09:49:29 went to deck show room forPRIEST
+card show 2020/06/22 09:49:35 went to card show room for:SwarmOfLocusts
+SwarmOfLocusts 2020/06/22 09:49:36 add this card toPRIEST
+back button 2020/06/22 09:49:37 went to deck room
+back button 2020/06/22 09:49:37 went to collection
+back buton 2020/06/22 09:49:38 went to menu
+play 2020/06/22 09:49:39 wants to play
+play 2020/06/22 09:49:39 just want to play
+signIn 2020/06/22 10:26:42 ap2020
+play 2020/06/22 10:26:43 wants to play
+play 2020/06/22 10:26:43 just want to play
+signIn 2020/06/22 10:28:56 ap2020
+play 2020/06/22 10:28:57 wants to play
+play 2020/06/22 10:28:57 just want to play
+signIn 2020/06/22 10:31:10 ap2020
+play 2020/06/22 10:31:10 wants to play
+play 2020/06/22 10:31:10 just want to play
+signIn 2020/06/22 10:34:53 ap2020
+play 2020/06/22 10:34:54 wants to play
+play 2020/06/22 10:34:54 just want to play
+signIn 2020/06/22 15:46:17 ap2020
+Collection 2020/06/22 15:46:19 went to Collection
+deck 2020/06/22 15:46:20 went to deck room
+deck show 2020/06/22 15:46:21 went to deck show room forMAGE
+card show 2020/06/22 15:46:29 went to card show room for:LearnDraconic
+LearnDraconic 2020/06/22 15:46:30 add this card toMAGE
+card show 2020/06/22 15:46:33 went to card show room for:StrengthInNumbers
+StrengthInNumbers 2020/06/22 15:46:34 add this card toMAGE
+back button 2020/06/22 15:46:36 went to deck room
+change current deck 2020/06/22 15:46:38 current deck:MAGE
+back button 2020/06/22 15:46:39 went to collection
+back buton 2020/06/22 15:46:40 went to menu
+play 2020/06/22 15:46:41 wants to play
+play 2020/06/22 15:46:41 just want to play
+signIn 2020/06/22 15:50:18 ap2020
+play 2020/06/22 15:50:19 wants to play
+play 2020/06/22 15:50:19 just want to play
+Collection 2020/06/22 15:53:51 went to Collection
+deck 2020/06/22 15:53:55 went to deck room
+deck show 2020/06/22 15:53:59 went to deck show room forMAGE
+card show 2020/06/22 15:54:01 went to card show room for:BatterHead
+BatterHead 2020/06/22 15:54:02 add this card toMAGE
+card show 2020/06/22 15:54:03 went to card show room for:BatterHead
+BatterHead 2020/06/22 15:54:04 add this card toMAGE
+card show 2020/06/22 15:54:06 went to card show room for:AzureDrake
+AzureDrake 2020/06/22 15:54:07 add this card toMAGE
+card show 2020/06/22 15:54:08 went to card show room for:AzureDrake
+AzureDrake 2020/06/22 15:54:08 add this card toMAGE
+back button 2020/06/22 15:54:09 went to deck room
+back button 2020/06/22 15:54:10 went to collection
+back buton 2020/06/22 15:54:11 went to menu
+play 2020/06/22 15:54:11 wants to play
+play 2020/06/22 15:54:11 just want to play
+Collection 2020/06/22 15:55:56 went to Collection
+deck 2020/06/22 15:55:57 went to deck room
+deck show 2020/06/22 15:55:58 went to deck show room forMAGE
+back button 2020/06/22 15:56:05 went to deck room
+change current deck 2020/06/22 15:56:07 current deck:MAGE
+back button 2020/06/22 15:56:09 went to collection
+back buton 2020/06/22 15:56:11 went to menu
+play 2020/06/22 15:56:11 wants to play
+play 2020/06/22 15:56:11 just want to play

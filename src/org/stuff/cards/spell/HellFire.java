@@ -13,4 +13,5 @@ public class HellFire extends Spell {
         return new HellFire();
     }
     //Card hellfire = new Card("HellFire", 4, 4, "damage3toall", "deal 3 damage to all characters", "All", "images\\hellfire.png", 2);
+    //finish
 }

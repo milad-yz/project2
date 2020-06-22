@@ -13,4 +13,5 @@ public class FriendlySmith extends Spell {
         return new FriendlySmith();
     }
     //Card FriendlySmith = new Card("Friendly Smith", 1, 1, "draw a weapon", "draw a weapon for your hero", "ROGUE", "images\\friendlysmith.png", 2);
+    //finish
 }

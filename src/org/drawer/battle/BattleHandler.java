@@ -1,7 +1,14 @@
 package org.drawer.battle;
 
+import org.drawer.battle.functions.BattleCryFunction;
+import org.drawer.battle.functions.BattleSpellFunctions;
+import org.drawer.battle.functions.BattleWeaponFunctions;
 import org.stuff.cards.Minion;
+import org.stuff.cards.QuestAndReward;
 import org.stuff.cards.Spell;
+import org.stuff.cards.Weapon;
+import org.stuff.cards.minions.BloodFenRaptor;
+import org.stuff.cards.minions.Locust;
 
 public class BattleHandler {
     public static synchronized void battleCryHandler(PlayerDisplay playerDisplay,Battle battle,Minion minion){
@@ -96,13 +103,13 @@ public class BattleHandler {
                 break;
         }
     }
-    public static void spellFunction(Battle battle, Spell spell){
+    public static void spellHandler(Battle battle, Spell spell){
         switch (spell.name){
             case "BookOfSpecters":
                 BattleCryFunction.drawCards(battle.whoseTurn(),battle,3);
                 break;
             case "FireBall":
-                BattleSpellFunctions.attack(battle);
+                BattleSpellFunctions.dealDamage(battle);
                 break;
             case "Foad":
                 BattleSpellFunctions.takeMinion(battle);
@@ -113,20 +120,51 @@ public class BattleHandler {
             case "GnomishArmyKnife":
                 break;
             case "HellFire":
+                BattleSpellFunctions.dealDamage2all(battle,3);
                 break;
             case "Milad":
+                BattleSpellFunctions.giveHealth2hero(battle,5);
                 break;
             case "PharaohsBlessing":
                 break;
             case "Polymorph":
+                BattleSpellFunctions.convert2Sheep(battle);
                 break;
             case "ReleaseTheRaptors":
+                BattleSpellFunctions.summon(battle,new BloodFenRaptor(),3);
                 break;
             case "Shahzad":
+                BattleSpellFunctions.giveHealth2minions(battle,battle.whoseTurn().battleCards,2);
                 break;
             case "Sprint":
+                BattleCryFunction.drawCards(battle.whoseTurn(),battle,4);
                 break;
             case "SwarmOfLocusts":
+                BattleSpellFunctions.summon(battle,new Locust(),7);
+                break;
+        }
+    }
+    public static void WeaponHandler(Battle battle, Weapon weapon){
+        switch (weapon.name){
+            case "GearBlade":
+                BattleWeaponFunctions.weaponOnHero(battle,weapon);
+                break;
+            case "HeavyAxe":
+                BattleWeaponFunctions.weaponOnHero(battle,weapon);
+                break;
+            case "WickedKnife":
+                BattleWeaponFunctions.weaponOnHero(battle,weapon);
+                break;
+        }
+    }
+
+    public static void QuestAndRewardHandler(Battle battle, QuestAndReward questAndReward) {
+        switch (questAndReward.name){
+            case "LearnDraconic":
+                battle.whoseTurn().sideQuestCounters.add(new SideQuestCounter(battle.whoseTurn(),battle,"Spell",8));
+                break;
+            case "StrengthInNumbers":
+                battle.whoseTurn().sideQuestCounters.add(new SideQuestCounter(battle.whoseTurn(),battle,"Minion",10));
                 break;
         }
     }

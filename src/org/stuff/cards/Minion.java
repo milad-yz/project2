@@ -8,6 +8,7 @@ public class Minion extends Card {
     private int damage;
     private int health;
     public int rush=0;
+    public boolean haveTaunt=false;
     public Minion(String name, int cost, int mana,int damage,int health, String description, String specialFor, String icon, int rarity) {
         super(name, cost, mana, description, specialFor, icon, rarity);
         this.damage=damage;
