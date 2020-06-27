@@ -5,7 +5,7 @@ import org.stuff.cards.Minion;
 
 public class Sathrovarr extends Minion {
     public Sathrovarr() {
-        super("Sathrovarr", 19, 9, 5, 5,  "choose a friendly minion and copy it to your deck battlefield and hand", "All", "images\\sathrovarr.png", 2);
+        super("Sathrovarr", 19, 9, 5, 5,  "choose a friendly minion and copy it to your deck battlefield and hand", "All", "images\\Sathrovarr.png", 2);
     }
 
     @Override

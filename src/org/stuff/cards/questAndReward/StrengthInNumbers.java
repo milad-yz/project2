@@ -5,7 +5,7 @@ import org.stuff.cards.QuestAndReward;
 
 public class StrengthInNumbers extends QuestAndReward {
     public StrengthInNumbers() {
-        super("StrengthInNumbers", 1, 1, "sideQuest:spend 10 mana on minions...reward:summon a minion from your deck", "All", "images\\strengthinnumbers.png", 2);
+        super("StrengthInNumbers", 1, 1, "sideQuest:spend 10 mana on minions...reward:summon a minion from your deck", "All", "images\\StrengthInNumbers.png", 2);
     }
 
     @Override

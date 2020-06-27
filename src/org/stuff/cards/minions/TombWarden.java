@@ -5,7 +5,8 @@ import org.stuff.cards.Minion;
 
 public class TombWarden extends Minion {
     public TombWarden() {
-        super("TombWarden", 17, 8, 3, 6, " taunt, battle cry: summon a copy of itself", "All", "images\\tombwarden.png", 2);
+        super("TombWarden", 17, 8, 3, 6, " taunt, battle cry: summon a copy of itself", "All", "images\\TombWarden.png", 2);
+        this.haveTaunt=true;
     }
 
     @Override

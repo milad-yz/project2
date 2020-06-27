@@ -6,7 +6,7 @@ import org.stuff.cards.spell.FriendlySmith;
 
 public class Rogue extends Hero {
     public Rogue() {
-        super("ROGUE", 1, 30, 3, "images\\rogue.png", "images\\roguePower.png",new Foad(),new FriendlySmith());
+        super("ROGUE", 1, 30, 3, "images\\Rogue.png", "images\\roguePower.png",new Foad(),new FriendlySmith());
     }
 
     @Override

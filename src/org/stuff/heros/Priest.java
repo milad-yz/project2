@@ -6,7 +6,7 @@ import org.stuff.cards.spell.Shahzad;
 
 public class Priest extends Hero {
     public Priest() {
-        super("PRIEST", 0,30, 2, "images\\priest.png", "images\\priestPower.jpg",new Shahzad(),new HighPriestAmet());
+        super("PRIEST", 0,30, 2, "images\\Priest.png", "images\\priestPower.png",new Shahzad(),new HighPriestAmet());
     }
 
     @Override

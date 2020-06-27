@@ -5,7 +5,7 @@ import org.stuff.cards.Minion;
 
 public class MagmaRager extends Minion {
     public MagmaRager() {
-        super("MagmaRager", 9, 3, 5, 1, "", "All", "images\\magmarager.png", 2);
+        super("MagmaRager", 9, 3, 5, 1, "", "All", "images\\MagmaRager.png", 2);
     }
 
     @Override

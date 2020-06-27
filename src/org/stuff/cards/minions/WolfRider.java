@@ -10,7 +10,8 @@ public class WolfRider extends Minion {
     }
 
     public WolfRider() {
-        super("WolfRider", 7, 3, 3, 1, "charge", "All", "images\\wolfrider.png", 2,1);
+        super("WolfRider", 7, 3, 3, 1, "charge", "All", "images\\WolfRider.png", 2);
+        this.rush=1;
     }
     //Card wolfrider = new Card("Wolfrider", 7, 3, 3, 1, "null", "charge", "All", "images\\wolfrider.png", 2);
     //finish

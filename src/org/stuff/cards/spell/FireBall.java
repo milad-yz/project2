@@ -5,7 +5,7 @@ import org.stuff.cards.Spell;
 
 public class FireBall extends Spell {
     public FireBall() {
-        super("FireBall", 4, 4, "deal 6 damage", "All", "images\\fireball.png", 2);
+        super("FireBall", 4, 4, "deal 6 damage", "All", "images\\FireBall.png", 2);
     }
 
     @Override

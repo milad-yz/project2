@@ -10,7 +10,8 @@ public class SilentKnight extends Minion {
     }
 
     public SilentKnight() {
-        super("SilentKnight", 7, 3, 2, 2, "divide shield", "All", "images\\silentknight.jpg", 2);
+        super("SilentKnight", 7, 3, 2, 2, "divide shield", "All", "images\\SilentKnight.png", 2);
+        this.haveShield=true;
     }
     //Card SilentKnight = new Card("SilentKnight", 7, 3, 2, 2, "make a shield", "make a shield", "All", "images\\silentknight.jpg", 2);
 }

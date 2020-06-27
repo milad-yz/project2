@@ -6,7 +6,7 @@ import org.stuff.cards.spell.GnomishArmyKnife;
 
 public class Paladin extends Hero {
     public Paladin() {
-        super("PALADIN", 0,30, 2, "images\\paladin.jpg", "images\\paladinPower.jpg",new Behrad(),new GnomishArmyKnife());
+        super("PALADIN", 0,30, 2, "images\\Paladin.png", "images\\paladinPower.jpg",new Behrad(),new GnomishArmyKnife());
     }
 
     @Override

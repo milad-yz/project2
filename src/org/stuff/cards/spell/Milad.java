@@ -6,7 +6,7 @@ import org.stuff.cards.Spell;
 public class Milad extends Spell {
 
     public Milad() {
-        super("Milad", 3, 3, "give your hero 5 health", "MAGE","images\\milad.jpg", 3);
+        super("Milad", 3, 3, "give your hero 5 health", "MAGE","images\\Milad.png", 3);
     }
 
     @Override

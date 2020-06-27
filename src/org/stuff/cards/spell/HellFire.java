@@ -5,7 +5,7 @@ import org.stuff.cards.Spell;
 
 public class HellFire extends Spell {
     public HellFire() {
-        super("HellFire", 4, 4, "deal 3 damage to all characters", "All", "images\\hellfire.png", 2);
+        super("HellFire", 4, 4, "deal 3 damage to all characters", "All", "images\\HellFire.png", 2);
     }
 
     @Override

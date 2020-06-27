@@ -5,7 +5,7 @@ import org.stuff.cards.Spell;
 
 public class GnomishArmyKnife extends Spell {
     public GnomishArmyKnife() {
-        super("GnomishArmyKnife", 5, 5, "give a minion charge poisonous windFury lifeSteal divideShield taunt", "PALADIN", "images\\gnomisharmyknife.png", 3);
+        super("GnomishArmyKnife", 5, 5, "give a minion charge poisonous windFury lifeSteal divideShield taunt", "PALADIN", "images\\GnomishArmyKnife.png", 3);
     }
 
     @Override

@@ -5,7 +5,8 @@ import org.stuff.cards.Minion;
 
 public class VoidWalker extends Minion {
     public VoidWalker() {
-        super("VoidWalker", 5, 1, 1, 3,  "taunt", "All", "images\\voidwalker.png", 2);
+        super("VoidWalker", 5, 1, 1, 3,  "taunt", "All", "images\\VoidWalker.png", 2);
+        this.haveTaunt=true;
     }
 
     @Override

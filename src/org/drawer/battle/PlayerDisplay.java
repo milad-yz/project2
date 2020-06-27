@@ -2,6 +2,8 @@ package org.drawer.battle;
 
 import org.drawer.battle.functions.BattleCryFunction;
 import org.drawer.battle.functions.BattleSpellFunctions;
+import org.drawer.battle.functions.HeroFunction;
+import org.drawer.battle.functions.SideQuestCounter;
 import org.drawer.labelsAndButtons.*;
 import org.stuff.Card;
 import org.stuff.Deck;
@@ -39,7 +41,7 @@ public class PlayerDisplay implements Runnable {
     private Minion enemyCard;
     public Deck deck;
     private int m = 0;
-    public ArrayList<SideQuestCounter> sideQuestCounters=new ArrayList<>();
+    public ArrayList<SideQuestCounter> sideQuestCounters = new ArrayList<>();
 
     public PlayerDisplay(JPanel handPanel, JPanel battlePanel, ArrayList<Card> handCards, HashMap<Integer, Minion> battleCards, int mana, Document eventDoc, JLabel manaText, Hero hero, JPanel heroPanel, Battle battle, Deck deck) {
         this.handPanel = handPanel;
@@ -114,12 +116,13 @@ public class PlayerDisplay implements Runnable {
                         default:
                             mana -= card.mana;
                             handCards.remove(card);
-                            BattleHandler.QuestAndRewardHandler(battle ,(QuestAndReward) card);
+                            BattleHandler.QuestAndRewardHandler(battle, (QuestAndReward) card);
                             break;
                     }
                     displaySemaphore.release();
                     try {
-                        eventDoc.insertString(eventDoc.getLength(), hero.name + " played " + card.name + "\n", null);
+                        if (!card.getClass().getSuperclass().getName().equals("org.stuff.cards.Minion"))
+                            eventDoc.insertString(eventDoc.getLength(), hero.name + " played " + card.name + "\n", null);
                     } catch (BadLocationException ex) {
                         ex.printStackTrace();
                     }
@@ -129,19 +132,30 @@ public class PlayerDisplay implements Runnable {
         }
     }
 
-    private void heroButtonNormal() {
+    private void heroPanelNormal() {
         heroPanel.removeAll();
         HeroButton heroButton = new HeroButton(hero);
         HeroPowerButton heroPowerButton = new HeroPowerButton(hero);
         heroButton.setBounds(0, 0, 110, 120);
         heroButton.addActionListener(e -> {
-            if (hero.damage > 0 && hero.rush>0) {
+            if (hero.damage > 0 && hero.rush > 0) {
                 battle.whoseTurn().setN(5);
                 battle.whoseNotTurn().setN(10);
-                battle.semaphoreNotify();
+            } else {
+                battle.whoseTurn().setN(1);
+                battle.whoseNotTurn().setN(3);
             }
+            battle.semaphoreNotify();
         });
         heroPowerButton.setBounds(110, 0, 40, 50);
+        heroPowerButton.addActionListener(e -> {
+            if (hero.heroPowerRush > 0 && mana >= hero.mana) {
+                BattleHandler.heroPowerHandler(battle, hero);
+            } else {
+                setN(1);
+            }
+            battle.semaphoreNotify();
+        });
         heroPanel.add(heroButton);
         heroPanel.add(heroPowerButton);
     }
@@ -161,6 +175,11 @@ public class PlayerDisplay implements Runnable {
                     manaCounterSideQuest(hand2battleMinion.mana);
                     handCards.remove(hand2battleMinion);
                     BattleHandler.battleCryHandler(this, battle, hand2battleMinion);
+                    try {
+                        eventDoc.insertString(eventDoc.getLength(), hero.name + " played " + hand2battleMinion.name + "\n", null);
+                    } catch (BadLocationException ex) {
+                        ex.printStackTrace();
+                    }
                     displaySemaphore.release();
                 });
                 battlePanel.add(cardButton);
@@ -211,8 +230,8 @@ public class PlayerDisplay implements Runnable {
         }
     }
 
-    private void heroButtonPlanting() {
-        heroButtonNormal();
+    private void heroPanelPlanting() {
+        heroPanelNormal();
     }
 
     //n=3
@@ -233,30 +252,40 @@ public class PlayerDisplay implements Runnable {
         }
     }
 
-    private void heroButtonEnemyTurn() {
-        heroButtonNormal();
+    private void heroPanelEnemyTurn() {
+        heroPanelNormal();
     }
 
     //n=4
     private void battlePanelEnemyAttack() {
         battlePanel.removeAll();
         for (int i = 0; i < 7; i++) {
-            if (battleCards.get(i) == null) {
+            if (battleCards.get(i) != null) {
+                if (!haveTaunt() || battleCards.get(i).haveTaunt) {
+                    Minion minion = battleCards.get(i);
+                    MinionButton cardButton = new MinionButton(minion);
+                    cardButton.setBounds(10 + 90 * i, 10, 75, 100);
+                    cardButton.addActionListener(e -> {
+                        BattleHandler.damagedStuffHandler(battle, battle.whoseNotTurn(), minion);
+                        BattleHandler.damagedStuffHandler(battle, battle.whoseTurn(), enemyCard);
+                        enemyCard.attack(minion);
+                        if (enemyCard.haveLifeSteal)
+                            battle.whoseTurn().hero.health += Math.min(enemyCard.getDamage(), minion.getHealth());
+                        enemyCard = null;
+                        setN(3);
+                        battle.enemySetN(1);
+                        battle.semaphoreNotify();
+                    });
+                    battlePanel.add(cardButton);
+                } else {
+                    CardLabel cardLabel = new CardLabel(battleCards.get(i));
+                    cardLabel.setBounds(10 + 90 * i, 10, 75, 100);
+                    battlePanel.add(cardLabel);
+                }
+            } else {
                 CardLabel cardLabel = new CardLabel(battleCards.get(i));
                 cardLabel.setBounds(10 + 90 * i, 10, 75, 100);
                 battlePanel.add(cardLabel);
-            } else {
-                Minion minion = battleCards.get(i);
-                MinionButton cardButton = new MinionButton(minion);
-                cardButton.setBounds(10 + 90 * i, 10, 75, 100);
-                cardButton.addActionListener(e -> {
-                    enemyCard.attack(minion);
-                    enemyCard = null;
-                    setN(3);
-                    battle.enemySetN(1);
-                    battle.semaphoreNotify();
-                });
-                battlePanel.add(cardButton);
             }
         }
     }
@@ -265,18 +294,20 @@ public class PlayerDisplay implements Runnable {
         handPanelEnemyTurn();
     }
 
-    private void heroButtonEnemyAttack() {
+    private void heroPanelEnemyAttack() {
         heroPanel.removeAll();
         HeroButton heroButton = new HeroButton(hero);
         HeroPowerButton heroPowerButton = new HeroPowerButton(hero);
         heroButton.setBounds(0, 0, 110, 120);
         heroPowerButton.setBounds(110, 0, 40, 50);
         heroButton.addActionListener(e -> {
-            enemyCard.attack(hero);
-            enemyCard = null;
-            setN(3);
-            battle.enemySetN(1);
-            battle.semaphoreNotify();
+            if (!haveTaunt()) {
+                enemyCard.attack(hero);
+                enemyCard = null;
+                setN(3);
+                battle.enemySetN(1);
+                battle.semaphoreNotify();
+            }
         });
         heroPanel.add(heroButton);
         heroPanel.add(heroPowerButton);
@@ -293,11 +324,11 @@ public class PlayerDisplay implements Runnable {
     }
 
     private void handPanelAttack() {
-        handPanelEnemyTurn();
+        handPanelNormal();
     }
 
     private void heroButtonAttack() {
-        heroButtonNormal();
+        heroPanelNormal();
     }
 
     //n=6  //m=1 swap damage and health
@@ -332,9 +363,9 @@ public class PlayerDisplay implements Runnable {
     }
 
     private void heroPanelAllButton() {
-        heroButtonNormal();
+        heroPanelNormal();
     }
-    //n=7 m=1 copy a minion to deck and hand
+    //n=7 m=1 copy a minion to deck and hand  //m=2 army knife   // m=3 blessing  // m=4 priestPower
 
     private void battlePanelSpellFriendly() {
         battlePanel.removeAll();
@@ -353,6 +384,16 @@ public class PlayerDisplay implements Runnable {
                             BattleCryFunction.copy2deck2handAction(this, minion);
                             setN(1);
                             break;
+                        case 2:
+                            BattleSpellFunctions.ArmyKnifeAction(battle, minion);
+                            setN(1);
+                            break;
+                        case 3:
+                            BattleSpellFunctions.blessingAction(battle, minion);
+                            break;
+                        case 4:
+                            HeroFunction.priestPowerAction(battle,minion);
+                            break;
                     }
                     battle.whoseTurn().setN(1);
                     battle.whoseNotTurn().setN(3);
@@ -368,7 +409,29 @@ public class PlayerDisplay implements Runnable {
     }
 
     private void heroPanelSpellFriendly() {
-        heroButtonNormal();
+        heroPanel.removeAll();
+        HeroButton heroButton = new HeroButton(hero);
+        HeroPowerButton heroPowerButton = new HeroPowerButton(hero);
+        heroButton.setBounds(0, 0, 110, 120);
+        heroButton.addActionListener(e -> {
+            switch (m){
+                case 4:
+                    HeroFunction.priestPowerAction(battle,hero);
+                    break;
+            }
+            battle.semaphoreNotify();
+        });
+        heroPowerButton.setBounds(110, 0, 40, 50);
+        heroPowerButton.addActionListener(e -> {
+            if (hero.heroPowerRush > 0 && mana >= hero.mana) {
+                BattleHandler.heroPowerHandler(battle, hero);
+            } else {
+                setN(1);
+            }
+            battle.semaphoreNotify();
+        });
+        heroPanel.add(heroButton);
+        heroPanel.add(heroPowerButton);
     }
 
     //n=8
@@ -381,7 +444,7 @@ public class PlayerDisplay implements Runnable {
     }
 
     private void heroPanelSpellWeOnEnemy() {
-        heroButtonNormal();
+        heroPanelNormal();
     }
 
     //n=9  //m=1 fire ball  //m=2 take minion //m=3 convert2sheep
@@ -448,18 +511,25 @@ public class PlayerDisplay implements Runnable {
                 cardLabel.setBounds(10 + 90 * i, 10, 75, 100);
                 battlePanel.add(cardLabel);
             } else {
-                Minion minion = battleCards.get(i);
-                MinionButton cardButton = new MinionButton(minion);
-                cardButton.setBounds(10 + 90 * i, 10, 75, 100);
-                cardButton.addActionListener(e -> {
-                    minion.setHealth(minion.getHealth()-battle.whoseTurn().hero.damage);
-                    battle.whoseTurn().hero.health-=minion.getDamage();
-                    battle.whoseTurn().hero.rush-=1;
-                    battle.whoseNotTurn().setN(1);
-                    battle.whoseNotTurn().setN(3);
-                    battle.semaphoreNotify();
-                });
-                battlePanel.add(cardButton);
+                if (!haveTaunt() || battleCards.get(i).haveTaunt) {
+                    Minion minion = battleCards.get(i);
+                    MinionButton cardButton = new MinionButton(minion);
+                    cardButton.setBounds(10 + 90 * i, 10, 75, 100);
+                    cardButton.addActionListener(e -> {
+                        BattleHandler.damagedStuffHandler(battle, this, minion);
+                        minion.setHealth(minion.getHealth() - battle.whoseTurn().hero.damage);
+                        battle.whoseTurn().hero.health -= minion.getDamage();
+                        battle.whoseTurn().hero.rush -= 1;
+                        battle.whoseTurn().setN(1);
+                        battle.whoseNotTurn().setN(3);
+                        battle.semaphoreNotify();
+                    });
+                    battlePanel.add(cardButton);
+                } else {
+                    CardLabel cardLabel = new CardLabel(battleCards.get(i));
+                    cardLabel.setBounds(10 + 90 * i, 10, 75, 100);
+                    battlePanel.add(cardLabel);
+                }
             }
         }
     }
@@ -475,12 +545,56 @@ public class PlayerDisplay implements Runnable {
         heroButton.setBounds(0, 0, 110, 120);
         heroPowerButton.setBounds(110, 0, 40, 50);
         heroButton.addActionListener(e -> {
-            battle.whoseNotTurn().hero.health-=battle.whoseTurn().hero.damage;
-            battle.whoseTurn().hero.health-=battle.whoseNotTurn().hero.damage;
-            battle.whoseTurn().hero.rush-=1;
-            battle.whoseTurn().setN(1);
-            battle.whoseNotTurn().setN(3);
-            battle.semaphoreNotify();
+            if(haveTaunt()) {
+                HeroFunction.heroAttack(battle);
+            }else{
+                battle.whoseTurn().setN(1);
+                battle.whoseNotTurn().setN(3);
+            }
+        });
+        heroPanel.add(heroButton);
+        heroPanel.add(heroPowerButton);
+    }
+    //n=11 m=1 mage attack
+    private void battlePanelEnemyHeroPowerAttack() {
+        battlePanel.removeAll();
+        for (int i = 0; i < 7; i++) {
+            if (battleCards.get(i) == null) {
+                CardLabel cardLabel = new CardLabel(battleCards.get(i));
+                cardLabel.setBounds(10 + 90 * i, 10, 75, 100);
+                battlePanel.add(cardLabel);
+            } else {
+                Minion minion = battleCards.get(i);
+                MinionButton cardButton = new MinionButton(minion);
+                cardButton.setBounds(10 + 90 * i, 10, 75, 100);
+                cardButton.addActionListener(e -> {
+                    switch (m) {
+                        case 1:
+                        HeroFunction.magePowerAction(battle, minion);
+                        break;
+                    }
+                });
+                battlePanel.add(cardButton);
+            }
+        }
+    }
+
+    private void handPanelEnemyHeroPowerAttack() {
+        handPanelEnemyTurn();
+    }
+
+    private void heroPanelEnemyHeroPowerAttack() {
+        heroPanel.removeAll();
+        HeroButton heroButton = new HeroButton(hero);
+        HeroPowerButton heroPowerButton = new HeroPowerButton(hero);
+        heroButton.setBounds(0, 0, 110, 120);
+        heroPowerButton.setBounds(110, 0, 40, 50);
+        heroButton.addActionListener(e -> {
+            switch (m){
+                case 1:
+                    HeroFunction.magePowerAction(battle,hero);
+                    break;
+            }
         });
         heroPanel.add(heroButton);
         heroPanel.add(heroPowerButton);
@@ -497,7 +611,7 @@ public class PlayerDisplay implements Runnable {
     }
 
     //n=1 your turn normal  // n=2 planting // n=3 enemyTurn //n=4 enemy attack // n=5 attack // n=6 allBattleCardButton //n=7 spell on friendly
-    //n=8 spell we on enemy  //n=9 spell enemy on us
+    //n=8 spell we on enemy  //n=9 spell enemy on us // n=10 enemy hero attack // n=11 hero power attack
     public void render() {
         try {
             displaySemaphore.acquire();
@@ -507,19 +621,19 @@ public class PlayerDisplay implements Runnable {
         if (n == 1) {
             handPanelNormal();
             battlePanelNormal();
-            heroButtonNormal();
+            heroPanelNormal();
         } else if (n == 2) {
             handPanelPlanting();
             battlePanelPlanting();
-            heroButtonPlanting();
+            heroPanelPlanting();
         } else if (n == 3) {
             handPanelEnemyTurn();
             battlePanelEnemyTurn();
-            heroButtonEnemyTurn();
+            heroPanelEnemyTurn();
         } else if (n == 4) {
             handPanelEnemyAttack();
             battlePanelEnemyAttack();
-            heroButtonEnemyAttack();
+            heroPanelEnemyAttack();
         } else if (n == 5) {
             handPanelAttack();
             battlePanelAttack();
@@ -544,6 +658,10 @@ public class PlayerDisplay implements Runnable {
             handPanelEnemyHeroAttack();
             battlePanelEnemyHeroAttack();
             heroPanelEnemyHeroAttack();
+        }else if(n==11){
+            handPanelEnemyHeroPowerAttack();
+            battlePanelEnemyHeroPowerAttack();
+            heroPanelEnemyHeroPowerAttack();
         }
         isAlive();
         manaText.setText("your mana is :" + mana);
@@ -610,19 +728,27 @@ public class PlayerDisplay implements Runnable {
         enemyCard = minion;
     }
 
+    public int getMana() {
+        return mana;
+    }
+
     public void endTurnNotify() {
-        for (int i = 0; i < 7; i++) {
-            if (battleCards.get(i) != null) {
-                battleCards.get(i).rush = 1;
-                semaphoreNotify();
-            }
-        }
-        hero.rush=1;
+        BattleHandler.endTurnHandler(battle, this);
+        battle.semaphoreNotify();
     }
 
     private void manaCounterSideQuest(int mana) {
         for (int i = 0; i < sideQuestCounters.size(); i++) {
             sideQuestCounters.get(i).drawReward(mana);
         }
+    }
+
+    private boolean haveTaunt() {
+        for (int i = 0; i < 7; i++)
+            if (battleCards.get(i) != null)
+                if (battleCards.get(i).haveTaunt)
+                    return true;
+        return false;
+
     }
 }

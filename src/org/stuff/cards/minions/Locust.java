@@ -5,7 +5,8 @@ import org.stuff.cards.Minion;
 
 public class Locust extends Minion {
     public Locust() {
-        super("Locust",3,1,1,1,"rush","All","images\\Locust.png",1,1);
+        super("Locust",3,1,1,1,"rush","All","images\\Locust.png",1);
+        this.rush=1;
     }
 
     @Override

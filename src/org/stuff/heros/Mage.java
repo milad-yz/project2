@@ -6,7 +6,7 @@ import org.stuff.cards.spell.Polymorph;
 
 public class Mage extends Hero {
     public Mage() {
-        super("MAGE", 0, 30, 2, "images\\mage.png", "images\\magePower.png",new Milad(),new Polymorph());
+        super("MAGE", 0, 30, 2, "images\\Mage.png", "images\\magePower.png",new Milad(),new Polymorph());
     }
 
     @Override

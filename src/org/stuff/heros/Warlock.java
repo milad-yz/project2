@@ -6,7 +6,7 @@ import org.stuff.cards.minions.Emad;
 
 public class Warlock extends Hero {
     public Warlock() {
-        super("WARLOCK", 0,  35,  2, "images\\warlock.jpg", "images\\warlockPower.png",new Emad(),new DreadScale());
+        super("WARLOCK", 0,  35,  2, "images\\Warlock.png", "images\\warlockPower.png",new Emad(),new DreadScale());
     }
 
     @Override

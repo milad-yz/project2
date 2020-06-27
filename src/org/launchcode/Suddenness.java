@@ -1,47 +1,60 @@
 package org.launchcode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import javax.swing.*;
 
-public class Suddenness {
+class suddenness {
+
+}
+class progress extends JFrame {
+
+    // create a frame
+    static JFrame f;
+
+    static JProgressBar b;
+
     public static void main(String[] args) {
-//        JFrame frame=new JFrame("sign room");
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setSize(1200, 800);
-//        frame.setVisible(true);
-//        frame.setLayout(null);
-//        JPanel panel=new JPanel(null);
-//        panel.setBounds(0,0,1200,800);
-//        CardLabel card=new CardLabel(null);
-//        panel.add(card);
-//        frame.add(panel);
-//        frame.repaint();
-//        frame.revalidate();
-        HashMap<Integer,String> hashMap=new HashMap<>();
-        hashMap.put(1,"salam");
-        hashMap.put(2,"bye");
-        System.out.println(hashMap);
-        hashMap.put(1,"bye bye");
-        System.out.println(hashMap);
+
+        // create a frame
+        f = new JFrame("ProgressBar demo");
+
+        // create a panel
+        JPanel p = new JPanel();
+
+        // create a progressbar
+        b = new JProgressBar();
+
+        // set initial value
+        b.setValue(0);
+
+        b.setStringPainted(true);
+        b.setString("salam");
+        // add progressbar
+        p.add(b);
+
+        // add panel
+        f.add(p);
+
+        // set the size of the frame
+        f.setSize(500, 500);
+        f.setVisible(true);
+
+        fill();
     }
 
-    private static void changer(ArrayList<Integer> in) {
-        in.set(0,0);
-    }
+    // function to increase progress
+    public static void fill() {
+        int i = 0;
+        try {
+            while (i <= 100) {
+                // fill the menu bar
+                b.setValue(i + 10);
 
-    public static Motor purify(){
-        return new MammadMotor();
+                // delay the thread
+                Thread.sleep(1000);
+                i += 20;
+            }
+        }
+        catch (Exception e) {
+        }
     }
-}
-
-class Motor{
-    public void stringto(){
-        System.out.println("Salam");
-    }
-}
-class MammadMotor extends Motor{
-    int x;
-}
-class AliMotor extends Motor{
-
 }

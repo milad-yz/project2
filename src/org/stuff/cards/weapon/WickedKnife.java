@@ -5,7 +5,7 @@ import org.stuff.cards.Weapon;
 
 public class WickedKnife extends Weapon {
     public WickedKnife() {
-        super("WickedKnife", 5, 1, 1, 2,"","All", "images\\wickedknife.png", 1);
+        super("WickedKnife", 5, 1, 1, 2,"","All", "images\\WickedKnife.png", 1);
     }
 
     @Override

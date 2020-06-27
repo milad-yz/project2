@@ -5,7 +5,7 @@ import org.stuff.cards.Minion;
 
 public class RavagingGhoul extends Minion {
     public RavagingGhoul() {
-        super("RavagingGhoul", 9, 3, 3, 3, "deal one damage to all enemy minions", "All", "images\\ravagingghoul.png", 3);
+        super("RavagingGhoul", 9, 3, 3, 3, "deal one damage to all enemy minions", "All", "images\\RavagingGhoul.png", 3);
     }
 
     @Override

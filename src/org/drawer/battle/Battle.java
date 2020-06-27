@@ -1,5 +1,7 @@
 package org.drawer.battle;
 
+import org.drawer.battle.functions.BattleCryFunction;
+import org.drawer.battle.functions.BattleFunctions;
 import org.drawer.labelsAndButtons.CardButton;
 import org.drawer.Drawer;
 import org.drawer.labelsAndButtons.HeroButton;
@@ -9,9 +11,12 @@ import org.stuff.Card;
 import org.stuff.Deck;
 import org.stuff.cards.Minion;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.text.Document;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -22,13 +27,13 @@ public class Battle implements Runnable {
     private int deck2battlePerTurn = 1;
     private int mana;
     private int firstMana = 2;
-    private int perTurnHeroPower = 1;
+    public int perTurnHeroPower = 1;
     private static int counter = 0;
     private HashMap<Integer, Minion> battleCards = new HashMap<>(7);
     private HashMap<Integer, Minion> battleCards2 = new HashMap<>(7);
     private ArrayList<Card> handCards = new ArrayList<>();
     private ArrayList<Card> handCards2 = new ArrayList<>();
-    private JPanel mapPanel;
+    public JPanel mapPanel;
     public JFrame frame;
     private PlayerDisplay playerDisplay;
     private PlayerDisplay playerDisplay2;
@@ -146,26 +151,10 @@ public class Battle implements Runnable {
                     mana = 10;
                 playerDisplay.setMana(mana);
                 manaText.setText("your mana is : \n" + mana);
-                if (handCards.size() + deck2battlePerTurn <= 12)
-                    handCards.addAll(shuffleCard(deck2battlePerTurn, deck));
-                else {
-                    try {
-                        playerDisplay.justShowCard(frame, deck, mapPanel);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                }
+                BattleCryFunction.drawCards(playerDisplay,this,deck2battlePerTurn);
                 deckSize.setText("your deck size is : \n" + deck.deckCards.size());
             }else{
-                if (handCards2.size() + deck2battlePerTurn <= 12)
-                    handCards2.addAll(shuffleCard(deck2battlePerTurn, deck2));
-                else {
-                    try {
-                        playerDisplay2.justShowCard(frame, deck2, mapPanel);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                }
+                BattleCryFunction.drawCards(playerDisplay2,this,1);
             }
             changeTurn();
             frame.repaint();
@@ -176,6 +165,7 @@ public class Battle implements Runnable {
         JButton endGameButton = new JButton("end Game");
         endGameButton.setBounds(950, 20, 150, 30);
         endGameButton.addActionListener(e -> {
+            counter=0;
             frame.remove(mapPanel);
             Drawer.getInstance().Enter();
         });
@@ -191,13 +181,13 @@ public class Battle implements Runnable {
             playerTurn=false;
             playerDisplay2.setN(1);
             playerDisplay.setN(3);
+            playerDisplay.endTurnNotify();
         }else{
             playerTurn=true;
             playerDisplay2.setN(3);
             playerDisplay.setN(1);
+            playerDisplay2.endTurnNotify();
         }
-        playerDisplay2.endTurnNotify();
-        playerDisplay.endTurnNotify();
         semaphoreNotify();
     }
     public void semaphoreNotify(){

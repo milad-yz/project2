@@ -5,7 +5,7 @@ import org.stuff.cards.Weapon;
 
 public class HeavyAxe extends Weapon {
     public HeavyAxe() {
-        super("HeavyAxe", 5, 1, 1, 3,"","All", "images\\heavyaxe.png", 1);
+        super("HeavyAxe", 5, 1, 1, 3,"","All", "images\\HeavyAxe.png", 1);
     }
 
     @Override

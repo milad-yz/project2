@@ -1,19 +1,12 @@
 package org.stuff;
 
-import com.google.gson.Gson;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Card extends Stuff{
     public int cost;
     public String description;
     public String specialFor;
     public int rarity;
     public int used = 0;
+    public final int finalMana;
 
     public Card(String name, int cost, int mana, String description, String specialFor, String icon, int rarity) {
         super(name,icon,mana);
@@ -21,6 +14,7 @@ public class Card extends Stuff{
         this.description = description;
         this.specialFor = specialFor;
         this.rarity = rarity;
+        this.finalMana = mana;
     }
     public Card getClone(){
         System.out.println(this.getClass().getSuperclass().getName());

@@ -27,6 +27,46 @@ public class PassiveInfo {
         this.mana = firstMana;
         this.frame = frame;
         draw();
+        specialPowerInit(deck);
+    }
+
+    private void specialPowerInit(Deck deck) {
+        switch (deck.deckHero.name){
+            case "MAGE":
+                for (int i = 0; i < deck.deckCards.size(); i++) {
+                    if(deck.deckCards.get(i).getClass().getSuperclass().getName().equals("org.stuff.cards.Spell")) {
+                        deck.deckCards.get(i).mana -= 2;
+                        if (deck.deckCards.get(i).mana < 0)
+                            deck.deckCards.get(i).mana = 0;
+                    }
+                }
+                break;
+            case "ROGUE":
+                for (int i = 0; i < deck.deckCards.size(); i++) {
+                    if(deck.deckCards.get(i).specialFor.equals(deck.deckHero.name)){
+                        deck.deckCards.get(i).mana -= 2;
+                        if (deck.deckCards.get(i).mana < 0)
+                            deck.deckCards.get(i).mana = 0;
+                    }
+                }
+                break;
+            case "PALADIN":
+
+                break;
+            case "PRIEST":
+                for (int i = 0; i < deck.deckCards.size(); i++) {
+                    if(deck.deckCards.get(i).name.equals("Shahzad")||deck.deckCards.get(i).name.equals("HighPriestAmet")||deck.deckCards.get(i).name.equals("Milad")){
+                        deck.deckCards.get(i).mana -= 2;
+                        if (deck.deckCards.get(i).mana < 0)
+                            deck.deckCards.get(i).mana = 0;
+                    }
+                }
+                break;
+            case "WARLOCK":
+
+                break;
+
+        }
     }
 
     private void draw() {
@@ -46,7 +86,7 @@ public class PassiveInfo {
         passiveInfo.add("twiceDraw");
         passiveInfo.add("offCards");
         passiveInfo.add("manaJump");
-        passiveInfo.add("HeroPower");
+        passiveInfo.add("heroHealth");
         passiveInfo.add("minionDamage");
         passiveInfo.add("minionHealth");
         //
@@ -80,6 +120,8 @@ public class PassiveInfo {
             case "offCards":
                 for (int i = 0; i < deck.deckCards.size(); i++) {
                     deck.deckCards.get(i).mana -= 1;
+                    if (deck.deckCards.get(i).mana < 0)
+                        deck.deckCards.get(i).mana = 0;
                 }
                 break;
             case "twiceDraw":
@@ -89,7 +131,7 @@ public class PassiveInfo {
                 firstMana = 3;
                 mana = 3;
                 break;
-            case "HeroPower":
+            case "heroHealth":
                 deck.deckHero.health += 10;
                 break;
             case "minionDamage":

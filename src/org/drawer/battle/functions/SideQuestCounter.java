@@ -1,5 +1,7 @@
-package org.drawer.battle;
+package org.drawer.battle.functions;
 
+import org.drawer.battle.Battle;
+import org.drawer.battle.PlayerDisplay;
 import org.drawer.battle.functions.BattleSpellFunctions;
 import org.stuff.cards.minions.DraconicEmissary;
 
@@ -16,17 +18,19 @@ public class SideQuestCounter {
         this.playerDisplay = playerDisplay;
         this.battle = battle;
         this.n = n;
-        if (counted.equals("Spell"))
+        if (counted.equals("Spell")) {
             isSpellManaCounting = true;
-        else if (counted.equals("Minion"))
+        }
+        else if (counted.equals("Minion")) {
             isMinionManaCounting = true;
+        }
     }
 
     public void drawReward(int mana) {
         if (isSpellManaCounting) {
             spellManaCounter += mana;
             if (spellManaCounter >= n) {
-                BattleSpellFunctions.summon(battle, new DraconicEmissary(), 1);
+                BattleSpellFunctions.summon(battle, playerDisplay,new DraconicEmissary(), 1);
                 spellManaCounter = 0;
                 isSpellManaCounting = false;
                 playerDisplay.sideQuestCounters.remove(this);
