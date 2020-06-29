@@ -70,20 +70,24 @@ public class HeroFunction {
         battle.whoseTurn().hero.heroPowerRush -= 1;
         battle.whoseTurn().setN(1);
         battle.whoseNotTurn().setN(3);
+        restore(4,stuff);
+        battle.semaphoreNotify();
+    }
+
+    public static void restore(int health, Stuff stuff) {
         if(stuff.getClass().getSuperclass().getName().equals("org.stuff.Hero")){
             Hero hero=(Hero)stuff;
-            if(hero.health+4>=30)
+            if(hero.health+health>=30)
                 hero.health=30;
             else
-                hero.health+=4;
+                hero.health+=health;
         }else if(stuff.getClass().getSuperclass().getName().equals("org.stuff.cards.Minion")){
             Minion minion=(Minion) stuff;
-            if(minion.getHealth()+4>=minion.finalHealth)
+            if(minion.getHealth()+health>=minion.finalHealth)
                 minion.setHealth(minion.finalHealth);
             else
-                minion.setHealth(minion.getHealth()+4);
+                minion.setHealth(minion.getHealth()+health);
         }
-        battle.semaphoreNotify();
     }
 
     public static void stealFromEnemyDeck(Battle battle) {

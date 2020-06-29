@@ -14,6 +14,7 @@ import org.stuff.cards.minions.TombWarden;
 public class BattleHandler {
     public static synchronized void battleCryHandler(PlayerDisplay playerDisplay,Battle battle,Minion minion){
         BattleFunctions.battleCardsUpdate(playerDisplay,minion);
+        BattleFunctions.attackFromSwamp(battle,minion);
         switch (minion.name){
             case "AzureDrake":
                 BattleCryFunction.drawCards(playerDisplay,battle,1);
@@ -122,6 +123,13 @@ public class BattleHandler {
             case "SwarmOfLocusts":
                 BattleSpellFunctions.summon(battle,battle.whoseTurn(),new Locust(),7);
                 break;
+            case "Overflow":
+                BattleSpellFunctions.restore2allCharacters(battle,5);
+                break;
+            case "Duel!":
+                BattleSpellFunctions.summonFromDeck(battle,battle.whoseTurn(),1);
+                BattleSpellFunctions.summonFromDeck(battle,battle.whoseNotTurn(),1);
+                break;
         }
     }
     public static void WeaponHandler(Battle battle, Weapon weapon){
@@ -141,10 +149,10 @@ public class BattleHandler {
     public static void QuestAndRewardHandler(Battle battle, QuestAndReward questAndReward) {
         switch (questAndReward.name){
             case "LearnDraconic":
-                battle.whoseTurn().sideQuestCounters.add(new SideQuestCounter(battle.whoseTurn(),battle,"Spell",8));
+                battle.whoseTurn().sideQuestCounters.add(new SideQuestCounter(battle.whoseTurn(),battle,"Spell",8,battle.whoseTurn().questAndRewardPanel,questAndReward));
                 break;
             case "StrengthInNumbers":
-                battle.whoseTurn().sideQuestCounters.add(new SideQuestCounter(battle.whoseTurn(),battle,"Minion",10));
+                battle.whoseTurn().sideQuestCounters.add(new SideQuestCounter(battle.whoseTurn(),battle,"Minion",10,battle.whoseTurn().questAndRewardPanel,questAndReward));
                 break;
         }
     }

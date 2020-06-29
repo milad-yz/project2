@@ -1,9 +1,6 @@
 package org.drawer.battle;
 
-import org.drawer.battle.functions.BattleCryFunction;
-import org.drawer.battle.functions.BattleSpellFunctions;
-import org.drawer.battle.functions.HeroFunction;
-import org.drawer.battle.functions.SideQuestCounter;
+import org.drawer.battle.functions.*;
 import org.drawer.labelsAndButtons.*;
 import org.stuff.Card;
 import org.stuff.Deck;
@@ -42,8 +39,9 @@ public class PlayerDisplay implements Runnable {
     public Deck deck;
     private int m = 0;
     public ArrayList<SideQuestCounter> sideQuestCounters = new ArrayList<>();
+    public JPanel questAndRewardPanel;
 
-    public PlayerDisplay(JPanel handPanel, JPanel battlePanel, ArrayList<Card> handCards, HashMap<Integer, Minion> battleCards, int mana, Document eventDoc, JLabel manaText, Hero hero, JPanel heroPanel, Battle battle, Deck deck) {
+    public PlayerDisplay(JPanel handPanel, JPanel battlePanel, ArrayList<Card> handCards, HashMap<Integer, Minion> battleCards, int mana, Document eventDoc, JLabel manaText, JPanel heroPanel, Battle battle, Deck deck,JPanel questAndRewardPanel) {
         this.handPanel = handPanel;
         this.battlePanel = battlePanel;
         this.handCards = handCards;
@@ -52,9 +50,10 @@ public class PlayerDisplay implements Runnable {
         this.heroPanel = heroPanel;
         this.eventDoc = eventDoc;
         this.manaText = manaText;
-        this.hero = hero;
+        this.hero = deck.deckHero;
         this.deck = deck;
         this.battle = battle;
+        this.questAndRewardPanel=questAndRewardPanel;
         Thread thread = new Thread(this);
         thread.start();
     }
@@ -104,7 +103,7 @@ public class PlayerDisplay implements Runnable {
                             break;
                         case "org.stuff.cards.Spell":
                             mana -= card.mana;
-                            manaCounterSideQuest(card.mana);
+                            manaOnSpellCounterSideQuest(card.mana);
                             handCards.remove(card);
                             BattleHandler.spellHandler(battle, (Spell) card);
                             break;
@@ -172,8 +171,9 @@ public class PlayerDisplay implements Runnable {
                     setN(1);
                     battleCards.put(finalI, hand2battleMinion);
                     mana -= hand2battleMinion.mana;
-                    manaCounterSideQuest(hand2battleMinion.mana);
+                    manaOnMinionCounterSideQuest(hand2battleMinion.mana);
                     handCards.remove(hand2battleMinion);
+                    BattleFunctions.animatedCard(battle.mapPanel,finalI,battle.playerTurn,hand2battleMinion);
                     BattleHandler.battleCryHandler(this, battle, hand2battleMinion);
                     try {
                         eventDoc.insertString(eventDoc.getLength(), hero.name + " played " + hand2battleMinion.name + "\n", null);
@@ -737,12 +737,16 @@ public class PlayerDisplay implements Runnable {
         battle.semaphoreNotify();
     }
 
-    private void manaCounterSideQuest(int mana) {
+    private void manaOnMinionCounterSideQuest(int mana) {
         for (int i = 0; i < sideQuestCounters.size(); i++) {
-            sideQuestCounters.get(i).drawReward(mana);
+            sideQuestCounters.get(i).drawRewardMinion(mana);
         }
     }
-
+    private void manaOnSpellCounterSideQuest(int mana) {
+        for (int i = 0; i < sideQuestCounters.size(); i++) {
+            sideQuestCounters.get(i).drawRewardSpell(mana);
+        }
+    }
     private boolean haveTaunt() {
         for (int i = 0; i < 7; i++)
             if (battleCards.get(i) != null)

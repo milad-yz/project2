@@ -52,7 +52,7 @@ public class Drawer {
     }
 
     public void play() throws IOException {
-        if (p.currentDeck == null||p.currentDeck.deckCards.size()<15) {
+        if (p.currentDeck == null || p.currentDeck.deckCards.size() < 15) {
             JOptionPane.showMessageDialog(frame, "You have no current deck or your deck's size is less than 15 please first choose/complete your main deck then come and play", "null deck", JOptionPane.INFORMATION_MESSAGE);
             collection();
         } else {
@@ -60,7 +60,14 @@ public class Drawer {
                 p.currentDeck.deckCards.get(i).used++;
             }
             p.update();
-            new PassiveInfo(p,frame);
+            //
+            int a=JOptionPane.showConfirmDialog(frame,"Do you want to read deck from deck reader?");
+            if(a==JOptionPane.YES_OPTION){
+                new PassiveInfo(p,frame,true);
+            }else if(a==JOptionPane.NO_OPTION)
+                new PassiveInfo(p,frame,false);
+            else if(a==JOptionPane.CANCEL_OPTION)
+                new Enter(frame, p);
         }
 
     }
@@ -99,7 +106,7 @@ public class Drawer {
         new Setting(frame, p);
     }
 
-    public void deletePlayer(){
-        new DeletePlayer(frame,p);
+    public void deletePlayer() {
+        new DeletePlayer(frame, p);
     }
 }

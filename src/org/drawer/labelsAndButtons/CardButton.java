@@ -15,7 +15,6 @@ import java.io.IOException;
 
 public class CardButton extends JButton {
     public CardButton(Card card) {
-        setBounds(0, 0, 75, 100);
         if (card != null) {
             BufferedImage myPicture = null;
             try {
@@ -60,5 +59,6 @@ public class CardButton extends JButton {
         } else {
             setBackground(Color.CYAN);
         }
+        setBounds(0, 0, 75, 100);
     }
 }

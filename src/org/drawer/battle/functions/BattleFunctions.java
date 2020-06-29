@@ -4,6 +4,7 @@ import org.drawer.battle.Battle;
 import org.drawer.battle.PlayerDisplay;
 import org.stuff.cards.Minion;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -59,6 +60,32 @@ public class BattleFunctions {
                 if (playerDisplay.battleCards.get(i).name.equals("RaidLeader"))
                     minion.setDamage(minion.getDamage() + 1);
 
+        }
+    }
+
+    public static void animatedCard(JPanel panel, int i,boolean playerTurn, Minion minion){
+        int x1,x2,y1,y2;
+        if(playerTurn){
+            x1=450;
+            y1=530;
+            y2=330;
+            x2=110 + 90 * i;
+        }else{
+            x1=450 ;
+            y1=0;
+            y2=200;
+            x2=110 + 90 * i;
+        }
+        new AnimationCard(panel,x1,y1,x2,y2,minion);
+    }
+
+    public static void attackFromSwamp(Battle battle, Minion minion) {
+        for (int i = 0; i < 7; i++) {
+            if(battle.whoseNotTurn().battleCards.get(i)!=null){
+                if(battle.whoseNotTurn().battleCards.get(i).name.equals("SwampKingDread")){
+                    battle.whoseNotTurn().battleCards.get(i).attack(minion);
+                }
+            }
         }
     }
 }

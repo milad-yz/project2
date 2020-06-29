@@ -52,6 +52,8 @@ public class CardSetter {
         spells.add(new Shahzad());
         spells.add(new Sprint());
         spells.add(new SwarmOfLocusts());
+        spells.add(new Overflow());
+        spells.add(new Duel());
         return spells;
     }
 
@@ -172,6 +174,10 @@ public class CardSetter {
                 return new HeavyAxe();
             case "WickedKnife":
                 return new WickedKnife();
+            case "Duel!":
+                return new Duel();
+            case "Overflow":
+                return new Overflow();
         }
         return null;
     }

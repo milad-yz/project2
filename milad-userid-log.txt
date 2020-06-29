@@ -1,95 +1,53 @@
 USER:milad
-CREATED_AT:2020/06/26 09:45:08(timestamp)
+CREATED_AT:2020/06/28 19:47:46(timestamp)
 PASSWORD:1234
 
-Collection 2020/06/26 09:45:10 went to Collection
-card 2020/06/26 09:45:10 went to card room
-buy 2020/06/26 09:45:14 want to buyBehrad
-Behrad 2020/06/26 09:45:15 have bought this card
-buy 2020/06/26 09:45:21 want to buyLootHoarder
-LootHoarder 2020/06/26 09:45:22 have bought this card
-buy 2020/06/26 09:45:28 want to buySathrovarr
-Sathrovarr 2020/06/26 09:45:29 have bought this card
-buy 2020/06/26 09:45:35 want to buySecurityRover
-SecurityRover 2020/06/26 09:45:36 have bought this card
-buy 2020/06/26 09:45:40 want to buyWolfRider
-WolfRider 2020/06/26 09:45:41 have bought this card
-buy 2020/06/26 09:45:48 want to buyFoad
-Foad 2020/06/26 09:45:49 have bought this card
-buy 2020/06/26 09:45:53 want to buyGnomishArmyKnife
-GnomishArmyKnife 2020/06/26 09:45:54 have bought this card
-buy 2020/06/26 09:45:59 want to buyPharaohsBlessing
-PharaohsBlessing 2020/06/26 09:46:00 have bought this card
-buy 2020/06/26 09:46:06 want to buyLearnDraconic
-LearnDraconic 2020/06/26 09:46:07 have bought this card
-buy 2020/06/26 09:46:11 want to buyStrengthInNumbers
-StrengthInNumbers 2020/06/26 09:46:12 have bought this card
-back button 2020/06/26 09:46:16 went to collection
-deck 2020/06/26 09:46:17 went to deck room
-deck show 2020/06/26 09:46:19 went to deck show room forMAGE
-card show 2020/06/26 09:46:31 went to card show room for:LootHoarder
-LootHoarder 2020/06/26 09:46:32 add this card toMAGE
-card show 2020/06/26 09:46:34 went to card show room for:StrengthInNumbers
-StrengthInNumbers 2020/06/26 09:46:35 add this card toMAGE
-card show 2020/06/26 09:46:37 went to card show room for:LearnDraconic
-LearnDraconic 2020/06/26 09:46:39 add this card toMAGE
-card show 2020/06/26 09:46:45 went to card show room for:PharaohsBlessing
-PharaohsBlessing 2020/06/26 09:46:45 add this card toMAGE
-card show 2020/06/26 09:46:50 went to card show room for:WolfRider
-WolfRider 2020/06/26 09:46:51 add this card toMAGE
-card show 2020/06/26 09:46:59 went to card show room for:SecurityRover
-SecurityRover 2020/06/26 09:46:59 add this card toMAGE
-card show 2020/06/26 09:47:06 went to card show room for:Sathrovarr
-Sathrovarr 2020/06/26 09:47:07 add this card toMAGE
-back button 2020/06/26 09:47:09 went to deck room
-back button 2020/06/26 09:47:09 went to collection
-back buton 2020/06/26 09:47:11 went to menu
-play 2020/06/26 09:47:11 wants to play
-play 2020/06/26 09:47:11 just want to play
-signIn 2020/06/26 09:53:04 ap2020
-play 2020/06/26 09:53:06 wants to play
-play 2020/06/26 09:53:06 just want to play
-signIn 2020/06/26 09:56:38 ap2020
-play 2020/06/26 09:56:39 wants to play
-play 2020/06/26 09:56:40 just want to play
-signIn 2020/06/26 09:58:19 ap2020
-play 2020/06/26 09:58:23 wants to play
-play 2020/06/26 09:58:23 just want to play
-signIn 2020/06/26 10:07:40 ap2020
-play 2020/06/26 10:07:41 wants to play
-play 2020/06/26 10:07:41 just want to play
-signIn 2020/06/26 10:09:00 ap2020
-play 2020/06/26 10:09:03 wants to play
-play 2020/06/26 10:09:03 just want to play
-Collection 2020/06/26 10:10:21 went to Collection
-card 2020/06/26 10:10:22 went to card room
-signIn 2020/06/26 18:25:02 ap2020
-play 2020/06/26 18:25:13 wants to play
-play 2020/06/26 18:25:13 just want to play
-signIn 2020/06/26 18:28:06 ap2020
-play 2020/06/26 18:28:07 wants to play
-play 2020/06/26 18:28:07 just want to play
-signIn 2020/06/26 18:29:12 ap2020
-play 2020/06/26 18:29:13 wants to play
-play 2020/06/26 18:29:13 just want to play
-signIn 2020/06/26 18:30:53 ap2020
-play 2020/06/26 18:31:04 wants to play
-play 2020/06/26 18:31:05 just want to play
-signIn 2020/06/26 19:16:20 ap2020
-Collection 2020/06/26 19:16:21 went to Collection
-card 2020/06/26 19:16:22 went to card room
-back button 2020/06/26 19:16:24 went to collection
-deck 2020/06/26 19:16:25 went to deck room
-deck show 2020/06/26 19:16:27 went to deck show room forWARLOCK
-back button 2020/06/26 19:16:29 went to deck room
-change current deck 2020/06/26 19:16:30 current deck:WARLOCK
-back button 2020/06/26 19:16:32 went to collection
-back buton 2020/06/26 19:16:34 went to menu
-play 2020/06/26 19:16:35 wants to play
-play 2020/06/26 19:16:35 just want to play
-signIn 2020/06/26 19:19:09 ap2020
-play 2020/06/26 19:19:10 wants to play
-play 2020/06/26 19:19:10 just want to play
-signIn 2020/06/26 19:19:48 ap2020
-play 2020/06/26 19:19:58 wants to play
-play 2020/06/26 19:19:59 just want to play
+Status 2020/06/28 19:47:49 went to status
+back buton 2020/06/28 19:48:24 went to menu
+signIn 2020/06/28 20:08:49 ap2020
+play 2020/06/28 20:08:50 wants to play
+signIn 2020/06/28 20:09:54 ap2020
+play 2020/06/28 20:09:55 wants to play
+signIn 2020/06/28 20:10:33 ap2020
+play 2020/06/28 20:10:35 wants to play
+signIn 2020/06/28 20:11:26 ap2020
+play 2020/06/28 20:11:27 wants to play
+play 2020/06/28 20:11:29 just want to play
+signIn 2020/06/28 20:40:10 ap2020
+play 2020/06/28 20:40:11 wants to play
+play 2020/06/28 20:40:30 just want to play
+play 2020/06/28 20:40:32 just want to play
+play 2020/06/28 20:40:36 just want to play
+signIn 2020/06/28 20:46:30 ap2020
+play 2020/06/28 20:46:33 wants to play
+play 2020/06/28 20:46:36 just want to play
+signIn 2020/06/28 20:47:27 ap2020
+play 2020/06/28 20:47:28 wants to play
+play 2020/06/28 20:47:33 just want to play
+signIn 2020/06/28 21:28:56 ap2020
+play 2020/06/28 21:28:57 wants to play
+play 2020/06/28 21:29:00 just want to play
+signIn 2020/06/28 21:29:40 ap2020
+play 2020/06/28 21:29:41 wants to play
+play 2020/06/28 21:29:42 just want to play
+signIn 2020/06/28 21:31:19 ap2020
+play 2020/06/28 21:31:19 wants to play
+play 2020/06/28 21:31:20 just want to play
+signIn 2020/06/28 21:31:43 ap2020
+play 2020/06/28 21:31:46 wants to play
+play 2020/06/28 21:31:49 just want to play
+signIn 2020/06/28 21:36:35 ap2020
+play 2020/06/28 21:36:36 wants to play
+play 2020/06/28 21:36:38 just want to play
+signIn 2020/06/28 22:07:53 ap2020
+play 2020/06/28 22:07:56 wants to play
+play 2020/06/28 22:08:00 just want to play
+signIn 2020/06/28 22:09:32 ap2020
+play 2020/06/28 22:09:33 wants to play
+play 2020/06/28 22:09:34 just want to play
+signIn 2020/06/28 22:10:17 ap2020
+play 2020/06/28 22:10:19 wants to play
+play 2020/06/28 22:10:20 just want to play
+signIn 2020/06/28 22:18:20 ap2020
+play 2020/06/28 22:18:23 wants to play
+play 2020/06/28 22:18:26 just want to play

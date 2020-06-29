@@ -2,6 +2,7 @@ package org.drawer.battle.functions;
 
 import org.drawer.battle.Battle;
 import org.drawer.battle.BattleHandler;
+import org.drawer.battle.PassiveInfo;
 import org.drawer.battle.PlayerDisplay;
 import org.drawer.labelsAndButtons.CardButton;
 import org.stuff.Card;
@@ -36,8 +37,8 @@ public class BattleSpellFunctions {
         } else {
             Minion minion = (Minion) stuff;
             minion.setHealth(minion.getHealth() - damage);
-            if(minion.name.equals("SecurityRover")){
-                BattleHandler.damagedStuffHandler(battle,battle.whoseNotTurn(),minion);
+            if (minion.name.equals("SecurityRover")) {
+                BattleHandler.damagedStuffHandler(battle, battle.whoseNotTurn(), minion);
             }
         }
         battle.semaphoreNotify();
@@ -95,14 +96,14 @@ public class BattleSpellFunctions {
         for (int i = 0; i < 7; i++) {
             if (battle.whoseTurn().battleCards.get(i) != null) {
                 battle.whoseTurn().battleCards.get(i).setHealth(battle.whoseTurn().battleCards.get(i).getHealth() - damage);
-                if(battle.whoseTurn().battleCards.get(i).name.equals("SecurityRover")){
-                    BattleHandler.damagedStuffHandler(battle,battle.whoseTurn(),battle.whoseTurn().battleCards.get(i));
+                if (battle.whoseTurn().battleCards.get(i).name.equals("SecurityRover")) {
+                    BattleHandler.damagedStuffHandler(battle, battle.whoseTurn(), battle.whoseTurn().battleCards.get(i));
                 }
             }
             if (battle.whoseNotTurn().battleCards.get(i) != null) {
                 battle.whoseNotTurn().battleCards.get(i).setHealth(battle.whoseNotTurn().battleCards.get(i).getHealth() - damage);
-                if(battle.whoseNotTurn().battleCards.get(i).name.equals("SecurityRover")){
-                    BattleHandler.damagedStuffHandler(battle,battle.whoseNotTurn(),battle.whoseNotTurn().battleCards.get(i));
+                if (battle.whoseNotTurn().battleCards.get(i).name.equals("SecurityRover")) {
+                    BattleHandler.damagedStuffHandler(battle, battle.whoseNotTurn(), battle.whoseNotTurn().battleCards.get(i));
                 }
             }
         }
@@ -135,14 +136,12 @@ public class BattleSpellFunctions {
     }
 
     public static void summon(Battle battle, PlayerDisplay playerDisplay, Minion minion, int summonNumber) {
-        int j=0;
-        for (int i = 0; i < 7&&j<summonNumber; i++) {
-            if(playerDisplay.battleCards.get(i)==null){
-                Minion summonMinion=(Minion)minion.getClone();
-                if(!summonMinion.name.equals("TombWarden"))
-                BattleHandler.battleCryHandler(playerDisplay,battle,summonMinion);
-                BattleFunctions.summonNotify(battle,playerDisplay,summonMinion);
-                playerDisplay.battleCards.put(i,summonMinion);
+        int j = 0;
+        for (int i = 0; i < 7 && j < summonNumber; i++) {
+            if (playerDisplay.battleCards.get(i) == null) {
+                Minion summonMinion = (Minion) minion.getClone();
+                BattleFunctions.summonNotify(battle, playerDisplay, summonMinion);
+                playerDisplay.battleCards.put(i, summonMinion);
                 j++;
             }
         }
@@ -150,31 +149,31 @@ public class BattleSpellFunctions {
     }
 
     public static void giveHealth2minions(Battle battle, HashMap<Integer, Minion> battleCards, int health) {
-        for (int i = 0; i <7; i++) {
-            if(battleCards.get(i)!=null){
-                battleCards.get(i).setHealth(battleCards.get(i).getHealth()+health);
+        for (int i = 0; i < 7; i++) {
+            if (battleCards.get(i) != null) {
+                battleCards.get(i).setHealth(battleCards.get(i).getHealth() + health);
             }
         }
         battle.semaphoreNotify();
     }
 
-    public static void summonFromDeck(Battle battle, int summonNumber) {
-        int j=0;
-        ArrayList<Minion>minions=new ArrayList<>();
-        for (int i = 0; i < battle.whoseTurn().deck.deckCards.size()&&j<summonNumber; i++) {
-            if(battle.whoseTurn().deck.deckCards.get(i).getClass().getSuperclass().getName().equals("org.stuff.cards.Minion")){
-                minions.add((Minion)battle.whoseTurn().deck.deckCards.get(i));
+    public static void summonFromDeck(Battle battle, PlayerDisplay playerDisplay, int summonNumber) {
+        int j = 0;
+        ArrayList<Minion> minions = new ArrayList<>();
+        for (int i = 0; i < playerDisplay.deck.deckCards.size() && j < summonNumber; i++) {
+            if (playerDisplay.deck.deckCards.get(i).getClass().getSuperclass().getName().equals("org.stuff.cards.Minion")) {
+                minions.add((Minion) playerDisplay.deck.deckCards.get(i));
             }
         }
         for (int k = 0; k < 7; k++) {
-            if(battle.whoseTurn().battleCards.get(k)==null){
-                Random random =new Random();
-                Minion summonMinion=minions.get(random.nextInt(minions.size()-1));
-                battle.whoseTurn().battleCards.put(k,summonMinion);
-                BattleHandler.battleCryHandler(battle.whoseTurn(),battle,summonMinion);
-                BattleFunctions.summonNotify(battle,battle.whoseTurn(),summonMinion);
+            if (playerDisplay.battleCards.get(k) == null) {
+                Random random = new Random();
+                Minion summonMinion = minions.get(random.nextInt(minions.size() - 1));
+                playerDisplay.deck.deckCards.remove(summonNumber);
+                playerDisplay.battleCards.put(k, summonMinion);
+                BattleFunctions.summonNotify(battle, playerDisplay, summonMinion);
                 j++;
-                if(j>=summonNumber){
+                if (j >= summonNumber) {
                     break;
                 }
             }
@@ -190,11 +189,11 @@ public class BattleSpellFunctions {
     }
 
     public static void ArmyKnifeAction(Battle battle, Minion minion) {
-        minion.haveShield=true;
-        minion.haveTaunt=true;
-        minion.havePoisonous=true;
-        minion.haveLifeSteal=true;
-        minion.perTurnAttack=2;
+        minion.haveShield = true;
+        minion.haveTaunt = true;
+        minion.havePoisonous = true;
+        minion.haveLifeSteal = true;
+        minion.perTurnAttack = 2;
         battle.semaphoreNotify();
     }
 
@@ -206,10 +205,21 @@ public class BattleSpellFunctions {
     }
 
     public static void blessingAction(Battle battle, Minion minion) {
-        minion.setHealth(minion.getHealth()+4);
-        minion.setDamage(minion.getDamage()+4);
-        minion.haveTaunt=true;
-        minion.haveShield=true;
+        minion.setHealth(minion.getHealth() + 4);
+        minion.setDamage(minion.getDamage() + 4);
+        minion.haveTaunt = true;
+        minion.haveShield = true;
+        battle.semaphoreNotify();
+    }
+
+    public static void restore2allCharacters(Battle battle, int health) {
+        for (int i = 0; i < 7; i++) {
+            HeroFunction.restore(health, battle.whoseTurn().battleCards.get(i));
+            HeroFunction.restore(health, battle.whoseNotTurn().battleCards.get(i));
+        }
+        HeroFunction.restore(health, battle.whoseTurn().hero);
+        HeroFunction.restore(health, battle.whoseNotTurn().hero);
+        BattleCryFunction.drawCards(battle.whoseTurn(), battle, 5);
         battle.semaphoreNotify();
     }
 }

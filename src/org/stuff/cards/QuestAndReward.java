@@ -3,6 +3,7 @@ package org.stuff.cards;
 import org.stuff.Card;
 
 public class QuestAndReward extends Card {
+    public Card rewardCard=null;
     public QuestAndReward(String name, int cost, int mana, String description, String specialFor, String icon, int rarity) {
         super(name, cost, mana, description, specialFor, icon, rarity);
     }
