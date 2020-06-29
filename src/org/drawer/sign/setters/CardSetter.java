@@ -78,6 +78,10 @@ public class CardSetter {
         minions.add(new TombWarden());
         minions.add(new VoidWalker());
         minions.add(new WolfRider());
+        minions.add(new DraconicEmissary());
+        minions.add(new GuardBot());
+        minions.add(new Sheep());
+        minions.add(new SwampKingDread());
         return minions;
     }
 
@@ -178,6 +182,16 @@ public class CardSetter {
                 return new Duel();
             case "Overflow":
                 return new Overflow();
+            case "DraconicEmissary":
+                return new DraconicEmissary();
+            case "GuardBot":
+                return new GuardBot();
+            case "Locust":
+                return new Locust();
+            case "Sheep":
+                return new Sheep();
+            case "SwampKingDread":
+                return new SwampKingDread();
         }
         return null;
     }

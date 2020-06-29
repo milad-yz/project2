@@ -67,8 +67,6 @@ public class DeckReader {
         switch (cardName) {
             case "AzureDrake":
                 return new AzureDrake();
-            case "DraconicEmissary":
-                return new DraconicEmissary();
             case "BatterHead":
                 return new BatterHead();
             case "Behrad":
@@ -145,6 +143,16 @@ public class DeckReader {
                 return new Duel();
             case "Overflow":
                 return new Overflow();
+            case "DraconicEmissary":
+                return new DraconicEmissary();
+            case "GuardBot":
+                return new GuardBot();
+            case "Locust":
+                return new Locust();
+            case "Sheep":
+                return new Sheep();
+            case "SwampKingDread":
+                return new SwampKingDread();
         }
         return null;
     }

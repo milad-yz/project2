@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class Player {
     private String UserName;
     private String PassWord;
-    public int diamonds = 100;
+    public int diamonds = 20;
     public ArrayList<Card> currentCards;
     public ArrayList<Card> allCards;
     public ArrayList<Hero> heros;
